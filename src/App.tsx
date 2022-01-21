@@ -27,4 +27,7 @@ export default App;
 
 const AppContainer = styled.div`
     background-color: ${(props) => props.theme.bgColor};
+
+    main {
+    }
 `;
