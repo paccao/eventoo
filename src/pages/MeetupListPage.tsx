@@ -1,5 +1,13 @@
+
+import MeetUpList from '../components/meetupList/MeetUpList';
+
 function MeetupListPage() {
-    return <>MeetupList page</>;
+	return (
+		<div>
+			<MeetUpList />
+        </div>
+
+	);
 }
 
 export default MeetupListPage;

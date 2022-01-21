@@ -6,7 +6,9 @@ export interface AppStateInterface {
     meetings: Meeting[];
     testCounter: number;
 }
-interface Meeting {
+
+export interface Meeting {
+    id: string;
     title: string;
     tag: string[];
     time: string;
@@ -17,7 +19,8 @@ interface Meeting {
 
 type Role = 'admin' | 'guest';
 
-interface Comment {
+export interface Comment {
+    id: string;
     time: string;
     content: string;
     role: Role;
@@ -31,13 +34,15 @@ const initialState: AppStateInterface = {
     testCounter: 1,
     meetings: [
         {
+            id: '0',
             title: 'lördag på landet',
             tag: ['outdoors'],
             time: 'Lördag 20 Jan 18.00',
             location: 'Göteborg',
-            image: 'http://example.se',
+            image: 'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
             comments: [
                 {
+                    id: '0',
                     time: '2020-05-25',
                     content: 'First comment!',
                     role: 'admin',
