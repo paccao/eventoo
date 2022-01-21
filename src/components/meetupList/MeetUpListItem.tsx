@@ -25,7 +25,7 @@ export default function MeetUpListItem({
 	title,
 	id,
 }: MeetUpListItemProps) {
-	console.log(image);
+	
 
 	return (
 		<MeetUpListItemContainer>
