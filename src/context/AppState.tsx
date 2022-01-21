@@ -24,7 +24,6 @@ interface Comment {
 }
 
 // export const AppContext = createContext<AppStateInterface | null>(null);
-export const AppContext = createContext<any>(null);
 
 const initialState: AppStateInterface = {
     isAdmin: false,
@@ -46,6 +45,7 @@ const initialState: AppStateInterface = {
         },
     ],
 };
+export const AppContext = createContext<any>(initialState);
 
 function AppState({ children }: React.PropsWithChildren<{}>) {
     const [state, dispatch] = useReducer(AppReducer, initialState);

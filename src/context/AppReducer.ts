@@ -1,15 +1,15 @@
 import { AppStateInterface } from './AppState';
 
 export const APP_STATE_ACTIONS = {
-    TEST_COUNTER_INCREASE: 'TEST_COUNTER_INCREASE',
+    TOGGLE_ROLE: 'TOGGLE_ROLE',
 };
 
 export function AppReducer(state: AppStateInterface, action: { type: string; payload?: any }) {
     switch (action.type) {
-        case APP_STATE_ACTIONS.TEST_COUNTER_INCREASE:
+        case APP_STATE_ACTIONS.TOGGLE_ROLE:
             return {
                 ...state,
-                testCounter: state.testCounter + 1,
+                isAdmin: state.isAdmin ? false : true,
             };
 
         default:
