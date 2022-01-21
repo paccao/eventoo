@@ -4,8 +4,8 @@ import { AppReducer } from './AppReducer';
 export interface AppStateInterface {
     isAdmin: Boolean;
     meetings: Meeting[];
+    testCounter: number;
 }
-
 interface Meeting {
     title: string;
     tag: string[];
@@ -23,11 +23,12 @@ interface Comment {
     role: Role;
 }
 
-export const AppContext = createContext<AppStateInterface | null>(null);
-// export const AppContext = createContext<any>(null);
+// export const AppContext = createContext<AppStateInterface | null>(null);
+export const AppContext = createContext<any>(null);
 
 const initialState: AppStateInterface = {
     isAdmin: false,
+    testCounter: 1,
     meetings: [
         {
             title: 'lördag på landet',
@@ -48,6 +49,7 @@ const initialState: AppStateInterface = {
 
 function AppState({ children }: React.PropsWithChildren<{}>) {
     const [state, dispatch] = useReducer(AppReducer, initialState);
+
     return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 }
 
