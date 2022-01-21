@@ -1,5 +1,4 @@
-function DetailsPage() {
-    return <div>Meetup details page</div>;
+function MeetupPage() {
 }
 
-export default DetailsPage;
+export default MeetupPage;
