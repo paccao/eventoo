@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
 describe('App component', () => {
@@ -6,3 +6,15 @@ describe('App component', () => {
         render(<App />);
     });
 });
+
+test('App component has darkmode', () => {
+    render(<App />);
+
+    const appContainer = screen.getByTestId('app-container')
+
+    expect(appContainer).toHaveStyle('background-color: #121212')
+
+
+
+});
+

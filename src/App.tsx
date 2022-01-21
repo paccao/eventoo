@@ -1,18 +1,18 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import MeetupListPage from './pages/MeetupListPage';
-import DetailsPage from './pages/DetailsPage';
+import React from 'react';
+import styled from 'styled-components';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme } from './themes/appTheme';
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<MeetupListPage />} />
-            </Routes>
-            <Routes>
-                <Route path="/details" element={<DetailsPage />} />
-            </Routes>
-        </BrowserRouter>
+        <ThemeProvider theme={darkTheme}>
+            <AppContainer data-testid="app-container" className="App"></AppContainer>
+        </ThemeProvider>
     );
 }
 
 export default App;
+
+const AppContainer = styled.div`
+    background-color: ${(props) => props.theme.bgColor};
+`;
