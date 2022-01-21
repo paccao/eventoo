@@ -16,6 +16,10 @@ it('should render', () => {
 
 it('should be clickable', () => {
     render(<MeetUpListItem />);
+
+    
+    
+
 });
 
 it('should have date and location info', () => {

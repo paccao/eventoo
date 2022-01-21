@@ -9,6 +9,6 @@ export const darkTheme = {
     textMediumEmph: '60%',
     textLowEmpEmph: '38%',
 
-    cardHighEmph: '15%',
-    cardMediumEmph: '10%',
+    cardHighEmph: '15%', // Opacity 
+    cardMediumEmph: '10%', // Opacity 
 }

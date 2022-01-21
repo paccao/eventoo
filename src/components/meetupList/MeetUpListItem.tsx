@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function MeetUpListItem() {
+export default function () {
   return <div></div>;
 }
