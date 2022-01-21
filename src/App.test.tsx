@@ -21,5 +21,5 @@ test('App component has darkmode', () => {
 
     const appContainer = screen.getByTestId('app-container');
 
-    expect(appContainer).toHaveStyle('background-color: #121212');
+    expect(appContainer).toHaveStyle('background-color: #151515');
 });

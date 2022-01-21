@@ -1,5 +1,6 @@
 export const darkTheme = {
     bgColor: '#121212',
+    __bgColorLargePageWidth: '#151515',
     textColor: '#fffff',
 
     accentColor: '#F0F415',
@@ -11,4 +12,4 @@ export const darkTheme = {
 
     cardHighEmph: '15%',
     cardMediumEmph: '10%',
-}
+};
