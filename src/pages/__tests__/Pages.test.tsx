@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import MeetupListPage from '../MeetupListPage';
-import DetailsPage from '../DetailsPage';
+import MeetupPage from '../MeetupPage';
 
 describe('MeetupListPage component', () => {
     it('renders without crashing', () => {
@@ -8,8 +8,8 @@ describe('MeetupListPage component', () => {
     });
 });
 
-describe('DetailsPage component', () => {
+describe('MeetupPage component', () => {
     it('renders without crashing', () => {
-        render(<DetailsPage />);
+        render(<MeetupPage />);
     });
 });

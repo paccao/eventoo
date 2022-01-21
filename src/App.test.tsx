@@ -1,20 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+
+function MockRouter() {
+    return (
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    );
+}
 
 describe('App component', () => {
     it(' renders without crashing', () => {
-        render(<App />);
+        render(<MockRouter />);
     });
 });
 
 test('App component has darkmode', () => {
-    render(<App />);
+    render(<MockRouter />);
 
-    const appContainer = screen.getByTestId('app-container')
+    const appContainer = screen.getByTestId('app-container');
 
-    expect(appContainer).toHaveStyle('background-color: #121212')
-
-
-
+    expect(appContainer).toHaveStyle('background-color: #121212');
 });
-
