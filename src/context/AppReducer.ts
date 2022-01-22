@@ -1,12 +1,14 @@
-import { AppStateInterface } from './AppState';
+import { State } from './AppState';
 
-export const APP_STATE_ACTIONS = {
-    TEST_COUNTER_INCREASE: 'TEST_COUNTER_INCREASE',
-};
+export type ActionType =
+  | { type: 'TEST_COUNTER_INCREASE' }
 
-export function AppReducer(state: AppStateInterface, action: { type: string; payload?: any }) {
+
+
+
+export function AppReducer(state: State, action: ActionType) {
     switch (action.type) {
-        case APP_STATE_ACTIONS.TEST_COUNTER_INCREASE:
+        case 'TEST_COUNTER_INCREASE':
             return {
                 ...state,
                 testCounter: state.testCounter + 1,

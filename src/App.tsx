@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { AppContext  } from './context/AppState';
+
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme } from './themes/appTheme';
@@ -6,6 +9,11 @@ import { Routes, Route } from 'react-router-dom';
 import MeetupListPage from './pages/MeetupListPage';
 import MeetupPage from './pages/MeetupPage';
 function App() {
+
+
+    const { state, dispatch } = useContext(AppContext)
+
+
     return (
         <ThemeProvider theme={darkTheme}>
             <AppContainer data-testid="app-container" className="App">

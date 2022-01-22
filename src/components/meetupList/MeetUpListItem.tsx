@@ -1,7 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
+import styled from 'styled-components';
+import { AiOutlineStar } from 'react-icons/ai'
+
+import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppState';
 import { Meeting } from '../../context/AppState';
@@ -17,14 +18,7 @@ interface MeetUpListItemProps {
 	title: string;
 }
 
-export default function MeetUpListItem({
-	image,
-	location,
-	tag,
-	time,
-	title,
-	id,
-}: MeetUpListItemProps) {
+export default function MeetUpListItem({ image, location, tag, time, title, id }: MeetUpListItemProps ) {
 	
 
 	return (
@@ -35,9 +29,11 @@ export default function MeetUpListItem({
 				<Link to={`/meetup/${id}`}>
 					<div className='inner-container'>
 						<div className='details-container'>
+
 							<h3>
 								{time} {location}
 							</h3>
+							<AiOutlineStar />
 						</div>
 
 						<div className='title-container'>
@@ -101,5 +97,12 @@ const ListInfoContainer = styled.div`
 	margin-right: 1rem;
 	border-radius: 15px;
 	cursor: pointer;
-	padding: 2rem;
+	padding: 2rem 1rem;
+
+	.details-container {
+
+		display: flex;
+		justify-content: space-between;
+
+	}
 `;

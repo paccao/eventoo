@@ -1,11 +1,13 @@
-import React, { createContext, useReducer } from 'react';
-import { AppReducer } from './AppReducer';
+import React, { createContext, useReducer, Dispatch } from 'react';
+import { AppReducer, ActionType } from './AppReducer';
 
-export interface AppStateInterface {
+
+export interface State {
     isAdmin: Boolean;
     meetings: Meeting[];
     testCounter: number;
 }
+
 
 export interface Meeting {
     id: string;
@@ -17,8 +19,8 @@ export interface Meeting {
     comments: Comment[];
 }
 
-type Role = 'admin' | 'guest';
 
+type Role = 'admin' | 'guest';
 export interface Comment {
     id: string;
     time: string;
@@ -26,10 +28,14 @@ export interface Comment {
     role: Role;
 }
 
-// export const AppContext = createContext<AppStateInterface | null>(null);
-export const AppContext = createContext<any>(null);
 
-const initialState: AppStateInterface = {
+interface ContextProps {
+    state: State
+    dispatch: Dispatch<ActionType>
+}
+
+
+const initialState: State = {
     isAdmin: false,
     testCounter: 1,
     meetings: [
@@ -52,10 +58,25 @@ const initialState: AppStateInterface = {
     ],
 };
 
-function AppState({ children }: React.PropsWithChildren<{}>) {
-    const [state, dispatch] = useReducer(AppReducer, initialState);
 
-    return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
+
+
+export const AppContext = createContext<ContextProps>({ 
+    
+    state: initialState, dispatch: () => null 
+
+});
+ 
+
+function AppState({ children }: React.PropsWithChildren<{}>) {
+    
+    const [ state, dispatch ] = useReducer(AppReducer, initialState);
+
+    return (
+        <AppContext.Provider value={{ state, dispatch }}>
+            { children }
+         </AppContext.Provider>
+    )
 }
 
 export default AppState;

@@ -8,7 +8,6 @@ export default function MeetUpList() {
     const { state } = useContext(AppContext)
 
 
-    
 
   return <ul>{state.meetings?.map((meeting: Meeting) => <MeetUpListItem  key={meeting.id} {...meeting} />)}</ul>
 
