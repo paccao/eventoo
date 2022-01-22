@@ -70,7 +70,7 @@ const MeetUpListItemContainer = styled.li`
 	align-items: center;
 	margin-top: 2rem;
 
-	height: 10rem;
+	height: 5.4rem;
 	border-radius: 15px;
 
 	h3 {
@@ -84,8 +84,8 @@ const MeetUpListItemContainer = styled.li`
 
 const ListImageContainer = styled.div`
 	cursor: pointer;
-	height: 10rem;
-	width: 30%;
+	height: 5.4rem;
+	width: 20%;
 	background-position: center;
 	background-size: cover;
 	border-radius: 15px;
@@ -96,7 +96,7 @@ const ListInfoContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	width: 70%;
+	width: 80%;
 	height: 100%;
 	margin-right: 1rem;
 	border-radius: 15px;

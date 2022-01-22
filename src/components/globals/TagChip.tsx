@@ -9,9 +9,12 @@ const TagChipContainer = styled.li`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	display: inline;
 	background-color: ${props => props.theme.accentColor};
-	height: 2rem;
-	width: 5rem;
 	border-radius: 15px;
-	color: ${props => props.theme.textColorDark }
+	padding: 0.3rem;
+	vertical-align: middle;
+	font-size: 10px;
+	margin: 0.3rem 0rem;
+	color: ${props => props.theme.textColorDark}
 `;
