@@ -14,13 +14,12 @@ export function useStoreHook() {
       try {
   
         db.setState(value);
-
         dispatch({ type: 'SET_STATE', payload: db.getState()})
-  
   
       } catch (error) {
         console.log(error);
       }
+
     };
   
     return { mutate };

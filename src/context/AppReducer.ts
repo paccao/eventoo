@@ -14,16 +14,19 @@ export type ActionType =
 export function AppReducer(state: State, action: ActionType) {
     switch (action.type) {
 
+
         case 'SET_STATE':
             return {
                 ...action.payload,
             };
+
 
         case 'TEST_COUNTER_INCREASE':
             return {
                 ...state,
                 testCounter: state.testCounter + 1,
             };
+
 
         case 'ADD_MEETUP':
 
@@ -33,10 +36,12 @@ export function AppReducer(state: State, action: ActionType) {
                 id: nanoid()
             }
 
+
             return {
                 ...state,
                 meetings: [...state.meetings, meetupWithId],
             };
+
             
         case 'SET_USER':
             return {
