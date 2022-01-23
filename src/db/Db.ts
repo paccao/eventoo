@@ -13,7 +13,7 @@ export class Db {
     return JSON.parse(localStorage.getItem('state') || '')
   }
 
-  
+
 }
 
 const db = new Db()

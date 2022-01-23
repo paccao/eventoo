@@ -5,10 +5,10 @@ import { nanoid } from 'nanoid';
 const db = new Db()
 
 export type ActionType =
-  | { type: 'TEST_COUNTER_INCREASE' }
-  | { type: 'ADD_MEETUP', payload: Meeting }
-  | { type: 'SET_USER',  payload: User }
-  | { type: 'SET_STATE',  payload: any }
+    | { type: 'TEST_COUNTER_INCREASE' }
+    | { type: 'ADD_MEETUP', payload: Meeting }
+    | { type: 'SET_USER', payload: User }
+    | { type: 'SET_STATE', payload: any }
 
 
 export function AppReducer(state: State, action: ActionType) {
@@ -42,13 +42,13 @@ export function AppReducer(state: State, action: ActionType) {
                 meetings: [...state.meetings, meetupWithId],
             };
 
-            
+
         case 'SET_USER':
             return {
                 ...state,
                 user: action.payload
             };
-    
+
 
         default:
             return state;
