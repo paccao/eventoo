@@ -1,9 +1,10 @@
 import React, { createContext, useReducer, Dispatch, useEffect } from 'react';
 import { AppReducer, ActionType } from './AppReducer';
-import { meetups } from '../mockData'
+import { useStoreHook } from '../hooks/StoreHook';
 
 import { Db } from '../db/Db';
 const db = new Db()
+
 
 
 export interface State {
@@ -19,8 +20,8 @@ export interface Meeting {
     title: string;
     tag: string[];
     time: string;
-    location: string;
     isOnline: boolean;
+    location: string;
     image: string;
     comments: Comment[];
 }
@@ -31,7 +32,7 @@ export interface Comment {
     id: string;
     time: string;
     content: string;
-    role: any;
+    role: string;
 }
 
 
@@ -69,12 +70,25 @@ export const AppContext = createContext<ContextProps>({
 function AppState({ children }: React.PropsWithChildren<{}>) {
     
     const [ state, dispatch ] = useReducer(AppReducer, initialState);
+    const { mutate } = useStoreHook()
 
-    
-    useEffect(() => {
-        const meetups = db.getMeetup()
-        dispatch({ type: 'SET_MEETUPS', payload: meetups })
-    }, [])
+     useEffect(() => {
+
+        const dbState = db.getState()
+        dispatch({ type: 'SET_STATE', payload: dbState })
+
+    }, []) 
+
+
+     useEffect(() => {
+        try {
+            mutate(state)
+        } catch (error) {
+            return
+        }
+ 
+    }, [ state ]) 
+
 
 
     return (

@@ -9,15 +9,23 @@ import { Routes, Route } from 'react-router-dom';
 import MeetupListPage from './pages/MeetupListPage';
 import MeetupPage from './pages/MeetupPage';
 
+import { meetups } from './mockData'
+
 
 function App() {
+
+    const { dispatch } = useContext(AppContext)
+
+    function addMeetupHandler() {
+        dispatch({ type: 'ADD_MEETUP', payload: meetups[0] })
+    }
 
 
     return (
         <ThemeProvider theme={darkTheme}>
             <AppContainer data-testid="app-container" className="App">
                 <header></header>
-
+                <button onClick={addMeetupHandler}>hello</button>
                 <main>
                     <Routes>
                         <Route path="/" element={<MeetupListPage />} />
