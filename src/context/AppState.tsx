@@ -1,54 +1,67 @@
-import React, { createContext, useReducer } from 'react';
-import { AppReducer } from './AppReducer';
+import React, { createContext, useReducer, Dispatch, useEffect } from 'react';
+import { AppReducer, ActionType } from './AppReducer';
+// import { meetups } from '../mockData';
 
-export interface AppStateInterface {
+import { Db } from '../db/Db';
+const db = new Db();
+
+export interface State {
     isAdmin: Boolean;
-    meetings: Meeting[];
+    meetings: Meeting[] | [];
     testCounter: number;
+    user: User | {};
 }
-interface Meeting {
+
+export interface Meeting {
+    id: string;
     title: string;
     tag: string[];
     time: string;
     location: string;
+    isOnline: boolean;
     image: string;
     comments: Comment[];
 }
 
 type Role = 'admin' | 'guest';
-
-interface Comment {
+export interface Comment {
+    id: string;
     time: string;
     content: string;
     role: Role;
 }
 
-// export const AppContext = createContext<AppStateInterface | null>(null);
+interface ContextProps {
+    state: State;
+    dispatch: Dispatch<ActionType>;
+}
 
-const initialState: AppStateInterface = {
+export interface User {
+    id: string;
+    isAdmin: boolean;
+    name: string;
+    bookedMeetups: string[];
+}
+
+const initialState: State = {
     isAdmin: false,
     testCounter: 1,
-    meetings: [
-        {
-            title: 'lördag på landet',
-            tag: ['outdoors'],
-            time: 'Lördag 20 Jan 18.00',
-            location: 'Göteborg',
-            image: 'http://example.se',
-            comments: [
-                {
-                    time: '2020-05-25',
-                    content: 'First comment!',
-                    role: 'admin',
-                },
-            ],
-        },
-    ],
+    meetings: [],
+    user: {},
 };
-export const AppContext = createContext<any>(initialState);
+
+export const AppContext = createContext<ContextProps>({
+    state: initialState,
+    dispatch: () => null,
+});
 
 function AppState({ children }: React.PropsWithChildren<{}>) {
     const [state, dispatch] = useReducer(AppReducer, initialState);
+
+    useEffect(() => {
+        const meetups = db.getMeetup();
+        dispatch({ type: 'SET_MEETUPS', payload: meetups });
+    }, []);
 
     return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 }

@@ -1,7 +1,10 @@
 export const darkTheme = {
     bgColor: '#121212',
+    __bgColorLargePageWidth: '#151515',
     textColor: '#fffff',
-    textColorBlack: '#000',
+    textColorDark: '#121212',
+
+
 
     accentColor: '#F0F415',
     accentColorAdmin: '#F45815',
@@ -10,8 +13,6 @@ export const darkTheme = {
     textMediumEmph: '60%',
     textLowEmpEmph: '38%',
 
-    cardHighEmph: '15%',
-    cardMediumEmph: '10%',
-
-    borderRadius: '15px',
+    cardHighEmph: '#353535',
+    cardBgColor: '#292929',
 };
