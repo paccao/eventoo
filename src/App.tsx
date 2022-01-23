@@ -8,22 +8,22 @@ import { Routes, Route } from 'react-router-dom';
 
 import MeetupListPage from './pages/MeetupListPage';
 import MeetupPage from './pages/MeetupPage';
+
+
 function App() {
-
-
-    const { state, dispatch } = useContext(AppContext)
 
 
     return (
         <ThemeProvider theme={darkTheme}>
             <AppContainer data-testid="app-container" className="App">
                 <header></header>
+
                 <main>
                     <Routes>
                         <Route path="/" element={<MeetupListPage />} />
                     </Routes>
                     <Routes>
-                        <Route path="/meetup" element={<MeetupPage />} />
+                        <Route path='/meetup/:id' element={<MeetupPage />} />
                     </Routes>
                 </main>
             </AppContainer>

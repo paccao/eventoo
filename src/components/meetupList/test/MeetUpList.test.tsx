@@ -24,4 +24,6 @@ describe('MeetUpList component', () => {
 
 		expect(listItem[0]).toBeInTheDocument();
 	});
+
+    
 });
