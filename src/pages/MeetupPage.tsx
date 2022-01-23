@@ -1,5 +1,11 @@
+import ChatBox from '../components/chat/ChatBox';
+
 function MeetupPage() {
-    return <>Meetup page</>;
+    return (
+        <div>
+            <ChatBox />
+        </div>
+    );
 }
 
 export default MeetupPage;
