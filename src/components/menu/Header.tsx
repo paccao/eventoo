@@ -14,7 +14,9 @@ function Header() {
                 <h2 className="logo">eventoo.</h2>
                 <h4 className="isAdmin">{state?.isAdmin ? 'Admin' : null}</h4>
             </div>
-            <ChangeRoleBtn />
+            <div>
+                <ChangeRoleBtn />
+            </div>
         </HeaderContainer>
     );
 }
@@ -23,15 +25,18 @@ export default Header;
 
 const HeaderContainer = styled.header`
     min-height: 120px;
-    padding: 2rem;
+    padding: 2rem 2rem 0rem 2rem;
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
 
     .logo-container {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+
+        h4 {
+            align-self: flex-end;
+        }
     }
 
     .logo {
