@@ -97,6 +97,14 @@ describe('MeetUpListItem component', () => {
         expect(image).toBeInTheDocument()
     });
 
+    it('should contain link to detailed meetup-page', () => {
+        render(<MockRouter />)
+    
+        const link = screen.getAllByRole('link')
+    
+        expect(link[0]).toBeInTheDocument()
+    });
+
 
 
 })
