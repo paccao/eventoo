@@ -1,108 +1,109 @@
-
 import styled from 'styled-components';
-import { AiOutlineStar } from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai';
 
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { AppContext } from '../../context/AppState';
-import { Meeting } from '../../context/AppState';
+// import { useContext } from 'react';
+// import { AppContext } from '../../context/AppState';
+// import { Meeting } from '../../context/AppState';
 
 import TagChip from '../globals/TagChip';
 
 interface MeetUpListItemProps {
-	id: string;
-	image: string;
-	location: string;
-	tag: string[];
-	time: string;
-	title: string;
+    id: string;
+    image: string;
+    location: string;
+    tag: string[];
+    time: string;
+    title: string;
 }
 
-export default function MeetUpListItem({ image, location, tag, time, title, id }: MeetUpListItemProps ) {
-	
+export default function MeetUpListItem({
+    image,
+    location,
+    tag,
+    time,
+    title,
+    id,
+}: MeetUpListItemProps) {
+    return (
+        <MeetUpListItemContainer>
+            <header></header>
 
-	return (
-		<MeetUpListItemContainer>
-			<header></header>
+            <ListInfoContainer data-testid="list-info-container">
+                <Link to={`/meetup/${id}`}>
+                    <div className="inner-container">
+                        <div className="details-container">
+                            <h3>
+                                {time} {location}
+                            </h3>
+                            <AiOutlineStar />
+                        </div>
 
-			<ListInfoContainer data-testid='list-info-container'>
-				<Link to={`/meetup/${id}`}>
-					<div className='inner-container'>
-						<div className='details-container'>
+                        <div className="title-container">
+                            <h2>{title}</h2>
+                        </div>
 
-							<h3>
-								{time} {location}
-							</h3>
-							<AiOutlineStar />
-						</div>
+                        <ul className="tag-container">
+                            {tag.map((tag) => (
+                                <TagChip key={tag} text={tag} />
+                            ))}
+                        </ul>
+                    </div>
+                </Link>
+            </ListInfoContainer>
 
-						<div className='title-container'>
-							<h2>{title}</h2>
-						</div>
-
-						<ul className='tag-container'>
-							{tag.map(tag => (
-								<TagChip key={tag} text={tag} />
-							))}
-						</ul>
-					</div>
-				</Link>
-			</ListInfoContainer>
-
-			<ListImageContainer
-				className='image-container'
-				role={'img'}
-				style={{ backgroundImage: `url(${image})` }}
-			>
-				<Link to={`/meetup/${id}`}></Link>
-			</ListImageContainer>
-		</MeetUpListItemContainer>
-	);
+            <ListImageContainer
+                className="image-container"
+                role={'img'}
+                style={{ backgroundImage: `url(${image})` }}
+            >
+                <Link to={`/meetup/${id}`}></Link>
+            </ListImageContainer>
+        </MeetUpListItemContainer>
+    );
 }
 
 const MeetUpListItemContainer = styled.li`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
 
-	height: 5.4rem;
-	border-radius: 15px;
+    height: 5.4rem;
+    border-radius: 15px;
 
-	h3 {
-		opacity: ${props => props.theme.textLowEmpEmph};
-	}
+    h3 {
+        opacity: ${(props) => props.theme.textLowEmpEmph};
+    }
 
-	h2 {
-		opacity: ${props => props.theme.textHighEmph};
-	}
+    h2 {
+        opacity: ${(props) => props.theme.textHighEmph};
+    }
 `;
 
 const ListImageContainer = styled.div`
-	cursor: pointer;
-	height: 5.4rem;
-	width: 20%;
-	background-position: center;
-	background-size: cover;
-	border-radius: 15px;
+    cursor: pointer;
+    height: 5.4rem;
+    width: 20%;
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
 `;
 
 const ListInfoContainer = styled.div`
-	background-color: ${props => props.theme.cardBgColor};
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	width: 80%;
-	height: 100%;
-	margin-right: 1rem;
-	border-radius: 15px;
-	cursor: pointer;
-	padding: 2rem 1rem;
+    background-color: ${(props) => props.theme.cardBgColor};
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    margin-right: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 2rem 1rem;
 
-	.details-container {
-
-		display: flex;
-		justify-content: space-between;
-
-	}
+    .details-container {
+        display: flex;
+        justify-content: space-between;
+    }
 `;

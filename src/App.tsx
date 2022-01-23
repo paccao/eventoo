@@ -33,13 +33,13 @@ export default App;
 
 const AppContainer = styled.div`
     background-color: ${(props) => props.theme.__bgColorLargePageWidth};
-    display: flex;
-    justify-content: center;
+    max-width: 980px;
+    margin: 0 auto;
+
     min-height: 100vh;
 
     main {
         padding: 1rem;
-        max-width: 980px;
         width: 100%;
         background-color: ${(props) => props.theme.bgColor};
     }

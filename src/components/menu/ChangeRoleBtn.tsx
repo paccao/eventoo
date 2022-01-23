@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { APP_STATE_ACTIONS } from '../../context/AppReducer';
 import { AppContext } from '../../context/AppState';
 
 import styled from 'styled-components';
@@ -8,7 +7,7 @@ function ChangeRoleBtn() {
     const { dispatch } = useContext(AppContext);
 
     function changeRole(): void {
-        dispatch({ type: APP_STATE_ACTIONS.TOGGLE_ROLE });
+        dispatch({ type: 'TOGGLE_ROLE' });
     }
 
     return <BtnContainer onClick={changeRole}>Change Role</BtnContainer>;
