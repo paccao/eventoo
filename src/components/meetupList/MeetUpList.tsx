@@ -8,7 +8,8 @@ import { isAttending } from '../../helpers/utils';
 export default function MeetUpList() { 
 	const { state } = useContext(AppContext);
 
-
+	console.log(state);
+	
 	return (
 		<ul>
 			{state?.meetings?.map((meeting: Meeting) => (
