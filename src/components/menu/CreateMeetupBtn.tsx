@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { MdOutlineAddCircle } from 'react-icons/md';
+import { MdAddCircleOutline } from 'react-icons/md';
 import styled from 'styled-components';
 import { AppContext } from '../../context/AppState';
 
@@ -7,8 +7,6 @@ function CreateMeetupBtn() {
     const { state, dispatch } = useContext(AppContext);
 
     function toggleCreateMeetupModal() {
-        console.log('hej');
-
         dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });
 
         console.log(state.showCreateMeetingModal);
@@ -16,7 +14,7 @@ function CreateMeetupBtn() {
 
     return (
         <CreateMeetupBtnContainer onClick={toggleCreateMeetupModal}>
-            <MdOutlineAddCircle data-testid="create-meetup-btn" />
+            <MdAddCircleOutline data-testid="create-meetup-btn" />
         </CreateMeetupBtnContainer>
     );
 }

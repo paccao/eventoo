@@ -93,5 +93,29 @@ describe('Header component', () => {
             const element = screen.queryByText(/lägg till meetup/i);
             expect(element).toBeInTheDocument();
         });
+        it('Modal is closed on form submit', async () => {
+            render(
+                <AppState>
+                    <Header />
+                </AppState>,
+            );
+
+            const titleInput = screen.getByPlaceholderText(/titel:/i);
+            const tagInput = screen.getByPlaceholderText(/ämne:/i);
+            const imageInput = screen.getByPlaceholderText(/bild:/i);
+            const locationInput = screen.getByPlaceholderText(/plats:/i);
+
+            userEvent.type(titleInput, 'Nytt event');
+            userEvent.type(tagInput, 'javascript');
+            userEvent.type(locationInput, 'Hemma');
+            userEvent.type(imageInput, 'https://test.com');
+
+            const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
+            userEvent.click(submitBtn);
+
+            const element = screen.queryByText('lägg till meetup..');
+
+            expect(element).not.toBeInTheDocument();
+        });
     });
 });

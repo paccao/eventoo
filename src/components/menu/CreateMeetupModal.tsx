@@ -1,24 +1,119 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { AppContext } from '../../context/AppState';
 import { MdOutlineLaptopMac } from 'react-icons/md';
 
+import { Meeting } from '../../context/AppState';
+import { nanoid } from 'nanoid';
+
 function CreateMeetupModal() {
+    const today = new Date().toLocaleDateString();
+
     const { dispatch } = useContext(AppContext);
+
+    const [title, setTitle] = useState<string>('');
+    const [tag, setTag] = useState<string>('');
+    const [image, setImage] = useState<string>('');
+    const [date, setDate] = useState<string>(today);
+    const [time, setTime] = useState<string>('00:00');
+    const [location, setLocation] = useState<string>('');
+    const [isOnline, setIsOnline] = useState<boolean>(false);
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const meeting: Meeting = {
+            id: nanoid(),
+            title,
+            tag: [tag],
+            time: date + ' ' + time,
+            isOnline,
+            location,
+            image,
+            comments: [],
+        };
+        console.log(meeting);
+
+        dispatch({ type: 'ADD_MEETUP', payload: meeting });
+        dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });
+    }
 
     return (
         <CreateMeetupModalContainer>
-            <form className="meeting-form">
+            <form onSubmit={handleSubmit} className="meeting-form">
                 <div className="close-container">
                     <h2>lägg till meetup..</h2>{' '}
-                    <div onClick={() => dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' })}> X</div>
+                    <div
+                        className="x"
+                        onClick={() => dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' })}
+                    >
+                        {' '}
+                        X
+                    </div>
                 </div>
-                <input type="text" id="title" name="title" placeholder="title:" />
-                <input type="text" id="ämne" name="ämne" placeholder="ämne:" />
-                <input type="text" id="bild" name="bild" placeholder="bild:" />
+                <input
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={title}
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="titel:"
+                    required
+                />
+                <input
+                    onChange={(e) => setTag(e.target.value)}
+                    value={tag}
+                    type="text"
+                    id="ämne"
+                    name="ämne"
+                    placeholder="ämne:"
+                    required
+                />
+                <input
+                    onChange={(e) => setImage(e.target.value)}
+                    value={image}
+                    type="text"
+                    id="bild"
+                    name="bild"
+                    placeholder="bild:"
+                    required
+                />
+                <div className="date-time-container">
+                    <input
+                        onChange={(e) => setDate(e.target.value)}
+                        value={date}
+                        type="date"
+                        id="date"
+                        name="date"
+                        placeholder="date:"
+                        min={today}
+                        required
+                    />
+                    <input
+                        onChange={(e) => setTime(e.target.value)}
+                        value={time}
+                        type="time"
+                        id="time"
+                        name="time"
+                        placeholder="time:"
+                        required
+                    />
+                </div>
                 <div className="place-container">
-                    <input type="text" id="plats" name="plats" placeholder="plats:" />
-                    <button className="location-button">
+                    <input
+                        onChange={(e) => setLocation(e.target.value)}
+                        value={location}
+                        type="text"
+                        id="plats"
+                        name="plats"
+                        placeholder="plats:"
+                        required
+                    />
+                    <button
+                        onClick={() => setIsOnline(!isOnline)}
+                        type="button"
+                        className="isOnline-button"
+                    >
                         <MdOutlineLaptopMac />
                     </button>
                 </div>
@@ -37,6 +132,7 @@ const CreateMeetupModalContainer = styled.section`
     position: fixed;
     inset: 120px 0 0 0;
     background-color: ${(props) => props.theme.__bgColorLargePageWidth};
+    opacity: 0.95;
     z-index: 1;
 
     display: flex;
@@ -46,7 +142,7 @@ const CreateMeetupModalContainer = styled.section`
 
     .meeting-form {
         width: 100%;
-        max-width: 250px;
+        max-width: 300px;
         display: flex;
         flex-direction: column;
 
@@ -57,10 +153,15 @@ const CreateMeetupModalContainer = styled.section`
             align-items: center;
             margin-bottom: 1.5rem;
 
-            div {
+            .x {
                 color: ${(props) => props.theme.accentColorAdmin};
                 font-size: 1.2rem;
                 font-weight: bold;
+            }
+
+            .x:hover {
+                font-size: 1.3rem;
+                cursor: pointer;
             }
         }
 
@@ -95,7 +196,7 @@ const CreateMeetupModalContainer = styled.section`
         justify-content: space-between;
         align-items: flex-start;
 
-        .location-button {
+        .isOnline-button {
             background-color: ${(props) => props.theme.cardBgColor};
             border-radius: ${(props) => props.theme.borderRadius};
             color: ${(props) => props.theme.accentColorAdmin};
@@ -103,5 +204,12 @@ const CreateMeetupModalContainer = styled.section`
             border: none;
             padding: 0.55rem;
         }
+    }
+
+    .date-time-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
     }
 `;
