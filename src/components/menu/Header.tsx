@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import ChangeRoleBtn from './ChangeRoleBtn';
 //Context
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppState';
+
+import ChangeRoleBtn from './ChangeRoleBtn';
+import CreateMeetupBtn from './CreateMeetupBtn';
+import CreateMeetupModal from './CreateMeetupModal';
 
 function Header() {
     const { state } = useContext(AppContext);
@@ -14,9 +17,13 @@ function Header() {
                 <h2 className="logo">eventoo.</h2>
                 <h4 className="isAdmin">{state?.isAdmin ? 'Admin' : null}</h4>
             </div>
+            <div>{state.isAdmin && <CreateMeetupBtn />}</div>
+
             <div>
                 <ChangeRoleBtn />
             </div>
+
+            {state.showCreateMeetingModal && <CreateMeetupModal />}
         </HeaderContainer>
     );
 }
