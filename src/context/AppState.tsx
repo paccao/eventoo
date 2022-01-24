@@ -61,41 +61,53 @@ export const AppContext = createContext<ContextProps>({
 });
 
 function AppState({ children }: React.PropsWithChildren<{}>) {
-    const [state, dispatch] = useReducer(AppReducer, initialState);
+	const [state, dispatch] = useReducer(AppReducer, initialState);
 
-    // custom hook to update state in local storage
-    const { mutate } = useStoreHook();
+	// custom hook to update state in local storage 
+	const { mutate } = useStoreHook();
 
-    // import stored state from LocalStorage into active state context on refresh.
-    useEffect(() => {
-        if (!localStorage.getItem('state')) {
-            return;
-        } else {
-            const dbState = db.getState();
-            dispatch({ type: 'SET_STATE', payload: dbState });
-        }
-    }, []);
 
-    //  On state change update local storage with current changes.
-    useEffect(() => {
-        mutate(state);
-    }, [state, mutate]);
+	// import stored state from LocalStorage into active state context on refresh.
+	useEffect(() => {
+		if (!localStorage.getItem('state')) {
+			return;
+		} else {
+			const dbState = db.getState();
+			dispatch({ type: 'SET_STATE', payload: dbState });
+		}
+	}, []);
 
-    //  set new user
-    useEffect(() => {
-        dispatch({ type: 'SET_USER', payload: user });
-    }, []);
 
-    // Sets initial app mock-data if no previous data is set
-    useEffect(() => {
-        if (!checkInitialData()) {
-            meetups.forEach((meetup) => {
-                dispatch({ type: 'ADD_MEETUP', payload: meetup });
-            });
 
-            document.cookie = 'initData=true; SameSite=Strict; Secure; Max-Age=2592000';
-        }
-    }, []);
+
+	//  On state change update local storage with current changes.
+	useEffect(() => {
+		mutate(state);
+	}, [ state, mutate ]);
+
+
+
+	//  set new user
+	useEffect(() => {
+		dispatch({ type: 'SET_USER', payload: user })
+	}, []);
+
+
+
+	// Sets initial app mock-data if no previous data is set
+	useEffect(() => {
+
+		if (!checkInitialData()) {
+
+			meetups.forEach((meetup) => {
+				dispatch({ type: 'ADD_MEETUP', payload: meetup });
+			})
+
+			document.cookie = 'initData=true; SameSite=Strict; Secure; Max-Age=2592000';
+		}
+
+	}, []);
+
 
     return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 }

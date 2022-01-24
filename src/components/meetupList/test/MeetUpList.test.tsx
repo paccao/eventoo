@@ -3,30 +3,30 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MeetUpList from '../MeetUpList';
 import AppState from '../../../context/AppState';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('MeetUpList component', () => {
 	it('should render', () => {
-        render(
-			<AppState>
-				<MeetUpList />
-			</AppState>
+		render(
+			<BrowserRouter>
+				<AppState>
+					<MeetUpList />
+				</AppState>
+			</BrowserRouter>
 		);
 	});
 
 	it('should render list components', () => {
 		render(
-			<AppState>
-				<MeetUpList />
-			</AppState>
+			<BrowserRouter>
+				<AppState>
+					<MeetUpList />
+				</AppState>
+			</BrowserRouter>
 		);
 
 		const listItem = screen.getAllByRole('listitem');
 
 		expect(listItem[0]).toBeInTheDocument();
 	});
-
-
-	
-
-    
 });
