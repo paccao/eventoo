@@ -1,5 +1,5 @@
 function ChatMessageList() {
-    return <ul></ul>;
+    return <ul data-testid="chatMessageList"></ul>;
 }
 
 export default ChatMessageList;

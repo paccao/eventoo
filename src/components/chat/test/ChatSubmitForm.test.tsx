@@ -7,9 +7,15 @@ describe('ChatSubmitForm component', () => {
         render(<ChatSubmitForm />);
     });
 
-    it('should display a label inside of the textbox', () => {
+    it('should display a default text inside of the textbox', () => {
         render(<ChatSubmitForm />);
-        screen.getByText(/Input/);
+        screen.getByPlaceholderText(/meddelande\.\./);
+    });
+
+    it('should have an appropriate label connected to the input field', () => {
+        render(<ChatSubmitForm />);
+
+        expect(screen.getByLabelText(/Input/)).toBeInTheDocument();
     });
 
     test('that the button displays relevant text', () => {
