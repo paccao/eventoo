@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, Dispatch, useEffect } from 'react';
 import { AppReducer, ActionType } from './AppReducer';
 import { useStoreHook } from '../hooks/StoreHook';
-import { checkInitialData } from '../helpers/cookieChecks'
+import { checkInitialData } from '../helpers/cookieChecks';
 
 import { meetups, user } from '../mockData';
 
@@ -14,6 +14,7 @@ export interface State {
 	meetings: Meeting[] | [];
 	testCounter: number;
 	user: any;
+    showCreateMeetingModal: boolean;
 }
 
 export interface Meeting {
@@ -50,6 +51,7 @@ export interface User {
 const initialState: State = {
 	isPassedMeetups: false,
     isAdmin: false,
+    showCreateMeetingModal: false,
     testCounter: 1,
     meetings: [],
     user: {},
@@ -59,7 +61,6 @@ export const AppContext = createContext<ContextProps>({
     state: initialState,
     dispatch: () => null,
 });
-
 
 function AppState({ children }: React.PropsWithChildren<{}>) {
 	const [state, dispatch] = useReducer(AppReducer, initialState);

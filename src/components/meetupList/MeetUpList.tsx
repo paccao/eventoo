@@ -3,11 +3,11 @@ import { AppContext } from '../../context/AppState';
 import { Meeting } from '../../context/AppState';
 import { isAttending } from '../../helpers/isAttending';
 import SwitchComponent from '../globals/SwitchComponent';
-import styled from 'styled-components';
+
 
 import MeetUpListItem from './MeetUpListItem';
 import InfoBlockDivider from '../globals/InfoBlockDivider';
-import { stat } from 'fs';
+
 
 export default function MeetUpList() {
 	const { state } = useContext(AppContext);

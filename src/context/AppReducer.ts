@@ -1,5 +1,4 @@
 import { State, Meeting, User } from './AppState';
-import { nanoid } from 'nanoid';
 
 export type ActionType =
     | { type: 'TEST_COUNTER_INCREASE' }
@@ -8,7 +7,8 @@ export type ActionType =
     | { type: 'TOGGLE_ROLE' }
     | { type: 'ADD_MEETUP'; payload: Meeting }
     | { type: 'SET_STATE'; payload: any }
-    | { type: 'SET_IS_PASSED_MEETUPS' };
+    | { type: 'SET_IS_PASSED_MEETUPS' }
+    | { type: 'TOGGLE_CREATE_MEETING_MODAL' };
 
 export function AppReducer(state: State, action: ActionType) {
     switch (action.type) {
@@ -30,7 +30,6 @@ export function AppReducer(state: State, action: ActionType) {
             };
 
         case 'ADD_MEETUP':
-
             return {
                 ...state,
                 meetings: [...state.meetings, action.payload],
@@ -46,6 +45,11 @@ export function AppReducer(state: State, action: ActionType) {
             return {
                 ...state,
                 isPassedMeetups: !state.isPassedMeetups,
+            };   
+        case 'TOGGLE_CREATE_MEETING_MODAL':
+            return {
+                ...state,
+                showCreateMeetingModal: !state.showCreateMeetingModal,
             };
 
         default:
