@@ -13,7 +13,7 @@ export const meetups = [
                 id: '1',
                 time: '2020-05-25',
                 content: 'First comment!',
-                role: 'admin',
+                role: 'guest',
             },
         ],
 
@@ -32,7 +32,7 @@ export const meetups = [
                 id: '1',
                 time: '2020-05-25',
                 content: 'First comment!',
-                role: 'admin',
+                role: 'guest',
             },
         ],
 
@@ -50,7 +50,7 @@ export const meetups = [
                 id: '1',
                 time: '2020-05-25',
                 content: 'First comment!',
-                role: 'admin',
+                role: 'guest',
             },
         ],
 

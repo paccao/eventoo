@@ -1,11 +1,10 @@
-
 import styled from 'styled-components';
-import { AiOutlineStar } from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai';
 
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { AppContext } from '../../context/AppState';
-import { Meeting } from '../../context/AppState';
+// import { useContext } from 'react';
+// import { AppContext } from '../../context/AppState';
+// import { Meeting } from '../../context/AppState';
 
 import TagChip from '../globals/TagChip';
 
@@ -67,43 +66,41 @@ const MeetUpListItemContainer = styled.li`
 	align-items: center;
 	margin-top: 1rem;
 
-	height: 5.4rem;
-	border-radius: 15px;
+    height: 5.4rem;
+    border-radius: 15px;
 
-	h3 {
-		opacity: ${props => props.theme.textLowEmpEmph};
-	}
+    h3 {
+        opacity: ${(props) => props.theme.textLowEmpEmph};
+    }
 
-	h2 {
-		opacity: ${props => props.theme.textHighEmph};
-	}
+    h2 {
+        opacity: ${(props) => props.theme.textHighEmph};
+    }
 `;
 
 const ListImageContainer = styled.div`
-	cursor: pointer;
-	height: 5.4rem;
-	width: 20%;
-	background-position: center;
-	background-size: cover;
-	border-radius: 15px;
+    cursor: pointer;
+    height: 5.4rem;
+    width: 20%;
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
 `;
 
 const ListInfoContainer = styled.div`
-	background-color: ${props => props.theme.cardBgColor};
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	width: 80%;
-	height: 100%;
-	margin-right: 1rem;
-	border-radius: 15px;
-	cursor: pointer;
-	padding: 2rem 1rem;
+    background-color: ${(props) => props.theme.cardBgColor};
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    margin-right: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 2rem 1rem;
 
-	.details-container {
-
-		display: flex;
-		justify-content: space-between;
-
-	}
+    .details-container {
+        display: flex;
+        justify-content: space-between;
+    }
 `;

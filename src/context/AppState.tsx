@@ -16,46 +16,46 @@ export interface State {
 }
 
 export interface Meeting {
-	id: string;
-	title: string;
-	tag: string[];
-	time: string;
-	isOnline: boolean;
-	location: string;
-	image: string;
-	comments: Comment[];
+    id: string;
+    title: string;
+    tag: string[];
+    time: string;
+    isOnline: boolean;
+    location: string;
+    image: string;
+    comments: Comment[];
 }
 
-type Role = 'admin' | 'guest';
+// type Role = 'admin' | 'guest';
 export interface Comment {
-	id: string;
-	time: string;
-	content: string;
-	role: string;
+    id: string;
+    time: string;
+    content: string;
+    role: string;
 }
 
 interface ContextProps {
-	state: State;
-	dispatch: Dispatch<ActionType>;
+    state: State;
+    dispatch: Dispatch<ActionType>;
 }
 
 export interface User {
-	id: string;
-	isAdmin: boolean;
-	name: string;
-	bookedMeetups: string[];
+    id: string;
+    isAdmin: boolean;
+    name: string;
+    bookedMeetups: string[];
 }
 
 const initialState: State = {
-	isAdmin: false,
-	testCounter: 1,
-	meetings: [],
-	user: {},
+    isAdmin: false,
+    testCounter: 1,
+    meetings: [],
+    user: {},
 };
 
 export const AppContext = createContext<ContextProps>({
-	state: initialState,
-	dispatch: () => null,
+    state: initialState,
+    dispatch: () => null,
 });
 
 
@@ -108,7 +108,7 @@ function AppState({ children }: React.PropsWithChildren<{}>) {
 	}, []);
 
 
-	return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
+    return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 }
 
 export default AppState;

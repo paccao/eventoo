@@ -20,5 +20,3 @@ export class Db {
 
 
 }
-
-const db = new Db()
