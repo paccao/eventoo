@@ -1,6 +1,3 @@
-// import { useContext } from 'react';
-// import { AppContext } from './context/AppState';
-
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
 import Header from './components/menu/Header';

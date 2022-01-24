@@ -65,7 +65,7 @@ export const user = {
 
     id: '1',
     isAdmin: false,
-    bookedMeetups: [ '1', '3' ]
+    bookedMeetups: ['1', '3']
 
 
 }

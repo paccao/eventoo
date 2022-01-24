@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, Dispatch, useEffect } from 'react';
 import { AppReducer, ActionType } from './AppReducer';
-// import { meetups } from '../mockData';
+import { useStoreHook } from '../hooks/StoreHook';
 
 import { Db } from '../db/Db';
 const db = new Db();
@@ -17,8 +17,8 @@ export interface Meeting {
     title: string;
     tag: string[];
     time: string;
-    location: string;
     isOnline: boolean;
+    location: string;
     image: string;
     comments: Comment[];
 }
@@ -57,11 +57,20 @@ export const AppContext = createContext<ContextProps>({
 
 function AppState({ children }: React.PropsWithChildren<{}>) {
     const [state, dispatch] = useReducer(AppReducer, initialState);
+    const { mutate } = useStoreHook();
 
     useEffect(() => {
-        const meetups = db.getMeetup();
-        dispatch({ type: 'SET_MEETUPS', payload: meetups });
+        if (!localStorage.getItem('state')) {
+            return;
+        } else {
+            const dbState = db.getState();
+            dispatch({ type: 'SET_STATE', payload: dbState });
+        }
     }, []);
+
+    useEffect(() => {
+        mutate(state);
+    }, [state, mutate]);
 
     return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 }

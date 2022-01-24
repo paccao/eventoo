@@ -1,18 +1,12 @@
-import { Meeting } from '../context/AppState';
+import { State } from '../context/AppState';
 
 export class Db {
-    setMeetup(meetup: Meeting[]): void {
+    setState(meetup: State): void {
         const meetupString = JSON.stringify(meetup);
-        localStorage.setItem('meetup', meetupString);
+        localStorage.setItem('state', meetupString);
     }
 
-    getMeetup(): Meeting[] {
-        if (localStorage.getItem('meetup') === null) {
-            return [];
-        } else {
-            return JSON.parse(localStorage.getItem('meetup') || '');
-        }
+    getState(): State {
+        return JSON.parse(localStorage.getItem('state') || '');
     }
 }
-
-const db = new Db();
