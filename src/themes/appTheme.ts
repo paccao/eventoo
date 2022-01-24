@@ -15,4 +15,6 @@ export const darkTheme = {
     cardBgColor: '#292929',
 
     borderRadius: '15px',
+
+    hr: '1px solid white;'
 };

@@ -29,4 +29,18 @@ describe('MeetUpList component', () => {
 
 		expect(listItem[0]).toBeInTheDocument();
 	});
+
+	it('should render list divider', () => {
+		render(
+			<BrowserRouter>
+				<AppState>
+					<MeetUpList />
+				</AppState>
+			</BrowserRouter>
+		);
+
+		const listItem = screen.getByText(/alla meetups/i);
+
+		expect(listItem).toBeInTheDocument();
+	});
 });
