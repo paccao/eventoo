@@ -4,8 +4,6 @@ export const darkTheme = {
     textColor: '#fffff',
     textColorDark: '#121212',
 
-
-
     accentColor: '#F0F415',
     accentColorAdmin: '#F45815',
 
@@ -15,4 +13,6 @@ export const darkTheme = {
 
     cardHighEmph: '#353535',
     cardBgColor: '#292929',
+
+    borderRadius: '15px',
 };

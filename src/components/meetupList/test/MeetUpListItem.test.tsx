@@ -3,10 +3,15 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import MeetUpListItem from '../MeetUpListItem'
 import { createMemoryHistory } from 'history'
-import { BrowserRouter, useLocation, Router } from 'react-router-dom'
+
+
+
+
+import { BrowserRouter, Router } from 'react-router-dom'
 
 describe('MeetUpListItem component', () => {
 
+    const history = createMemoryHistory()
 
     const meeting = {
         id: '0',
@@ -21,15 +26,11 @@ describe('MeetUpListItem component', () => {
 
     function MockRouter() {
         return (
-            <BrowserRouter>
-                <MeetUpListItem {...meeting} />
+            <BrowserRouter  >
+                <MeetUpListItem isAttending={false} {...meeting} />
             </BrowserRouter>
         );
     }
-    
-
-
-
 
     it('should render', () => {
 
@@ -92,19 +93,28 @@ describe('MeetUpListItem component', () => {
         expect(image).toBeInTheDocument()
     });
 
-    it('should link to a detailed meetup page', () => {
-
+    it('should contain link to detailed meetup-page', () => {
         render(<MockRouter />)
+    
+        const link = screen.getAllByRole('link')
+    
+        expect(link[0]).toBeInTheDocument()
+    });
 
-        const listItem = screen.getByRole('listitem')
+    it('should show star when user is attending', () => {
+        <MeetUpListItem isAttending={true} {...meeting} />
     
-        userEvent.click(listItem) 
-        const newPage = screen.getByText(/Meetup page/i)
+        const starIcon = screen.getByTestId('star-icon')
+        expect(starIcon).toBeInTheDocument()
+    });
 
-        expect(newPage).toBeInTheDocument()
+    it('should not show star when user is not attending', () => {
+        <MeetUpListItem isAttending={false} {...meeting} />
     
-    }); 
-    
+        const starIcon = screen.getByTestId('star-icon')
+        expect(starIcon).not.toBeInTheDocument()
+    });
+
 
 
 })
