@@ -14,6 +14,11 @@ export class Db {
   }
 
 
+  clearState() {
+    localStorage.clear()
+  }
+
+
 }
 
 const db = new Db()

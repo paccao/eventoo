@@ -27,14 +27,10 @@ describe('MeetUpListItem component', () => {
     function MockRouter() {
         return (
             <BrowserRouter  >
-                <MeetUpListItem {...meeting} />
+                <MeetUpListItem isAttending={false} {...meeting} />
             </BrowserRouter>
         );
     }
-
-
-
-
 
     it('should render', () => {
 
@@ -103,6 +99,20 @@ describe('MeetUpListItem component', () => {
         const link = screen.getAllByRole('link')
     
         expect(link[0]).toBeInTheDocument()
+    });
+
+    it('should show star when user is attending', () => {
+        <MeetUpListItem isAttending={true} {...meeting} />
+    
+        const starIcon = screen.getByTestId('star-icon')
+        expect(starIcon).toBeInTheDocument()
+    });
+
+    it('should not show star when user is not attending', () => {
+        <MeetUpListItem isAttending={false} {...meeting} />
+    
+        const starIcon = screen.getByTestId('star-icon')
+        expect(starIcon).not.toBeInTheDocument()
     });
 
 

@@ -16,10 +16,11 @@ interface MeetUpListItemProps {
 	tag: string[];
 	time: string;
 	title: string;
+	isAttending: boolean;
 }
 
-export default function MeetUpListItem({ image, location, tag, time, title, id }: MeetUpListItemProps ) {
-	
+export default function MeetUpListItem({ image, location, tag, time, title, id, isAttending }: MeetUpListItemProps ) {
+
 
 	return (
 		<MeetUpListItemContainer>
@@ -33,7 +34,7 @@ export default function MeetUpListItem({ image, location, tag, time, title, id }
 							<h3>
 								{time} {location}
 							</h3>
-							<AiOutlineStar />
+							{isAttending && <AiOutlineStar data-testid='star-icon' />}
 						</div>
 
 						<div className='title-container'>
@@ -64,7 +65,7 @@ const MeetUpListItemContainer = styled.li`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 2rem;
+	margin-top: 1rem;
 
 	height: 5.4rem;
 	border-radius: 15px;

@@ -3,16 +3,17 @@ import { AppContext } from '../../context/AppState';
 import MeetUpListItem from './MeetUpListItem';
 import { Meeting } from '../../context/AppState';
 
-export default function MeetUpList() {
+import { isAttending } from '../../helpers/utils';
 
-    const { state } = useContext(AppContext)
-
-    console.log(state);
-    
+export default function MeetUpList() { 
+	const { state } = useContext(AppContext);
 
 
-
-  return <ul>{state?.meetings?.map((meeting: Meeting) => <MeetUpListItem  key={meeting.id} {...meeting} />)}</ul>
-
-
+	return (
+		<ul>
+			{state?.meetings?.map((meeting: Meeting) => (
+				<MeetUpListItem key={meeting.id} isAttending={ isAttending(state?.user?.bookedMeetups, meeting.id) ? true : false } {...meeting} />
+			))}
+		</ul>
+	);
 }

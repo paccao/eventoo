@@ -30,16 +30,9 @@ export function AppReducer(state: State, action: ActionType) {
 
         case 'ADD_MEETUP':
 
-            const meetupWithId = {
-
-                ...action.payload,
-                id: nanoid()
-            }
-
-
             return {
                 ...state,
-                meetings: [...state.meetings, meetupWithId],
+                meetings: [...state.meetings, action.payload],
             };
 
 

@@ -1,6 +1,9 @@
 import React, { createContext, useReducer, Dispatch, useEffect } from 'react';
 import { AppReducer, ActionType } from './AppReducer';
 import { useStoreHook } from '../hooks/StoreHook';
+import { checkInitialData } from '../helpers/cookieChecks'
+
+import { meetups, user } from '../mockData';
 
 import { Db } from '../db/Db';
 const db = new Db();
@@ -9,7 +12,7 @@ export interface State {
 	isAdmin: Boolean;
 	meetings: Meeting[] | [];
 	testCounter: number;
-	user: User | {};
+	user: any;
 }
 
 export interface Meeting {
@@ -55,10 +58,15 @@ export const AppContext = createContext<ContextProps>({
 	dispatch: () => null,
 });
 
+
 function AppState({ children }: React.PropsWithChildren<{}>) {
 	const [state, dispatch] = useReducer(AppReducer, initialState);
+
+	// custom hook to update state in local storage 
 	const { mutate } = useStoreHook();
 
+
+	// import stored state from LocalStorage into active state context on refresh.
 	useEffect(() => {
 		if (!localStorage.getItem('state')) {
 			return;
@@ -68,9 +76,37 @@ function AppState({ children }: React.PropsWithChildren<{}>) {
 		}
 	}, []);
 
+
+
+
+	//  On state change update local storage with current changes.
 	useEffect(() => {
 		mutate(state);
-	}, [state]);
+	}, [ state ]);
+
+
+
+	//  set new user
+	useEffect(() => {
+		dispatch({ type: 'SET_USER', payload: user })
+	}, []);
+
+
+
+	// Sets initial app mock-data if no previous data is set
+	useEffect(() => {
+
+		if (!checkInitialData()) {
+
+			meetups.forEach((meetup) => {
+				dispatch({ type: 'ADD_MEETUP', payload: meetup });
+			})
+
+			document.cookie = 'initData=true; SameSite=Strict; Secure; Max-Age=2592000';
+		}
+
+	}, []);
+
 
 	return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 }
