@@ -7,7 +7,8 @@ export type ActionType =
     | { type: 'SET_USER'; payload: User }
     | { type: 'TOGGLE_ROLE' }
     | { type: 'ADD_MEETUP'; payload: Meeting }
-    | { type: 'SET_STATE'; payload: any };
+    | { type: 'SET_STATE'; payload: any }
+    | { type: 'SET_IS_PASSED_MEETUPS' };
 
 export function AppReducer(state: State, action: ActionType) {
     switch (action.type) {
@@ -39,6 +40,12 @@ export function AppReducer(state: State, action: ActionType) {
             return {
                 ...state,
                 user: action.payload,
+            };
+            
+        case 'SET_IS_PASSED_MEETUPS':
+            return {
+                ...state,
+                isPassedMeetups: !state.isPassedMeetups,
             };
 
         default:

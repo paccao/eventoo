@@ -7,8 +7,6 @@ import { Routes, Route } from 'react-router-dom';
 import MeetupListPage from './pages/MeetupListPage';
 import MeetupPage from './pages/MeetupPage';
 
-import { isPassedDate } from './helpers/utils'
-
 function App() {
    
     return (

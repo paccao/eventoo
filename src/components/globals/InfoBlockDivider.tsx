@@ -4,19 +4,21 @@ import styled from 'styled-components';
 
 interface InfoBlockDividerProps {
 	text: string;
-	toggle?: () => void;
+	toggle?: React.ReactNode;
 }
 
-export default function InfoBlockDivider({ text }: InfoBlockDividerProps) {
+export default function InfoBlockDivider({ text, toggle }: InfoBlockDividerProps) {
 	return (
 		<InfoBlockDividerContainer>
 			<h5>{text}</h5>
+			{toggle}
 		</InfoBlockDividerContainer>
 	);
 }
 
 const InfoBlockDividerContainer = styled.div`
 	display: flex;
+	justify-content: space-between;
 	opacity: 40%;
 	border-bottom: ${props => props.theme.hr};
 	width: auto;

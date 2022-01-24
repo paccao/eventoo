@@ -9,6 +9,7 @@ import { Db } from '../db/Db';
 const db = new Db();
 
 export interface State {
+	isPassedMeetups: boolean;
 	isAdmin: Boolean;
 	meetings: Meeting[] | [];
 	testCounter: number;
@@ -47,6 +48,7 @@ export interface User {
 }
 
 const initialState: State = {
+	isPassedMeetups: false,
     isAdmin: false,
     testCounter: 1,
     meetings: [],
