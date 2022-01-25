@@ -8,7 +8,7 @@ import { Meeting } from '../../context/AppState';
 import { nanoid } from 'nanoid';
 
 function CreateMeetupModal() {
-    const today = new Date().toLocaleDateString();
+    const today = new Date().toLocaleDateString('sv-se');
 
     const { dispatch } = useContext(UiContext);
     const { dispatch: appDispatch } = useContext(AppContext);
@@ -46,7 +46,6 @@ function CreateMeetupModal() {
             timeStamp: Date.parse(dateAndTime),
             comments: [],
         };
-        console.log(meeting);
 
         appDispatch({ type: 'ADD_MEETUP', payload: meeting });
         dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });

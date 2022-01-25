@@ -4,12 +4,10 @@ import styled from 'styled-components';
 import { UiContext } from '../../context/UiState';
 
 function CreateMeetupBtn() {
-    const { state, dispatch } = useContext(UiContext);
+    const { dispatch } = useContext(UiContext);
 
     function toggleCreateMeetupModal() {
         dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });
-
-        console.log(state.showCreateMeetingModal);
     }
 
     return (
