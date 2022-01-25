@@ -1,8 +1,5 @@
-import { render, screen, within } from '@testing-library/react';
-import { useContext, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import AppState, { AppContext, Comment, Meeting } from '../../../context/AppState';
-import { isAttending } from '../../../helpers/utils';
+import { render, screen } from '@testing-library/react';
+import AppState, { Comment } from '../../../context/AppState';
 import ChatMessageList from '../ChatMessageList';
 import { meetups as mockMeetups, meetupsNoComments } from '../../../mockData';
 import ChatMessageItem from '../ChatMessageItem';
