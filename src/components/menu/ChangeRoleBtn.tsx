@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import { AppContext } from '../../context/AppState';
+import { UiContext } from '../../context/UiState';
 
 import styled from 'styled-components';
 
 function ChangeRoleBtn() {
-    const { dispatch } = useContext(AppContext);
+    const { dispatch } = useContext(UiContext);
 
     function changeRole(): void {
         dispatch({ type: 'TOGGLE_ROLE' });

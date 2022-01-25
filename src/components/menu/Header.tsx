@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 //Context
 import { useContext } from 'react';
-import { AppContext } from '../../context/AppState';
+import { UiContext } from '../../context/UiState';
 
 import ChangeRoleBtn from './ChangeRoleBtn';
 import CreateMeetupBtn from './CreateMeetupBtn';
 import CreateMeetupModal from './CreateMeetupModal';
 
 function Header() {
-    const { state } = useContext(AppContext);
+    const { state } = useContext(UiContext);
 
     return (
         <HeaderContainer>

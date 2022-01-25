@@ -15,7 +15,7 @@ describe('Header component', () => {
             screen.getByRole('button', { name: /change role/i });
         });
 
-        it('Text with Admin shows in header when buton is pressed once', () => {
+        it('Text with Admin shows in header when buton is pressed twice', () => {
             render(
                 <AppState>
                     <Header />
@@ -142,6 +142,5 @@ describe('Header component', () => {
 
             expect(submitBtn).toBeInTheDocument();
         });
-    
     });
 });

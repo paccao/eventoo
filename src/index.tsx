@@ -5,16 +5,17 @@ import App from './App';
 
 import { BrowserRouter } from 'react-router-dom';
 import AppState from './context/AppState';
-
-
+import UiState from './context/UiState';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<AppState>
-				<App />
-			</AppState>
-		</BrowserRouter>
-	</React.StrictMode>,
-	document.getElementById('root')
+    <React.StrictMode>
+        <BrowserRouter>
+            <UiState>
+                <AppState>
+                    <App />
+                </AppState>
+            </UiState>
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root'),
 );
