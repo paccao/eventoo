@@ -10,6 +10,7 @@ describe('TagChip component', () => {
 	it('should render', () => {
 		render(<SwitchComponent />);
 	});
+	
 	it('should have label rendered with props', () => {
 		render(<SwitchComponent />);
 

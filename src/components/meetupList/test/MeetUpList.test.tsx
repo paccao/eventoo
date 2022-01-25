@@ -11,7 +11,7 @@ import SwitchComponent from '../../globals/SwitchComponent';
 import InfoBlockDivider from '../../globals/InfoBlockDivider';
 
 describe('MeetUpList component', () => {
-	// Global tests
+
 	it('should render', () => {
 		render(
 			<BrowserRouter>

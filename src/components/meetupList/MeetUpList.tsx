@@ -1,25 +1,22 @@
 import React, { useContext, ReactChild } from 'react';
-import { AppContext } from '../../context/AppState';
 import { Meeting, User } from '../../context/AppState';
 import { isAttending } from '../../helpers/isAttending';
 
-import MeetUpListItem from './MeetUpListItem';
+import styled from 'styled-components';
 
+import MeetUpListItem from './MeetUpListItem';
 
 interface MeetUpListProps {
 	list: Meeting[];
 	divider: ReactChild;
-	user: User
+	user: User;
 }
 
 export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
 
-	const { state } = useContext(AppContext);
-
-
 	return (
 		<ul>
-			{list.length < 1 && <h2>No meetups found</h2> }
+			{list.length < 1 && <PlaceholderMessage>No meetups found</PlaceholderMessage>}
 			{divider}
 			{list.map((meeting: Meeting) => (
 				<MeetUpListItem
@@ -31,3 +28,15 @@ export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
 		</ul>
 	);
 }
+
+
+
+const PlaceholderMessage = styled.h2`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: ${props => props.theme.textColor};
+	opacity: ${props => props.theme.textLowEmpEmph};
+	width: 100%;
+	height: 10rem;
+`;
