@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AppContext } from '../../context/AppState';
 import { MdOutlineLaptopMac } from 'react-icons/md';
@@ -19,17 +19,25 @@ function CreateMeetupModal() {
     const [location, setLocation] = useState<string>('');
     const [isOnline, setIsOnline] = useState<boolean>(false);
 
+    //Togles value of location input value when isOnline button is pressed
+    useEffect(() => {
+        isOnline ? setLocation('online') : setLocation('');
+    }, [isOnline]);
+
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+
+        const dateAndTime = date + ' ' + time;
 
         const meeting: Meeting = {
             id: nanoid(),
             title,
             tag: [tag],
-            time: date + ' ' + time,
+            time: dateAndTime,
             isOnline,
             location,
             image,
+            timeStamp: Date.parse(dateAndTime),
             comments: [],
         };
         console.log(meeting);
@@ -108,11 +116,12 @@ function CreateMeetupModal() {
                         name="plats"
                         placeholder="plats:"
                         required
+                        disabled={isOnline}
                     />
                     <button
                         onClick={() => setIsOnline(!isOnline)}
                         type="button"
-                        className="isOnline-button"
+                        className={`isOnline-button ${isOnline ? 'online' : null}`}
                     >
                         <MdOutlineLaptopMac />
                     </button>
@@ -171,13 +180,11 @@ const CreateMeetupModalContainer = styled.section`
             border: none;
             padding: 10px;
             background-color: ${(props) => props.theme.cardBgColor};
-            /* color: ${(props) => props.theme.textColor}; */
-            color: white;
+            color: ${(props) => props.theme.textColor};
         }
 
         input::placeholder {
-            /* color: ${(props) => props.theme.textColor}; */
-            color: white;
+            color: ${(props) => props.theme.textColor};
         }
 
         .submit-button {
@@ -203,6 +210,11 @@ const CreateMeetupModalContainer = styled.section`
             font-size: 1rem;
             border: none;
             padding: 0.55rem;
+        }
+
+        .online {
+            background-color: ${(props) => props.theme.accentColorAdmin};
+            color: ${(props) => props.theme.cardBgColor};
         }
     }
 
