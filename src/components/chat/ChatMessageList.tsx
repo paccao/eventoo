@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AppContext, Comment, Meeting } from '../../context/AppState';
 import { useParams } from 'react-router-dom';
 import ChatMessageItem from './ChatMessageItem';
+import styled from 'styled-components';
 
 function ChatMessageList() {
     const { state } = useContext(AppContext);
@@ -17,12 +18,22 @@ function ChatMessageList() {
     }, []);
 
     return (
-        <ul data-testid="chatMessageList">
+        <List data-testid="chatMessageList">
             {currentMeeting?.comments?.map((comment: Comment) => (
                 <ChatMessageItem key={'commentItem-' + comment.id} {...comment} />
             ))}
-        </ul>
+        </List>
     );
 }
 
+const List = styled.ul`
+    background-color: ${(props) => props.theme.cardBgColor};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: auto;
+    border-radius: ${(props) => props.theme.borderRadius};
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+`;
 export default ChatMessageList;

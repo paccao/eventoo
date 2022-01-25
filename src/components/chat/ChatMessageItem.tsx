@@ -1,11 +1,16 @@
 import { Comment } from '../../context/AppState';
+import styled from 'styled-components';
 
-function ChatMessageItem({ id, time, content, role }: Comment) {
+function ChatMessageItem({ id: _, time, content, role }: Comment) {
     return (
-        <li>
-            <p>{role}</p>
-        </li>
+        <ListItem>
+            <time dateTime={time}>{time}</time>
+            <p>{content}</p>
+            <p>{'/' + role}</p>
+        </ListItem>
     );
 }
+
+const ListItem = styled.li``;
 
 export default ChatMessageItem;

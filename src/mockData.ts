@@ -11,8 +11,20 @@ export const meetups = [
         comments: [
             {
                 id: '1',
-                time: '2020-05-25',
+                time: '1640263576',
                 content: 'First comment!',
+                role: 'guest',
+            },
+            {
+                id: '2',
+                time: '1641863576',
+                content: 'Second comment!',
+                role: 'admin',
+            },
+            {
+                id: '3',
+                time: '1643118376',
+                content: 'Third comment!',
                 role: 'guest',
             },
         ],

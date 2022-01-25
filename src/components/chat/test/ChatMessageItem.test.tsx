@@ -22,4 +22,18 @@ describe('ChatMessageItem component', () => {
         const roleElement = screen.getByText(/guest/i || /admin/i);
         expect(roleElement).toBeInTheDocument();
     });
+
+    it('should display what the user wrote in their comment', () => {
+        render(<ChatMessageItem {...comment} />);
+
+        const content = screen.getByText(comment.content);
+        expect(content).toBeInTheDocument();
+    });
+
+    it('should display the time of when the comment was left on the the meeting page', () => {
+        render(<ChatMessageItem {...comment} />);
+
+        const time = screen.getByText(comment.time);
+        expect(time).toBeInTheDocument();
+    });
 });
