@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import ChangeRoleBtn from './ChangeRoleBtn';
 //Context
 import { useContext } from 'react';
-import { AppContext } from '../../context/AppState';
+import { UiContext } from '../../context/UiState';
+
+import ChangeRoleBtn from './ChangeRoleBtn';
+import CreateMeetupBtn from './CreateMeetupBtn';
+import CreateMeetupModal from './CreateMeetupModal';
 
 function Header() {
-    const { state } = useContext(AppContext);
+    const { state } = useContext(UiContext);
 
     return (
         <HeaderContainer>
@@ -14,9 +17,13 @@ function Header() {
                 <h2 className="logo">eventoo.</h2>
                 <h4 className="isAdmin">{state?.isAdmin ? 'Admin' : null}</h4>
             </div>
-            <div>
-                <ChangeRoleBtn />
+
+            <div>{!state.showCreateMeetingModal && <ChangeRoleBtn />}</div>
+
+            <div className="create-meetup-btn-container">
+                {state.isAdmin && <CreateMeetupBtn />}
             </div>
+            {state.showCreateMeetingModal && <CreateMeetupModal />}
         </HeaderContainer>
     );
 }
@@ -45,5 +52,9 @@ const HeaderContainer = styled.header`
 
     .isAdmin {
         color: ${(props) => props.theme.accentColorAdmin};
+    }
+
+    .create-meetup-btn-container {
+        min-width: 50px;
     }
 `;

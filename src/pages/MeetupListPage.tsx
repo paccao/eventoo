@@ -5,7 +5,7 @@ function MeetupListPage() {
 	return (
 		<div>
 
-			Home page
+
 			<MeetUpList />
         </div>
 

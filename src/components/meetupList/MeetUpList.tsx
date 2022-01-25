@@ -1,19 +1,46 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppState';
-import MeetUpListItem from './MeetUpListItem';
 import { Meeting } from '../../context/AppState';
+import { isAttending } from '../../helpers/isAttending';
+import SwitchComponent from '../globals/SwitchComponent';
 
-import { isAttending } from '../../helpers/utils';
 
-export default function MeetUpList() { 
+import MeetUpListItem from './MeetUpListItem';
+import InfoBlockDivider from '../globals/InfoBlockDivider';
+
+
+export default function MeetUpList() {
 	const { state } = useContext(AppContext);
 
+	const filteredByBooked = [...state?.meetings]?.filter((meeting) => isAttending(state?.user?.bookedMeetups, meeting.id))
 
 	return (
-		<ul>
-			{state?.meetings?.map((meeting: Meeting) => (
-				<MeetUpListItem key={meeting.id} isAttending={ isAttending(state?.user?.bookedMeetups, meeting.id) ? true : false } {...meeting} />
-			))}
-		</ul>
+		<>
+			<ul data-testid='booked-meetups' >
+				<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />}/>
+				{filteredByBooked.map((meeting: Meeting) => (
+					<MeetUpListItem
+						key={meeting.id}
+						isAttending={ isAttending(state?.user?.bookedMeetups, meeting.id) ? true : false }
+						{...meeting}
+					/>
+				))}
+			</ul>
+			
+			<ul>
+				<InfoBlockDivider text='Alla meetups' />
+				{state?.meetings?.map((meeting: Meeting) => (
+					
+					<MeetUpListItem
+						key={meeting.id}
+						isAttending={ isAttending(state?.user?.bookedMeetups, meeting.id) ? true : false }
+						{...meeting}
+					/>
+				))}
+			</ul>
+
+		</>
 	);
 }
+
+
