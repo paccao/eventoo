@@ -220,7 +220,7 @@ describe('MeetUpList component', () => {
 
 	});
 
-	it('should only render upcoming meetups when "Visa gamla meetups" toggle is clicked twice"', () => {
+	it('should only render upcoming meetups when "Visa gamla" toggle is clicked twice"', () => {
 
 		const currentDatePlusOneYearString = currentDatePlusOneYear()
 
@@ -264,7 +264,7 @@ describe('MeetUpList component', () => {
 		const toggle = screen.getByRole('checkbox');
 		userEvent.click(toggle)
 
-		const listItem = screen.queryByRole('heading', { name: /lördag på landet/i });
+		const listItem = screen.queryByRole('heading', { name: /lördag på lan.../i });
 
 		expect(listItem).toBeInTheDocument()
 

@@ -15,7 +15,6 @@ const TagChipContainer = styled.li`
 	border-radius: 15px;
 	padding: 0.3rem;
 	font-size: 10px;
-	margin-right: 0.5rem;
 	margin-top: 0.5rem;
 	width: auto;
 
