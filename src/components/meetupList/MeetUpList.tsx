@@ -9,7 +9,6 @@ import styled from 'styled-components';
 
 import MeetUpListItem from './MeetUpListItem';
 
-
 interface MeetUpListProps {
 	list: Meeting[];
 	divider: ReactChild;
@@ -17,23 +16,18 @@ interface MeetUpListProps {
 }
 
 export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
-
-	const { state } = useContext(UiContext)
-	const [ activeList, setActiveList ] = useState<Meeting[]>([])
+	const { state } = useContext(UiContext);
+	const [activeList, setActiveList] = useState<Meeting[]>([]);
 
 	useEffect(() => {
-
 		const ascendingList = [...list].sort((a, b) => Date.parse(a.time) - Date.parse(b.time));
-		
 
 		if (state.isPassedMeetups) {
-			setActiveList([...ascendingList].filter(meetup => isPassedDate(meetup.time)))
+			setActiveList([...ascendingList].filter(meetup => isPassedDate(meetup.time)));
 		} else {
-			setActiveList([...ascendingList].filter(meetup => !isPassedDate(meetup.time)))
+			setActiveList([...ascendingList].filter(meetup => !isPassedDate(meetup.time)));
 		}
-
-	}, [ list, state ])
-
+	}, [list, state]);
 
 	return (
 		<ListContainer>
@@ -51,8 +45,7 @@ export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
 }
 
 const ListContainer = styled.ul`
-	margin: 3rem 0rem;
-	
+	margin-bottom: 1rem;
 `;
 
 const PlaceholderMessage = styled.h2`

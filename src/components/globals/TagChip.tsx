@@ -2,18 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function TagChip({ text }: { text: string }) {
-	return <TagChipContainer>{text}</TagChipContainer>;
+	return <TagChipContainer>
+		<p>{text}</p>
+	</TagChipContainer>;
 }
 
 const TagChipContainer = styled.li`
-	display: inline;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
 	border-radius: 15px;
 	padding: 0.3rem;
-	vertical-align: middle;
 	font-size: 10px;
-	margin: 0.3rem;
 	margin-right: 0.5rem;
+	margin-top: 0.5rem;
+	width: auto;
 
-	color: ${props => props.theme.textColorDark};
-	background-color: ${props => props.theme.accentColor};
+	p{
+		padding: 0.3rem;
+		border-radius: 15px;
+		color: ${props => props.theme.textColorDark};
+		background-color: ${props => props.theme.accentColor};
+	}
+
 `;

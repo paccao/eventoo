@@ -2,14 +2,18 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 html body {
     font-family: 'Inter', sans-serif;
     color: #fff;
     background-color: #151515;
-    overflow-y: hidden;
+    width: 100%;
+  
 }
+
+
 
 a {
     color: inherit;

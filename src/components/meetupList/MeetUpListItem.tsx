@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import { AiOutlineStar } from 'react-icons/ai';
+
 
 import { Link } from 'react-router-dom';
 import TagChip from '../globals/TagChip';
+import AttendingIndicator from '../globals/AttendingIndicator';
+import { shortenLongStrings } from '../../helpers/shortenLongString';
 
-import { isPassedDate } from '../../helpers/isPassedDate'
+import { isPassedDate } from '../../helpers/isPassedDate';
 
 interface MeetUpListItemProps {
 	id: string;
@@ -34,15 +36,11 @@ export default function MeetUpListItem({
 							<h3>
 								{time} {location}
 							</h3>
-							{isAttending && (
-								<span>
-									Attending <AiOutlineStar className='star-icon' />
-								</span>
-							)}
+							{isAttending && <AttendingIndicator />}
 						</div>
 
 						<div className='title-container'>
-							<h2>{title}</h2>
+							<h2>{shortenLongStrings(title, 13)}</h2>
 						</div>
 
 						<ul className='tag-container'>
@@ -58,8 +56,7 @@ export default function MeetUpListItem({
 				className='image-container'
 				role={'img'}
 				style={{ backgroundImage: `url(${image})` }}
-			>
-			</ListImageContainer>
+			></ListImageContainer>
 		</MeetUpListItemContainer>
 	);
 }
@@ -70,7 +67,7 @@ const MeetUpListItemContainer = styled.li`
 	align-items: center;
 	margin-top: 1rem;
 
-	height: 6.4rem;
+	height: 7.4rem;
 	border-radius: 15px;
 
 	h3 {
@@ -84,12 +81,11 @@ const MeetUpListItemContainer = styled.li`
 
 const ListImageContainer = styled.div`
 	cursor: pointer;
-	height: 5.4rem;
+	height: 7.4rem;
 	width: 20%;
 	background-position: center;
 	background-size: cover;
 	border-radius: 15px;
-
 `;
 
 const ListInfoContainer = styled.div`

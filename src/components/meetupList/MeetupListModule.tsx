@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppState';
+import styled from 'styled-components';
  
 import MeetUpList from './MeetUpList';
 import InfoBlockDivider from '../globals/InfoBlockDivider';
 import SwitchComponent from '../globals/SwitchComponent';
 
 import { isAttending } from '../../helpers/isAttending';
+
  
 export default function MeetUpListModule() {
  
@@ -16,8 +18,8 @@ export default function MeetUpListModule() {
 
  
  return (
- 
-   <section>
+
+   <MeetupListModuleContainer>
       <MeetUpList 
         list={filteredByBooked} 
         divider={<InfoBlockDivider 
@@ -34,7 +36,13 @@ export default function MeetUpListModule() {
         user={state.user}
       
       />
-   </section>
+   </MeetupListModuleContainer>
  
  )
 }
+
+const MeetupListModuleContainer = styled.section`
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 80vh;
+`
