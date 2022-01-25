@@ -27,6 +27,10 @@ function CreateMeetupModal() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        if (!title || !tag || !image || !location || !date || !time) {
+            return;
+        }
+
         const dateAndTime = date + ' ' + time;
 
         const meeting: Meeting = {
@@ -44,6 +48,8 @@ function CreateMeetupModal() {
 
         dispatch({ type: 'ADD_MEETUP', payload: meeting });
         dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });
+
+        setLocation('');
     }
 
     return (

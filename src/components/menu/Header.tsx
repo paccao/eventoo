@@ -17,12 +17,12 @@ function Header() {
                 <h2 className="logo">eventoo.</h2>
                 <h4 className="isAdmin">{state?.isAdmin ? 'Admin' : null}</h4>
             </div>
-            <div>{state.isAdmin && <CreateMeetupBtn />}</div>
 
-            <div>
-                <ChangeRoleBtn />
+            <div>{!state.showCreateMeetingModal && <ChangeRoleBtn />}</div>
+
+            <div className="create-meetup-btn-container">
+                {state.isAdmin && <CreateMeetupBtn />}
             </div>
-
             {state.showCreateMeetingModal && <CreateMeetupModal />}
         </HeaderContainer>
     );
@@ -52,5 +52,9 @@ const HeaderContainer = styled.header`
 
     .isAdmin {
         color: ${(props) => props.theme.accentColorAdmin};
+    }
+
+    .create-meetup-btn-container {
+        min-width: 50px;
     }
 `;

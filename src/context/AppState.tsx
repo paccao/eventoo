@@ -80,6 +80,7 @@ function AppState({ children }: React.PropsWithChildren<{}>) {
     }, []);
 
     //  On state change update local storage with current changes.
+
     useEffect(() => {
         mutate(state);
     }, [state, mutate]);

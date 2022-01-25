@@ -13,8 +13,8 @@ function CreateMeetupBtn() {
     }
 
     return (
-        <CreateMeetupBtnContainer onClick={toggleCreateMeetupModal}>
-            <MdAddCircleOutline data-testid="create-meetup-btn" />
+        <CreateMeetupBtnContainer data-testid="create-meetup-btn" onClick={toggleCreateMeetupModal}>
+            <MdAddCircleOutline />
         </CreateMeetupBtnContainer>
     );
 }
