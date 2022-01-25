@@ -5,26 +5,43 @@ import MeetUpList from '../MeetUpList';
 import AppState from '../../../context/AppState';
 import { BrowserRouter } from 'react-router-dom';
 
+import { meetups, user } from '../../../mockData';
+
+import SwitchComponent from '../../globals/SwitchComponent';
+import InfoBlockDivider from '../../globals/InfoBlockDivider';
+
 describe('MeetUpList component', () => {
-
-
-
 	// Global tests
 	it('should render', () => {
 		render(
 			<BrowserRouter>
 				<AppState>
-					<MeetUpList />
+					<MeetUpList
+						user={user}
+						list={meetups}
+						divider={
+							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
+						}
+					/>
 				</AppState>
 			</BrowserRouter>
 		);
 	});
-
+	
 	it('should render list components', () => {
 		render(
 			<BrowserRouter>
 				<AppState>
-					<MeetUpList />
+
+					<MeetUpList 
+					user={user}
+					list={meetups}   
+					divider={<InfoBlockDivider 
+					text='Bokade meetups' 
+					toggle={<SwitchComponent />} />} 
+					
+					/>
+
 				</AppState>
 			</BrowserRouter>
 		);
@@ -34,9 +51,104 @@ describe('MeetUpList component', () => {
 		expect(listItem[0]).toBeInTheDocument();
 	});
 
+	it('should render "No meetups found" message if there are no meetups', () => {
+		render(
+			<BrowserRouter>
+				<AppState>
+
+					<MeetUpList 
+					user={user}
+					list={[]}   
+					divider={<InfoBlockDivider 
+					text='Bokade meetups' 
+					toggle={<SwitchComponent />} />} 
+					
+					/>
+
+				</AppState>
+			</BrowserRouter>
+		);
+
+		const message = screen.getByRole('heading', { name: /no meetups found/i });
+
+		expect(message).toBeInTheDocument();
+	});
+
+	it('should render "bookade meetups" divider', () => {
+		render(
+			<BrowserRouter>
+				<AppState>
+
+					<MeetUpList 
+					user={user}
+					list={[]}   
+					divider={<InfoBlockDivider 
+					text='Bokade meetups' 
+					toggle={<SwitchComponent />} />} 
+					
+					/>
+
+				</AppState>
+			</BrowserRouter>
+		);
+
+		const message = screen.getByRole('heading', { name: /no meetups found/i });
+
+		expect(message).toBeInTheDocument();
+	});
 
 
 
+	it('should render list divider "Alla meetups"', () => {
+		render(
+			<BrowserRouter>
+				<AppState>
+
+					<MeetUpList 
+					user={user}
+					list={meetups}   
+					divider={<InfoBlockDivider 
+					text='Alla meetups' 
+					toggle={<SwitchComponent />} />} 
+					
+					/>
+
+				</AppState>
+			</BrowserRouter>
+		);
+
+		const heading = screen.getByText(/alla meetups/i);
+
+		expect(heading).toBeInTheDocument();
+	});
+
+
+	it('should render list divider "Bokade meetups"', () => {
+		render(
+			<BrowserRouter>
+				<AppState>
+					<MeetUpList  
+						user={user}
+						list={meetups}   
+						divider={<InfoBlockDivider 
+						text='Bokade meetups' 
+						toggle={<SwitchComponent />} />} 
+						/>
+				</AppState>
+			</BrowserRouter>
+		);
+
+		const heading = screen.getByText(/bokade meetups/i);
+
+		expect(heading).toHaveTextContent(/Bokade meetups/i);
+	});
+
+}); 
+
+
+
+
+/* 
 		// Nested tests
 		describe('Alla meetups - section', () => {
 
@@ -45,7 +157,16 @@ describe('MeetUpList component', () => {
 				render(
 					<BrowserRouter>
 						<AppState>
-							<MeetUpList />
+
+							<MeetUpList 
+							user={user}
+							list={meetups}   
+							divider={<InfoBlockDivider 
+							text='Bokade meetups' 
+							toggle={<SwitchComponent />} />} 
+							
+							/>
+
 						</AppState>
 					</BrowserRouter>
 				);
@@ -59,7 +180,15 @@ describe('MeetUpList component', () => {
 				render(
 					<BrowserRouter>
 						<AppState>
-							<MeetUpList />
+							<MeetUpList 
+
+							user={user}
+							list={meetups}   
+							divider={<InfoBlockDivider 
+							text='Bokade meetups' 
+							toggle={<SwitchComponent />} />} 
+							
+							/>
 						</AppState>
 					</BrowserRouter>
 				);
@@ -84,7 +213,13 @@ describe('MeetUpList component', () => {
 				render(
 					<BrowserRouter>
 						<AppState>
-							<MeetUpList />
+							<MeetUpList  
+								user={user}
+								list={meetups}   
+								divider={<InfoBlockDivider 
+								text='Bokade meetups' 
+								toggle={<SwitchComponent />} />} 
+								/>
 						</AppState>
 					</BrowserRouter>
 				);
@@ -98,7 +233,16 @@ describe('MeetUpList component', () => {
 				render(
 					<BrowserRouter>
 						<AppState>
-							<MeetUpList />
+
+							<MeetUpList  
+							user={user}
+							list={meetups}   
+							divider={<InfoBlockDivider 
+							text='Bokade meetups' 
+							toggle={<SwitchComponent />} />} 
+							
+							/>
+
 						</AppState>
 					</BrowserRouter>
 				);
@@ -108,5 +252,4 @@ describe('MeetUpList component', () => {
 				expect(list).toHaveTextContent(/Bokade meetups/i);
 			});
 
-		});
-});
+		}); */

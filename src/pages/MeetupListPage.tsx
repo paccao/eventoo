@@ -1,12 +1,10 @@
 
-import MeetUpList from '../components/meetupList/MeetUpList';
+import MeetUpListModule from "../components/meetupList/MeetupListModule";
 
 function MeetupListPage() {
 	return (
 		<div>
-
-
-			<MeetUpList />
+			<MeetUpListModule />
         </div>
 
 	);

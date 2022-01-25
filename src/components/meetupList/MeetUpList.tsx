@@ -1,46 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, ReactChild } from 'react';
 import { AppContext } from '../../context/AppState';
-import { Meeting } from '../../context/AppState';
+import { Meeting, User } from '../../context/AppState';
 import { isAttending } from '../../helpers/isAttending';
-import SwitchComponent from '../globals/SwitchComponent';
-
 
 import MeetUpListItem from './MeetUpListItem';
-import InfoBlockDivider from '../globals/InfoBlockDivider';
 
 
-export default function MeetUpList() {
-	const { state } = useContext(AppContext);
-
-	const filteredByBooked = [...state?.meetings]?.filter((meeting) => isAttending(state?.user?.bookedMeetups, meeting.id))
-
-	return (
-		<>
-			<ul data-testid='booked-meetups' >
-				<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />}/>
-				{filteredByBooked.map((meeting: Meeting) => (
-					<MeetUpListItem
-						key={meeting.id}
-						isAttending={ isAttending(state?.user?.bookedMeetups, meeting.id) ? true : false }
-						{...meeting}
-					/>
-				))}
-			</ul>
-			
-			<ul>
-				<InfoBlockDivider text='Alla meetups' />
-				{state?.meetings?.map((meeting: Meeting) => (
-					
-					<MeetUpListItem
-						key={meeting.id}
-						isAttending={ isAttending(state?.user?.bookedMeetups, meeting.id) ? true : false }
-						{...meeting}
-					/>
-				))}
-			</ul>
-
-		</>
-	);
+interface MeetUpListProps {
+	list: Meeting[];
+	divider: ReactChild;
+	user: User
 }
 
+export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
 
+	const { state } = useContext(AppContext);
+
+
+	return (
+		<ul>
+			{list.length < 1 && <h2>No meetups found</h2> }
+			{divider}
+			{list.map((meeting: Meeting) => (
+				<MeetUpListItem
+					key={meeting.id}
+					isAttending={isAttending(user.bookedMeetups, meeting.id) ? true : false}
+					{...meeting}
+				/>
+			))}
+		</ul>
+	);
+}
