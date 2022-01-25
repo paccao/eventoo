@@ -9,12 +9,8 @@ import { Db } from '../db/Db';
 const db = new Db();
 
 export interface State {
-    isPassedMeetups: boolean;
-    isAdmin: Boolean;
     meetings: Meeting[] | [];
-    testCounter: number;
     user: any;
-    showCreateMeetingModal: boolean;
 }
 
 export interface Meeting {
@@ -50,10 +46,6 @@ export interface User {
 }
 
 const initialState: State = {
-    isPassedMeetups: false,
-    isAdmin: false,
-    showCreateMeetingModal: false,
-    testCounter: 1,
     meetings: [],
     user: {},
 };
@@ -80,6 +72,7 @@ function AppState({ children }: React.PropsWithChildren<{}>) {
     }, []);
 
     //  On state change update local storage with current changes.
+
     useEffect(() => {
         mutate(state);
     }, [state, mutate]);

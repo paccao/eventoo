@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { UiContext } from '../../context/UiState';
 import { AppContext } from '../../context/AppState';
 import { MdOutlineLaptopMac } from 'react-icons/md';
 
@@ -9,7 +10,8 @@ import { nanoid } from 'nanoid';
 function CreateMeetupModal() {
     const today = new Date().toLocaleDateString();
 
-    const { dispatch } = useContext(AppContext);
+    const { dispatch } = useContext(UiContext);
+    const { dispatch: appDispatch } = useContext(AppContext);
 
     const [title, setTitle] = useState<string>('');
     const [tag, setTag] = useState<string>('');
@@ -27,6 +29,10 @@ function CreateMeetupModal() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+        if (!title || !tag || !image || !location || !date || !time) {
+            return;
+        }
+
         const dateAndTime = date + ' ' + time;
 
         const meeting: Meeting = {
@@ -42,8 +48,10 @@ function CreateMeetupModal() {
         };
         console.log(meeting);
 
-        dispatch({ type: 'ADD_MEETUP', payload: meeting });
+        appDispatch({ type: 'ADD_MEETUP', payload: meeting });
         dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });
+
+        setLocation('');
     }
 
     return (

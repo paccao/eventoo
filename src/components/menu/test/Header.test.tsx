@@ -15,7 +15,7 @@ describe('Header component', () => {
             screen.getByRole('button', { name: /change role/i });
         });
 
-        it('Text with Admin shows in header when buton is pressed once', () => {
+        it('Text with Admin shows in header when buton is pressed twice', () => {
             render(
                 <AppState>
                     <Header />
@@ -116,6 +116,31 @@ describe('Header component', () => {
             const element = screen.queryByText('lägg till meetup..');
 
             expect(element).not.toBeInTheDocument();
+        });
+        it('Modal is NOT closed on form submit if all fields are not provided', async () => {
+            render(
+                <AppState>
+                    <Header />
+                </AppState>,
+            );
+
+            const createMeetupBtn = screen.getByTestId('create-meetup-btn');
+            userEvent.click(createMeetupBtn);
+
+            const titleInput = screen.getByPlaceholderText(/titel:/i);
+            const tagInput = screen.getByPlaceholderText(/ämne:/i);
+            const imageInput = screen.getByPlaceholderText(/bild:/i);
+            const locationInput = screen.getByPlaceholderText(/plats:/i);
+
+            userEvent.type(titleInput, '');
+            userEvent.type(tagInput, 'javascript');
+            userEvent.type(locationInput, 'Hemma');
+            userEvent.type(imageInput, 'https://test.com');
+
+            const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
+            userEvent.click(submitBtn);
+
+            expect(submitBtn).toBeInTheDocument();
         });
     });
 });
