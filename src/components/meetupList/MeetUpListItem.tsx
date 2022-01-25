@@ -4,6 +4,8 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import TagChip from '../globals/TagChip';
 
+import { isPassedDate } from '../../helpers/isPassedDate'
+
 interface MeetUpListItemProps {
 	id: string;
 	image: string;

@@ -28,7 +28,7 @@ export default function MeetUpListModule() {
       />
 
       <MeetUpList 
-        list={ state.meetings } 
+        list={state.meetings} 
         divider={<InfoBlockDivider 
         text='alla meetups' />} 
         user={state.user}

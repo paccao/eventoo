@@ -11,7 +11,8 @@ const TagChipContainer = styled.li`
 	padding: 0.3rem;
 	vertical-align: middle;
 	font-size: 10px;
-	margin: 0.3rem 0rem;
+	margin: 0.3rem;
+	margin-right: 0.5rem;
 
 	color: ${props => props.theme.textColorDark};
 	background-color: ${props => props.theme.accentColor};

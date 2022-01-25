@@ -21,10 +21,10 @@ export default function SwitchComponent() {
                         <Switch
                             checked={state.isPassedMeetups}
                             onChange={onChangeHandler}
-                            name="gilad"
+                            name="switch"
                         />
                     }
-                    label={state.isPassedMeetups ? 'Visa tidigare' : 'Visa kommande'}
+                    label={'Visa gamla meetups'}
                     labelPlacement="start"
                 />
             </FormGroup>

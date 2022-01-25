@@ -56,29 +56,11 @@ export const meetups = [
             },
         ],
     },
-    {
-        id: '4',
-        title: 'Räkjostillverkning med greger',
-        tag: ['food', 'gourme'],
-        time: '2022-01-20 15:01',
-        isOnline: true,
-        location: 'Göteborg',
-        timeStamp: 1643097488,
-        image: 'https://images.unsplash.com/photo-1613585535485-dc11f77335ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-        comments: [
-            {
-                id: '1',
-                time: '2020-05-25',
-                content: 'First comment!',
-                role: 'guest',
-            },
-        ],
-    },
 ];
 
 export const user = {
     name: 'kalle',
     id: '1',
     isAdmin: false,
-    bookedMeetups: ['1', '3', '4'],
+    bookedMeetups: ['1', '3'],
 };
