@@ -1,7 +1,7 @@
 export const darkTheme = {
     bgColor: '#121212',
     __bgColorLargePageWidth: '#151515',
-    textColor: '#fffff',
+    textColor: '#ffffff',
     textColorDark: '#121212',
 
     accentColor: '#F0F415',
@@ -16,5 +16,5 @@ export const darkTheme = {
 
     borderRadius: '15px',
 
-    hr: '1px solid white;'
+    hr: '1px solid white;',
 };
