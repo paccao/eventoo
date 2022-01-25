@@ -1,23 +1,25 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
+import { useContext, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import AppState, { AppContext, Comment, Meeting } from '../../../context/AppState';
+import { isAttending } from '../../../helpers/utils';
 import ChatMessageList from '../ChatMessageList';
-
-function MockChatMessageList() {
-    return (
-        <ul data-testid="chatMessageList">
-            <li data-testid="test-listitem"></li>
-        </ul>
-    );
-}
+import { meetups as mockMeetups } from '../../../mockData';
+import ChatMessageItem from '../ChatMessageItem';
 
 describe('ChatMessageList component', () => {
     it('renders without crashing', () => {
         render(<ChatMessageList />);
     });
 
-    it('renders the list of chat messages', () => {
-        render(<MockChatMessageList />);
+    it("should render no list items when there aren't any", () => {
+        render(
+            <AppState>
+                <ChatMessageList />
+            </AppState>,
+        );
 
-        const listItem = screen.getByTestId('test-listitem');
-        expect(listItem).toBeInTheDocument();
+        const listItem = screen.queryAllByRole('listitem');
+        expect(listItem[0]).toBeUndefined();
     });
 });
