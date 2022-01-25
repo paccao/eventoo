@@ -56,6 +56,19 @@ export const meetups = [
     },
 ];
 
+export const meetupsNoComments = [
+    {
+        id: '1',
+        title: 'lördag på landet',
+        tag: ['outdoors'],
+        time: 'Lördag 20 Jan 18.00',
+        isOnline: false,
+        location: 'Göteborg',
+        image: 'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        comments: [],
+    },
+];
+
 export const user = {
     name: 'kalle',
     id: '1',
