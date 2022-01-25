@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext, Comment, Meeting } from '../../context/AppState';
-import { meetups as mockMeetups } from '../../mockData';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ChatMessageItem from './ChatMessageItem';
 
 function ChatMessageList() {

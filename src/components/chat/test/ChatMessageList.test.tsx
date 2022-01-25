@@ -12,14 +12,24 @@ describe('ChatMessageList component', () => {
         render(<ChatMessageList />);
     });
 
-    it("should render no list items when there aren't any", () => {
+    function MockChatMessageList() {
+        return (
+            <ul data-testid="chatMessageList">
+                {mockMeetups[0]?.comments?.map((comment: Comment) => (
+                    <ChatMessageItem key={'commentItem-' + comment.id} {...comment} />
+                ))}
+            </ul>
+        );
+    }
+
+    it('should render chat messages if there are any', () => {
         render(
             <AppState>
-                <ChatMessageList />
+                <MockChatMessageList />
             </AppState>,
         );
 
         const listItem = screen.queryAllByRole('listitem');
-        expect(listItem[0]).toBeUndefined();
+        expect(listItem[0]).toBeInTheDocument();
     });
 });
