@@ -6,6 +6,12 @@ describe('ChatBox component', () => {
         render(<ChatBox />);
     });
 
+    it('should render the info block divider', () => {
+        render(<ChatBox />);
+        const infoDivider = screen.getByText(/diskussion/i);
+        expect(infoDivider).toBeInTheDocument();
+    });
+
     it('should render the list of chat messages', () => {
         render(<ChatBox />);
         const listNode = screen.getByRole('list');
