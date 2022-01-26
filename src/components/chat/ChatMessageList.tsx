@@ -7,13 +7,7 @@ import styled from 'styled-components';
 function ChatMessageList() {
     const { state } = useContext(AppContext);
     const { id } = useParams();
-    const [currentMeeting, setCurrentMeeting] = useState<Meeting>();
-
-    useEffect(() => {
-        const filteredMeetings = [...state?.meetings]?.filter((meeting) => meeting.id === id)[0];
-
-        setCurrentMeeting(filteredMeetings);
-    }, []);
+    const currentMeeting = [...state?.meetings]?.filter((meeting) => meeting.id === id)[0];
 
     return (
         <List data-testid="chatMessageList">
