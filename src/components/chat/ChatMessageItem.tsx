@@ -10,6 +10,7 @@ function ChatMessageItem({ id: _, time, content, role }: Comment) {
         const minutes = '0' + date.getMinutes();
         const seconds = '0' + date.getSeconds();
 
+        // 19 januari kl.16:04
         // Will display time in 10:30:23 format
         return hours + ':' + minutes.slice(1) + ':' + seconds.slice(1);
     }
@@ -18,8 +19,13 @@ function ChatMessageItem({ id: _, time, content, role }: Comment) {
         return role.charAt(0).toUpperCase() + role.slice(1);
     }
 
+    function checkIfAdmin() {
+        if (role === 'admin') return true;
+        else return false;
+    }
+
     return (
-        <ListItem>
+        <ListItem isAdmin={checkIfAdmin()}>
             <time dateTime={time}>{formatTime(time)}</time>
             <p>{content}</p>
             <cite className={role}>{'/' + formatRole(role)}</cite>
@@ -27,9 +33,12 @@ function ChatMessageItem({ id: _, time, content, role }: Comment) {
     );
 }
 
-const ListItem = styled.li`
+const ListItem = styled.li<{ isAdmin: Boolean }>`
     font-style: normal;
     text-align: left;
+    color: ${(props) => props.theme.textColor};
+    background-color: ${(props) =>
+        props.isAdmin ? props.theme.accentColorAdmin : props.theme.bgColor};
 
     time {
         opacity: ${(props) => props.theme.textLowEmpEmph};

@@ -28,7 +28,7 @@ describe('ChatMessageList component', () => {
         render(<ChatMessageList />);
     });
 
-    it('should render chat messages if there are any', () => {
+    it('should render chat messages when there are any', () => {
         render(
             <AppState>
                 <MockChatMessageList />
@@ -39,7 +39,7 @@ describe('ChatMessageList component', () => {
         expect(listItem[0]).toBeInTheDocument();
     });
 
-    it("should not crash if there aren't any chat messages", () => {
+    it("should not crash when there aren't any chat messages", () => {
         render(
             <AppState>
                 <MockEmptyChatMessageList />
