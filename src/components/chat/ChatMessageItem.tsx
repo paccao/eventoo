@@ -11,14 +11,18 @@ function ChatMessageItem({ id: _, time, content, role }: Comment) {
         const seconds = '0' + date.getSeconds();
 
         // Will display time in 10:30:23 format
-        return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+        return hours + ':' + minutes.slice(1) + ':' + seconds.slice(1);
+    }
+
+    function formatRole(role: string) {
+        return role.charAt(0).toUpperCase() + role.slice(1);
     }
 
     return (
         <ListItem>
             <time dateTime={time}>{formatTime(time)}</time>
             <p>{content}</p>
-            <cite className={role}>{'/' + role}</cite>
+            <cite className={role}>{'/' + formatRole(role)}</cite>
         </ListItem>
     );
 }

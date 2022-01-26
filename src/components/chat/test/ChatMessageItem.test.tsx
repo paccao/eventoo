@@ -16,10 +16,10 @@ describe('ChatMessageItem component', () => {
         render(<ChatMessageItem {...comment} />);
     });
 
-    it('should display the role of the comment author', () => {
-        render(<MockItem />);
+    it('should render the role of the author', () => {
+        render(<ChatMessageItem {...comment} />);
 
-        const roleElement = screen.getByText(/guest/i || /admin/i);
+        const roleElement = screen.getByText(/Guest/ || /Admin/);
         expect(roleElement).toBeInTheDocument();
     });
 
