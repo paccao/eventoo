@@ -39,7 +39,7 @@ export default function MeetUpListItem({
 						</div>
 
 						<div className='title-container'>
-							<h2>{shortenLongStrings(title, 13)}</h2>
+							<h2 title={title}>{shortenLongStrings(title, 13)}</h2>
 						</div>
 
 						<TagContainer className='tag-container'>

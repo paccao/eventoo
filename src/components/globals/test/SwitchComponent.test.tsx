@@ -14,7 +14,7 @@ describe('TagChip component', () => {
 	it('should have label rendered with props', () => {
 		render(<SwitchComponent />);
 
-        const label = screen.getByText(/visa kommande/i)
+        const label = screen.getByText(/visa gamla/i)
 
         expect(label).toBeInTheDocument()
 

@@ -22,7 +22,7 @@ export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
 	useEffect(() => {
 		const ascendingList = [...list].sort((a, b) => Date.parse(a.time) - Date.parse(b.time));
 
-		if (state.isPassedMeetups) {
+		if (!state.isPassedMeetups) {
 			setActiveList([...ascendingList].filter(meetup => isPassedDate(meetup.time)));
 		} else {
 			setActiveList([...ascendingList].filter(meetup => !isPassedDate(meetup.time)));
