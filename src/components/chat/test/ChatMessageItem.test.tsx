@@ -4,7 +4,7 @@ import ChatMessageItem from '../ChatMessageItem';
 describe('ChatMessageItem component', () => {
     const comment = {
         id: '0',
-        time: 'Lördag 20 Jan 18.00',
+        time: '13:46:16',
         content: 'Coolt event!',
         role: 'Guest',
     };
@@ -30,10 +30,10 @@ describe('ChatMessageItem component', () => {
         expect(content).toBeInTheDocument();
     });
 
-    it('should display the time of when the comment was left on the the meeting page', () => {
-        render(<ChatMessageItem {...comment} />);
+    it('should display the time of when the comment was left on the the meeting page in the correct time format', () => {
+        render(<time dateTime={comment.time}>{comment.time}</time>);
 
-        const time = screen.getByText(comment.time);
-        expect(time).toBeInTheDocument();
+        const time = screen.getAllByText(comment.time);
+        expect(time[0]).toBeInTheDocument();
     });
 });

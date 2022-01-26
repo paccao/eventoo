@@ -9,12 +9,10 @@ function ChatMessageList() {
     const { id } = useParams();
     const [currentMeeting, setCurrentMeeting] = useState<Meeting>();
 
-    let currentMeetings: Meeting[];
-
     useEffect(() => {
-        currentMeetings = state?.meetings?.filter((meeting) => meeting.id === id);
+        const filteredMeetings = [...state?.meetings]?.filter((meeting) => meeting.id === id)[0];
 
-        setCurrentMeeting(currentMeetings[0]);
+        setCurrentMeeting(filteredMeetings);
     }, []);
 
     return (
