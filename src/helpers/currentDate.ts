@@ -9,12 +9,18 @@ export function currentDate(): string {
 
 }
 
-export function currentDatePlusOneYear(): string {
+export function currentDatePlusOneYear(hasTime: boolean): string {
 
     const currentTimeStamp = new Date();
 
     const date = currentTimeStamp.getFullYear() + 1 + '-' + (currentTimeStamp.getMonth() + 1) + '-' + currentTimeStamp.getDate();
     const time = currentTimeStamp.getHours() + ":" + currentTimeStamp.getMinutes();
-    return date + ' ' + time;
+
+    if (hasTime) {
+        return date + ' ' + time; 
+    } else {
+        return date
+    }
 
 }
+

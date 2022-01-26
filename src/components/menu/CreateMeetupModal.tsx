@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { UiContext } from '../../context/UiState';
 import { AppContext } from '../../context/AppState';
 import { MdOutlineLaptopMac } from 'react-icons/md';
+import { currentDatePlusOneYear } from '../../helpers/currentDate';
 
 import { Meeting } from '../../context/AppState';
 import { nanoid } from 'nanoid';
@@ -16,7 +17,7 @@ function CreateMeetupModal() {
     const [title, setTitle] = useState<string>('');
     const [tag, setTag] = useState<string>('');
     const [image, setImage] = useState<string>('');
-    const [date, setDate] = useState<string>(today);
+    const [date, setDate] = useState<string>(currentDatePlusOneYear(false));
     const [time, setTime] = useState<string>('00:00');
     const [location, setLocation] = useState<string>('');
     const [isOnline, setIsOnline] = useState<boolean>(false);

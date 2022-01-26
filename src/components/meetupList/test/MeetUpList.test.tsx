@@ -1,11 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { nanoid } from 'nanoid';
+
 import userEvent from '@testing-library/user-event';
 import MeetUpList from '../MeetUpList';
 import AppState from '../../../context/AppState';
 import UiState from '../../../context/UiState';
-import { BrowserRouter } from 'react-router-dom';
 
+import { BrowserRouter } from 'react-router-dom';
+import { Meeting } from '../../../context/AppState';
 import { meetups, user } from './mockData';
 import { currentDate, currentDatePlusOneYear } from '../../../helpers/currentDate';
 
@@ -30,36 +33,12 @@ describe('MeetUpList component', () => {
 	});
 
 	it('should render list components', () => {
-		const currentDatePlusOneYearString = currentDatePlusOneYear();
-
-		const testData = [
-			{
-				id: '1',
-				title: 'lördag på landet',
-				tag: ['outdoors'],
-				time: currentDatePlusOneYearString,
-				isOnline: false,
-				location: 'Göteborg',
-				timeStamp: Date.parse(currentDatePlusOneYearString),
-				image:
-					'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-				comments: [
-					{
-						id: '1',
-						time: '2020-05-25',
-						content: 'First comment!',
-						role: 'guest',
-					},
-				],
-			},
-		];
-
 		render(
 			<BrowserRouter>
 				<AppState>
 					<MeetUpList
 						user={user}
-						list={testData}
+						list={testMeetup(true)}
 						divider={
 							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
 						}
@@ -74,26 +53,6 @@ describe('MeetUpList component', () => {
 	});
 
 	it('should render "No meetups found" message if there are no meetups', () => {
-		render(
-			<BrowserRouter>
-				<AppState>
-					<MeetUpList
-						user={user}
-						list={[]}
-						divider={
-							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</AppState>
-			</BrowserRouter>
-		);
-
-		const message = screen.getByRole('heading', { name: /no meetups found/i });
-
-		expect(message).toBeInTheDocument();
-	});
-
-	it('should render "bookade meetups" divider', () => {
 		render(
 			<BrowserRouter>
 				<AppState>
@@ -154,36 +113,12 @@ describe('MeetUpList component', () => {
 	});
 
 	it('should only render passed meetups when "Visa gamla meetups" toggle is clicked once"', () => {
-		const currentDateString = currentDate();
-
-		const testData = [
-			{
-				id: '1',
-				title: 'lördag på landet',
-				tag: ['outdoors'],
-				time: '2020-06-04 15:01',
-				isOnline: false,
-				location: 'Göteborg',
-				timeStamp: Date.parse(currentDateString),
-				image:
-					'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-				comments: [
-					{
-						id: '1',
-						time: '2020-05-25',
-						content: 'First comment!',
-						role: 'guest',
-					},
-				],
-			},
-		];
-
 		render(
 			<BrowserRouter>
 				<UiState>
 					<MeetUpList
 						user={user}
-						list={testData}
+						list={testMeetup(false)}
 						divider={
 							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
 						}
@@ -201,36 +136,12 @@ describe('MeetUpList component', () => {
 	});
 
 	it('should only render upcoming meetups when "Visa gamla" toggle is clicked twice"', () => {
-		const currentDatePlusOneYearString = currentDatePlusOneYear();
-
-		const testData = [
-			{
-				id: '1',
-				title: 'lördag på landet',
-				tag: ['outdoors'],
-				time: currentDatePlusOneYearString,
-				isOnline: false,
-				location: 'Göteborg',
-				timeStamp: Date.parse(currentDatePlusOneYearString),
-				image:
-					'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-				comments: [
-					{
-						id: '1',
-						time: '2020-05-25',
-						content: 'First comment!',
-						role: 'guest',
-					},
-				],
-			},
-		];
-
 		render(
 			<BrowserRouter>
 				<UiState>
 					<MeetUpList
 						user={user}
-						list={testData}
+						list={testMeetup(true)}
 						divider={
 							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
 						}
@@ -248,7 +159,7 @@ describe('MeetUpList component', () => {
 		expect(listItem).toBeInTheDocument();
 	});
 
-	it('should sort by ascending order', () => {
+	it('should sort all cards in ascending order', () => {
 		render(
 			<BrowserRouter>
 				<UiState>
@@ -263,11 +174,37 @@ describe('MeetUpList component', () => {
 			</BrowserRouter>
 		);
 
-		const toggle = screen.getByRole('checkbox');
-		userEvent.click(toggle);
+		const listItems = screen.getAllByRole('listitem');
 
-		const listItems = screen.getByRole('listitem');
-
-		expect(listItems).toHaveTextContent(/räkjostillver.../i);
+		expect(listItems[0]).toHaveTextContent(/game night/i);
 	});
 });
+
+function testMeetup(upcomingMeetup: boolean): Meeting[] {
+	const currentDatePlusOneYearString = currentDatePlusOneYear(true);
+	const currentDateString = currentDate();
+
+	return [
+		{
+			id: nanoid(),
+			title: 'lördag på landet',
+			tag: ['outdoors'],
+			time: upcomingMeetup ? currentDatePlusOneYearString : currentDateString,
+			isOnline: false,
+			location: 'Göteborg',
+			timeStamp: upcomingMeetup
+				? Date.parse(currentDatePlusOneYearString)
+				: Date.parse(currentDateString),
+			image:
+				'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+			comments: [
+				{
+					id: '1',
+					time: '2020-05-25',
+					content: 'First comment!',
+					role: 'guest',
+				},
+			],
+		},
+	];
+}

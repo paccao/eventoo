@@ -1,8 +1,8 @@
-
+import { nanoid } from "nanoid";
 
 export const meetups = [
     {
-        id: '1',
+        id: nanoid(),
         title: 'lördag på landet',
         tag: ['outdoors'],
         time: '2022-01-28 15:01',
@@ -21,7 +21,7 @@ export const meetups = [
     },
 
     {
-        id: '2',
+        id: nanoid(),
         title: 'sockerkaka hos gpa',
         tag: ['fika'],
         time: '2022-01-29 15:01',
@@ -39,7 +39,7 @@ export const meetups = [
         ],
     },
     {
-        id: '3',
+        id: nanoid(),
         title: 'game night',
         tag: ['fika'],
         time: '2022-01-27 15:01',
@@ -57,7 +57,7 @@ export const meetups = [
         ],
     },
     {
-        id: '4',
+        id: nanoid(),
         title: 'Räkjostillverkning med greger',
         tag: ['food', 'gourme'],
         time: '2022-01-20 15:01',

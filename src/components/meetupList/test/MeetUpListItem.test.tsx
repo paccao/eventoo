@@ -55,9 +55,9 @@ describe('MeetUpListItem component', () => {
 	it('should have title present', () => {
 		render(<MockRouter />);
 
-		const text = screen.getByRole('heading', { name: 'lördag på lan...' });
+		const text = screen.getByRole('heading', { name: /lan.../i });
 
-		expect(text).toHaveTextContent('lördag på lan...');
+		expect(text).toHaveTextContent(/lan.../i);
 	});
 
 	it('should have type tag present', () => {
