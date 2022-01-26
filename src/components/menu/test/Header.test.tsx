@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import AppState from '../../../context/AppState';
+import UiState from '../../../context/UiState';
 
 import Header from '../Header';
 
@@ -15,28 +15,27 @@ describe('Header component', () => {
             screen.getByRole('button', { name: /change role/i });
         });
 
-        it('Text with Admin shows in header when buton is pressed twice', () => {
+        it('Text with Admin shows in header when buton is pressed once', () => {
             render(
-                <AppState>
+                <UiState>
                     <Header />
-                </AppState>,
+                </UiState>,
             );
-
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
-            userEvent.click(changeRoleBtn);
+            changeRole();
 
             const adminText = screen.getByText(/admin/i);
 
             expect(adminText).toBeInTheDocument();
         });
-        it('Text with Admin does not show in header when buton is pressed one additional time', () => {
+        it('Text with Admin does not show in header when buton is pressed two times', () => {
             render(
-                <AppState>
+                <UiState>
                     <Header />
-                </AppState>,
+                </UiState>,
             );
 
             const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            userEvent.click(changeRoleBtn);
             userEvent.click(changeRoleBtn);
 
             const adminText = screen.queryByText(/admin/i);
@@ -48,20 +47,21 @@ describe('Header component', () => {
     describe('Create new meeting', () => {
         it('Create new meeting btn is not vissible when role is not admin', () => {
             render(
-                <AppState>
+                <UiState>
                     <Header />
-                </AppState>,
+                </UiState>,
             );
 
             const element = screen.queryByTestId('create-meetup-btn');
 
             expect(element).not.toBeInTheDocument();
         });
+
         it('Create new meeting btn is vissible when role is admin', () => {
             render(
-                <AppState>
+                <UiState>
                     <Header />
-                </AppState>,
+                </UiState>,
             );
             const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
             userEvent.click(changeRoleBtn);
@@ -70,22 +70,26 @@ describe('Header component', () => {
 
             expect(element).toBeInTheDocument();
         });
-        it('Create new meeting modal is not visible when app loads', () => {
+
+        it('Create new meeting modal is not visible when app first loads', () => {
             render(
-                <AppState>
+                <UiState>
                     <Header />
-                </AppState>,
+                </UiState>,
             );
 
             const element = screen.queryByText(/lägg till meetup/i);
             expect(element).not.toBeInTheDocument();
         });
+
         it('Create new meeting modal is visible after clicking + button', () => {
             render(
-                <AppState>
+                <UiState>
                     <Header />
-                </AppState>,
+                </UiState>,
             );
+
+            changeRole();
 
             const createMeetupBtn = screen.getByTestId('create-meetup-btn');
             userEvent.click(createMeetupBtn);
@@ -93,12 +97,18 @@ describe('Header component', () => {
             const element = screen.queryByText(/lägg till meetup/i);
             expect(element).toBeInTheDocument();
         });
-        it('Modal is closed on form submit', async () => {
+
+        it('Modal is closed on successfull form submit', async () => {
             render(
-                <AppState>
+                <UiState>
                     <Header />
-                </AppState>,
+                </UiState>,
             );
+
+            changeRole();
+
+            const createMeetupBtn = screen.getByTestId('create-meetup-btn');
+            userEvent.click(createMeetupBtn);
 
             const titleInput = screen.getByPlaceholderText(/titel:/i);
             const tagInput = screen.getByPlaceholderText(/ämne:/i);
@@ -119,13 +129,13 @@ describe('Header component', () => {
         });
         it('Modal is NOT closed on form submit if all fields are not provided', async () => {
             render(
-                <AppState>
+                <UiState>
                     <Header />
-                </AppState>,
+                </UiState>,
             );
 
-            const createMeetupBtn = screen.getByTestId('create-meetup-btn');
-            userEvent.click(createMeetupBtn);
+            changeRole();
+            openCreateMeetingModal();
 
             const titleInput = screen.getByPlaceholderText(/titel:/i);
             const tagInput = screen.getByPlaceholderText(/ämne:/i);
@@ -144,3 +154,13 @@ describe('Header component', () => {
         });
     });
 });
+
+function changeRole(): void {
+    const element = screen.getByRole('button', { name: /change role/i });
+    userEvent.click(element);
+}
+
+function openCreateMeetingModal(): void {
+    const createMeetupBtn = screen.getByTestId('create-meetup-btn');
+    userEvent.click(createMeetupBtn);
+}

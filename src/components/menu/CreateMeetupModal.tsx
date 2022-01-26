@@ -46,7 +46,6 @@ function CreateMeetupModal() {
             timeStamp: Date.parse(dateAndTime),
             comments: [],
         };
-        console.log(meeting);
 
         appDispatch({ type: 'ADD_MEETUP', payload: meeting });
         dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });
