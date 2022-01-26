@@ -19,13 +19,19 @@ export default function SwitchComponent() {
                 <FormControlLabel
                     control={
                         <Switch
+                            style={{fontSize: '0.1rem'}}
                             checked={state.isPassedMeetups}
                             onChange={onChangeHandler}
-                            name="gilad"
+                            name="switch"
+                            color='default'
+        
+                
+    
                         />
                     }
-                    label={state.isPassedMeetups ? 'Visa tidigare' : 'Visa kommande'}
+                    label={'Visa gamla'}
                     labelPlacement="start"
+                    
                 />
             </FormGroup>
         </FormControl>

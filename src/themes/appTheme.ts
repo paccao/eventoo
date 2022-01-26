@@ -12,7 +12,7 @@ export const darkTheme = {
     textLowEmpEmph: '38%',
 
     cardHighEmph: '#353535',
-    cardBgColor: '#292929',
+    cardBgColor: 'rgba(255, 255, 255, 0.05)',
 
     borderRadius: '15px',
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 interface InfoBlockDividerProps {
-	text: string;
+	text?: string;
 	toggle?: React.ReactNode;
 }
 
@@ -23,6 +23,7 @@ const InfoBlockDividerContainer = styled.div`
 	border-bottom: ${props => props.theme.hr};
 	width: auto;
 	margin-left: 1rem;
+	margin-right: 0.5rem;
 
 	h5 {
 		padding: 0.5rem 0rem;

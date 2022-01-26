@@ -1,46 +1,59 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../../context/AppState';
-import { Meeting } from '../../context/AppState';
+import React, { useContext, ReactChild, useState, useEffect } from 'react';
+import { Meeting, User } from '../../context/AppState';
 import { isAttending } from '../../helpers/isAttending';
-import SwitchComponent from '../globals/SwitchComponent';
+import { UiContext } from '../../context/UiState';
 
+import { isPassedDate } from '../../helpers/isPassedDate';
+
+import styled from 'styled-components';
 
 import MeetUpListItem from './MeetUpListItem';
-import InfoBlockDivider from '../globals/InfoBlockDivider';
 
+interface MeetUpListProps {
+	list: Meeting[];
+	divider: ReactChild;
+	user: User;
+}
 
-export default function MeetUpList() {
-	const { state } = useContext(AppContext);
+export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
+	const { state } = useContext(UiContext);
+	const [activeList, setActiveList] = useState<Meeting[]>([]);
 
-	const filteredByBooked = [...state?.meetings]?.filter((meeting) => isAttending(state?.user?.bookedMeetups, meeting.id))
+	useEffect(() => {
+		const ascendingList = [...list].sort((a, b) => Date.parse(a.time) - Date.parse(b.time));
+
+		if (!state.isPassedMeetups) {
+			setActiveList([...ascendingList].filter(meetup => isPassedDate(meetup.time)));
+		} else {
+			setActiveList([...ascendingList].filter(meetup => !isPassedDate(meetup.time)));
+		}
+	}, [list, state]);
 
 	return (
-		<>
-			<ul data-testid='booked-meetups' >
-				<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />}/>
-				{filteredByBooked.map((meeting: Meeting) => (
-					<MeetUpListItem
-						key={meeting.id}
-						isAttending={ isAttending(state?.user?.bookedMeetups, meeting.id) ? true : false }
-						{...meeting}
-					/>
-				))}
-			</ul>
-			
-			<ul>
-				<InfoBlockDivider text='Alla meetups' />
-				{state?.meetings?.map((meeting: Meeting) => (
-					
-					<MeetUpListItem
-						key={meeting.id}
-						isAttending={ isAttending(state?.user?.bookedMeetups, meeting.id) ? true : false }
-						{...meeting}
-					/>
-				))}
-			</ul>
-
-		</>
+		<ListContainer>
+			{list.length < 1 && <PlaceholderMessage>No meetups found</PlaceholderMessage>}
+			{divider}
+			{activeList?.map((meeting: Meeting) => (
+				<MeetUpListItem
+					key={meeting.id}
+					isAttending={isAttending(user.bookedMeetups, meeting.id) ? true : false}
+					{...meeting}
+				/>
+			))}
+		</ListContainer>
 	);
 }
 
+const ListContainer = styled.ul`
+	margin-bottom: 1rem;
+`;
 
+const PlaceholderMessage = styled.h2`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: ${props => props.theme.textColor};
+	opacity: ${props => props.theme.textLowEmpEmph};
+	width: 100%;
+	height: 10rem;
+`;

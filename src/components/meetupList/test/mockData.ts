@@ -1,8 +1,8 @@
-
+import { nanoid } from "nanoid";
 
 export const meetups = [
     {
-        id: '1',
+        id: nanoid(),
         title: 'lördag på landet',
         tag: ['outdoors'],
         time: '2022-01-28 15:01',
@@ -13,27 +13,15 @@ export const meetups = [
         comments: [
             {
                 id: '1',
-                time: '1640263576',
+                time: '2020-05-25',
                 content: 'First comment!',
-                role: 'guest',
-            },
-            {
-                id: '2',
-                time: '1641863576',
-                content: 'Second comment!',
-                role: 'admin',
-            },
-            {
-                id: '3',
-                time: '1643118376',
-                content: 'Third comment!',
                 role: 'guest',
             },
         ],
     },
 
     {
-        id: '2',
+        id: nanoid(),
         title: 'sockerkaka hos gpa',
         tag: ['fika'],
         time: '2022-01-29 15:01',
@@ -51,7 +39,7 @@ export const meetups = [
         ],
     },
     {
-        id: '3',
+        id: nanoid(),
         title: 'game night',
         tag: ['fika'],
         time: '2022-01-27 15:01',
@@ -68,42 +56,11 @@ export const meetups = [
             },
         ],
     },
-    {
-        id: '4',
-        title: 'Räkjostillverkning med greger',
-        tag: ['food', 'gourme'],
-        time: '2022-01-20 15:01',
-        isOnline: true,
-        location: 'Göteborg',
-        timeStamp: 1643097488,
-        image: 'https://images.unsplash.com/photo-1613585535485-dc11f77335ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-        comments: [
-            {
-                id: '1',
-                time: '2020-05-25',
-                content: 'First comment!',
-                role: 'guest',
-            },
-        ],
-    },
-];
-
-export const meetupsNoComments = [
-    {
-        id: '1',
-        title: 'lördag på landet',
-        tag: ['outdoors'],
-        time: 'Lördag 20 Jan 18.00',
-        isOnline: false,
-        location: 'Göteborg',
-        image: 'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-        comments: [],
-    },
 ];
 
 export const user = {
     name: 'kalle',
     id: '1',
     isAdmin: false,
-    bookedMeetups: ['1', '3', '4'],
+    bookedMeetups: ['1', '3'],
 };

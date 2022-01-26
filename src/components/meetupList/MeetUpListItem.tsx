@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import { AiOutlineStar } from 'react-icons/ai';
 
 import { Link } from 'react-router-dom';
 import TagChip from '../globals/TagChip';
+import AttendingIndicator from '../globals/AttendingIndicator';
+import { shortenLongStrings } from '../../helpers/shortenLongString';
+
+import { isPassedDate } from '../../helpers/isPassedDate';
 
 interface MeetUpListItemProps {
 	id: string;
@@ -32,22 +35,18 @@ export default function MeetUpListItem({
 							<h3>
 								{time} {location}
 							</h3>
-							{isAttending && (
-								<span>
-									Attending <AiOutlineStar className='star-icon' />
-								</span>
-							)}
+							{isAttending && <AttendingIndicator />}
 						</div>
 
 						<div className='title-container'>
-							<h2>{title}</h2>
+							<h2 title={title}>{shortenLongStrings(title, 13)}</h2>
 						</div>
 
-						<ul className='tag-container'>
+						<TagContainer className='tag-container'>
 							{tag.map(tag => (
 								<TagChip key={tag} text={tag} />
 							))}
-						</ul>
+						</TagContainer>
 					</div>
 				</Link>
 			</ListInfoContainer>
@@ -56,19 +55,33 @@ export default function MeetUpListItem({
 				className='image-container'
 				role={'img'}
 				style={{ backgroundImage: `url(${image})` }}
-			>
-			</ListImageContainer>
+			></ListImageContainer>
 		</MeetUpListItemContainer>
 	);
 }
 
 const MeetUpListItemContainer = styled.li`
+	:hover {
+		opacity: 90%;
+		transform: scale(1.005);
+	}
+
+
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), 
+                0 2px 4px rgba(0,0,0,0.05), 
+                0 4px 8px rgba(0,0,0,0.05), 
+                0 8px 16px rgba(0,0,0,0.05),
+                0 16px 32px rgba(0,0,0,0.05), 
+                0 32px 64px rgba(0,0,0,0.05);
+
+
+
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 1rem;
 
-	height: 6.4rem;
+	height: 7.4rem;
 	border-radius: 15px;
 
 	h3 {
@@ -82,12 +95,11 @@ const MeetUpListItemContainer = styled.li`
 
 const ListImageContainer = styled.div`
 	cursor: pointer;
-	height: 5.4rem;
-	width: 20%;
+	height: 7.4rem;
+	width: 30%;
 	background-position: center;
 	background-size: cover;
 	border-radius: 15px;
-
 `;
 
 const ListInfoContainer = styled.div`
@@ -95,7 +107,7 @@ const ListInfoContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	width: 80%;
+	width: 70%;
 	height: 100%;
 	margin-right: 1rem;
 	border-radius: 15px;
@@ -117,4 +129,8 @@ const ListInfoContainer = styled.div`
 			}
 		}
 	}
+`;
+
+const TagContainer = styled.ul`
+	display: flex;
 `;
