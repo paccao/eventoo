@@ -1,11 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import SwitchComponent from '../SwitchComponent'
-import TagChip from '../TagChip';
+
 
 describe('TagChip component', () => {
-
-	const mockFunction = jest.fn()
 
 	it('should render', () => {
 		render(<SwitchComponent />);
