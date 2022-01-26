@@ -18,7 +18,7 @@ function CreateMeetupModal() {
     const [tag, setTag] = useState<string>('');
     const [image, setImage] = useState<string>('');
     const [date, setDate] = useState<string>(currentDatePlusOneYear(false));
-    const [time, setTime] = useState<string>('00:00');
+    const [time, setTime] = useState<string>('18:00');
     const [location, setLocation] = useState<string>('');
     const [isOnline, setIsOnline] = useState<boolean>(false);
 
