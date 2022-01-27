@@ -30,6 +30,7 @@ const ListItem = styled.li<{ isAdmin: Boolean }>`
 
     padding: 0.25rem 0.75rem;
     max-width: 80%;
+    min-width: 28%;
     width: fit-content;
 
     display: flex;
@@ -49,8 +50,9 @@ const ListItem = styled.li<{ isAdmin: Boolean }>`
     }
 
     cite {
-        opacity: ${(props) => (props.isAdmin ? '1' : props.theme.textMediumEmph)};
-        color: ${(props) => (props.isAdmin ? props.theme.accentColorAdmin : 'inherits')};
+        opacity: 1;
+        color: ${(props) =>
+            props.isAdmin ? props.theme.accentColorAdmin : props.theme.accentColor};
         text-align: right;
         font-size: 0.85em;
     }
