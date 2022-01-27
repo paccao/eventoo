@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import { AppContext, Comment, Meeting } from '../../context/AppState';
+import { useContext } from 'react';
+import { AppContext, Comment } from '../../context/AppState';
 import { useParams } from 'react-router-dom';
 import ChatMessageItem from './ChatMessageItem';
 import styled from 'styled-components';
