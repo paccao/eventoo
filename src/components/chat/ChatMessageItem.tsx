@@ -2,19 +2,6 @@ import { Comment } from '../../context/AppState';
 import styled from 'styled-components';
 
 function ChatMessageItem({ id: _, time, content, role }: Comment) {
-    function formatTime(unixTime: string) {
-        const date = new Date(parseInt(unixTime) * 1000);
-
-        let hours: string | number = date.getHours();
-        if (hours.toString().length != 2) hours = '0' + hours;
-        const minutes = '0' + date.getMinutes();
-        const seconds = '0' + date.getSeconds();
-
-        // 19 januari kl.16:04
-        // Will display time in 10:30:23 format
-        return hours + ':' + minutes.slice(1) + ':' + seconds.slice(1);
-    }
-
     function formatRole(role: string) {
         return role.charAt(0).toUpperCase() + role.slice(1);
     }
@@ -26,7 +13,7 @@ function ChatMessageItem({ id: _, time, content, role }: Comment) {
 
     return (
         <ListItem isAdmin={checkIfAdmin()}>
-            <time dateTime={time}>{formatTime(time)}</time>
+            <time dateTime={time}>{time}</time>
             <p>{content}</p>
             <cite className={role}>{'/' + formatRole(role)}</cite>
         </ListItem>
