@@ -19,13 +19,13 @@ function ChatMessageList() {
 }
 
 const List = styled.ul`
-    background-color: ${(props) => props.theme.cardBgColor};
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: auto;
+    gap: 0.6rem;
+
+    background-color: ${(props) => props.theme.cardBgColor};
     border-radius: ${(props) => props.theme.borderRadius};
-    padding: 1.5rem 1rem;
-    gap: 1rem;
+    padding: 1em 1rem;
 `;
 export default ChatMessageList;

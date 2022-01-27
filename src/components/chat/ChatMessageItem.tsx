@@ -6,7 +6,7 @@ function ChatMessageItem({ id: _, time, content, role }: Comment) {
         return role.charAt(0).toUpperCase() + role.slice(1);
     }
 
-    function checkIfAdmin() {
+    function checkIfAdmin(): Boolean {
         if (role === 'admin') return true;
         else return false;
     }
@@ -21,33 +21,48 @@ function ChatMessageItem({ id: _, time, content, role }: Comment) {
 }
 
 const ListItem = styled.li<{ isAdmin: Boolean }>`
-    font-style: normal;
-    text-align: left;
-    color: ${(props) => props.theme.textColor};
     background-color: ${(props) =>
-        props.isAdmin ? props.theme.accentColorAdmin : props.theme.bgColor};
+        props.isAdmin ? props.theme.accentColorOpaque : props.theme.accentColorOpaque};
+    border-radius: ${(props) => props.theme.borderRadius};
+
+    color: ${(props) => props.theme.textColor};
+    font-style: normal;
+
+    padding: 0.25rem 0.75rem;
+    max-width: 80%;
+    width: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    align-self: ${(props) => (props.isAdmin ? 'start' : 'end')};
 
     time {
-        opacity: ${(props) => props.theme.textLowEmpEmph};
-        font-size: 0.9em;
+        opacity: ${(props) => props.theme.textMediumEmph};
+        font-size: 0.75em;
     }
 
     p {
         opacity: ${(props) => props.theme.textHighEmph};
-        font-size: 1em;
+        font-size: 0.9em;
         font-weight: 800;
-        line-height: 11px;
+        margin: 0.1rem 0rem;
     }
 
     cite {
-        opacity: ${(props) => props.theme.textMediumEmph};
-        font-size: 1em;
+        opacity: ${(props) => (props.isAdmin ? '1' : props.theme.textMediumEmph)};
+        color: ${(props) => (props.isAdmin ? props.theme.accentColorAdmin : 'inherits')};
+        text-align: right;
+        font-size: 0.85em;
+    }
+
+    time,
+    p {
+        text-align: start;
     }
 
     time,
     cite {
         font-weight: 400;
-        line-height: 8px;
     }
 `;
 
