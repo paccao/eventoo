@@ -3,6 +3,7 @@ import { UiReducer } from '../../../context/UiReducer';
 import { AppReducer } from '../../../context/AppReducer';
 
 import userEvent from '@testing-library/user-event';
+import { currentDatePlusOneYear, currentDatePlusOneHalfHour } from '../../../helpers/currentDate';
 
 import { user, meetups } from './mockData';
 import { render, screen } from '@testing-library/react';
@@ -25,7 +26,7 @@ describe('MeetupBtnsContainer component', () => {
 		return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 	}
 
-	function MockContext({ isLoggedIn }: { isLoggedIn: boolean }) {
+	function MockContext({ isLoggedIn, date }: { isLoggedIn: boolean, date: string }) {
 		const uiInitialState = {
 			isPassedMeetups: false,
 			isAdmin: isLoggedIn && true,
@@ -38,14 +39,14 @@ describe('MeetupBtnsContainer component', () => {
 		return (
 			<UiContext.Provider value={{ state, dispatch }}>
 				<MockAppState>
-					<MeetupBtnsContainer id={'2'} />
+					<MeetupBtnsContainer id={'2'} date={date} />
 				</MockAppState>
 			</UiContext.Provider>
 		);
 	}
 
 	it('should contain two buttons "Delta" and "Editera" when logged in as admin', () => {
-		render(<MockContext isLoggedIn={true} />);
+		render(<MockContext isLoggedIn={true} date={currentDatePlusOneYear(true)} />);
 
 		const buttonDelta = screen.getByRole('button', { name: 'delta' });
 		const buttonEditera = screen.getByRole('button', { name: 'editera' });
@@ -55,7 +56,7 @@ describe('MeetupBtnsContainer component', () => {
 	});
 
 	it('should only contain "Delta" when not logged in as admin', () => {
-		render(<MockContext isLoggedIn={false} />);
+		render(<MockContext isLoggedIn={false} date={currentDatePlusOneYear(true)} />);
 
 		const buttonDelta = screen.queryByRole('button', { name: 'delta' });
 		const buttonEditera = screen.queryByRole('button', { name: 'editera' });
@@ -66,7 +67,7 @@ describe('MeetupBtnsContainer component', () => {
 
 	describe('Delta Button', () => {
 		it('should change message you are attending the current meetup', () => {
-			render(<MockContext isLoggedIn={false} />);
+			render(<MockContext isLoggedIn={false} date={currentDatePlusOneYear(true)}  />);
 			const button = screen.getByRole('button', { name: /delta/i });
 
 			userEvent.click(button);
@@ -74,8 +75,8 @@ describe('MeetupBtnsContainer component', () => {
 			expect(button).toHaveTextContent(/deltar/i);
 		});
 
-		it('should not be clickable if the meetup is not an upcoming event', () => {
-			render(<MockContext isLoggedIn={false} />);
+		it('should not be clickable if it "is too late to attend" (one hour before start)', () => {
+			render(<MockContext isLoggedIn={false} date={currentDatePlusOneHalfHour()}  />);
 
 			const button = screen.getByRole('button', { name: /delta/i });
 

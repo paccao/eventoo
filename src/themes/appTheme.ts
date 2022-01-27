@@ -5,7 +5,7 @@ export const darkTheme = {
     textColorDark: '#121212',
 
     accentColor: '#F0F415',
-    accentColorAdmin: '#F45815',
+    accentColorAdmin: '#fff',
 
     textHighEmph: '87%',
     textMediumEmph: '60%',

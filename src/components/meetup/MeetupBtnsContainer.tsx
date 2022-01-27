@@ -3,15 +3,13 @@ import { UiContext } from '../../context/UiState';
 import { AppContext } from '../../context/AppState';
 import CardButton from '../globals/CardButton';
 import { isAttending } from '../../helpers/isAttending';
-
-import { useParams } from 'react-router-dom';
-import { isPassedDate } from '../../helpers/isPassedDate';
+import { isTooLateToAttend } from '../../helpers/isTooLateToAttend';
 
 
-export default function MeetupBtnsContainer({ id }: { id: string }) {
-	const { state: uiState, dispatch: uiDispatch } = useContext(UiContext);
+
+export default function MeetupBtnsContainer({ id, date }: { id: string, date: string }) {
+	const { state: uiState, } = useContext(UiContext);
 	const { state: appState, dispatch: appDispatch } = useContext(AppContext);
-
 	
 	function editMeetupHandler() {}
 	function attendMeetupHandler() {
@@ -23,15 +21,16 @@ export default function MeetupBtnsContainer({ id }: { id: string }) {
 		<div>
  			{uiState.isAdmin && (
 				<CardButton
+					isSelected={isAttending(appState.user.bookedMeetups, id)}
 					text='editera'
-					isActive={isAttending(appState.user.bookedMeetups, id )}
+					isActive={isTooLateToAttend(date)}
 					clickHandler={editMeetupHandler}
 				/>
 			)} 
-
 				<CardButton
+					isSelected={isAttending(appState.user.bookedMeetups, id)}
 					text={isAttending(appState.user.bookedMeetups, id) ? 'deltar' : 'delta'}
-					isActive={isPassedDate(id)}
+					isActive={isTooLateToAttend(date)}
 					clickHandler={attendMeetupHandler}
 				/>
 		</div>

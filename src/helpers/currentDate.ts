@@ -32,3 +32,13 @@ export function currentDatePlusOneYear(hasTime: boolean): string {
         return formattedDate;
     }
 }
+
+
+export function currentDatePlusOneHalfHour(): string {
+    
+        var dt = new Date();
+        dt.setMinutes( dt.getMinutes() + 30 );
+        return dt.toString()
+    
+    }
+    

@@ -20,7 +20,7 @@ function Meetup({ currentMeetup }: Props) {
             </section>
             <section className="content-container">
                 <section className="location-time">
-                    <code>{currentMeetup?.time}</code>
+                   <code>{ currentMeetup && currentMeetup?.time}</code> 
                     <h2>{currentMeetup?.location}</h2>
                     {currentMeetup?.tag.map((tag) => (
                         <TagChip key={currentMeetup.id} text={tag} />
@@ -28,7 +28,7 @@ function Meetup({ currentMeetup }: Props) {
                 </section>
                 <section className="interact-section">
 
-                <MeetupBtnsContainer id={currentMeetup?.id} />
+                <MeetupBtnsContainer id={currentMeetup?.id} date={currentMeetup && currentMeetup.time} />
                 </section>
             </section>
         </MeetingContainer>
