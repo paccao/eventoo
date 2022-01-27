@@ -3,7 +3,8 @@ import { UiStateModel } from './UiState';
 export type ActionType =
     | { type: 'TOGGLE_ROLE' }
     | { type: 'SET_IS_PASSED_MEETUPS' }
-    | { type: 'TOGGLE_CREATE_MEETING_MODAL' };
+    | { type: 'TOGGLE_CREATE_MEETING_MODAL' }
+    | { type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' };
 
 export function UiReducer(state: UiStateModel, action: ActionType) {
     switch (action.type) {
@@ -22,6 +23,11 @@ export function UiReducer(state: UiStateModel, action: ActionType) {
             return {
                 ...state,
                 showCreateMeetingModal: !state.showCreateMeetingModal,
+            };
+        case 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL':
+            return {
+                ...state,
+                showEditDeleteModal: !state.showCreateMeetingModal,
             };
 
         default:

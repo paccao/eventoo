@@ -1,9 +1,11 @@
 import ChatBox from '../components/chat/ChatBox';
 import styled from 'styled-components';
+import MeetupBtnsContainer from '../components/meetup/MeetupBtnsContainer';
 
 function MeetupPage() {
     return (
         <PageWrapper>
+            <MeetupBtnsContainer />
             <ChatBox />
         </PageWrapper>
     );
