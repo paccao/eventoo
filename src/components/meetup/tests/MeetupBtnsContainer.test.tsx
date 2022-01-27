@@ -93,7 +93,7 @@ describe('MeetupBtnsContainer component', () => {
 
 			const startIcon = screen.getByTestId('star-icon');
 			expect(startIcon).toBeInTheDocument();
-			
+
 		});
 	});
 });

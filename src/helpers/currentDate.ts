@@ -24,8 +24,6 @@ export function currentDatePlusOneYear(hasTime: boolean): string {
 
     const formattedDate = new Date(date).toLocaleDateString('sv-se');
 
-    console.log('DATE:', date, 'FORMATTED', formattedDate);
-
     const time = currentTimeStamp.getHours() + ':' + currentTimeStamp.getMinutes();
 
     if (hasTime) {
