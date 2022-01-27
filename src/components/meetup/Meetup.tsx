@@ -14,21 +14,21 @@ function Meetup({ currentMeetup }: Props) {
             <section
                 role="img"
                 className="landing"
-                style={{ backgroundImage: `url(${currentMeetup.image})` }}
+                style={{ backgroundImage: `url(${currentMeetup?.image})` }}
             >
-                <h1>{currentMeetup.title}</h1>
+                <h1>{currentMeetup?.title}</h1>
             </section>
             <section className="content-container">
                 <section className="location-time">
-                    <code>{currentMeetup.time}</code>
-                    <h2>{currentMeetup.location}</h2>
-                    {currentMeetup.tag.map((tag) => (
-                        <TagChip text={tag} />
+                    <code>{currentMeetup?.time}</code>
+                    <h2>{currentMeetup?.location}</h2>
+                    {currentMeetup?.tag.map((tag) => (
+                        <TagChip key={currentMeetup.id} text={tag} />
                     ))}
                 </section>
                 <section className="interact-section">
 
-                <MeetupBtnsContainer id={currentMeetup.id} />
+                <MeetupBtnsContainer id={currentMeetup?.id} />
                 </section>
             </section>
         </MeetingContainer>
