@@ -12,10 +12,10 @@ describe('ChatSubmitForm component', () => {
         screen.getByPlaceholderText(/meddelande\.\./);
     });
 
-    it('should have an appropriate label connected to the input field', () => {
+    it('should have a label connected to the input field', () => {
         render(<ChatSubmitForm />);
 
-        expect(screen.getByLabelText(/Input/)).toBeInTheDocument();
+        expect(screen.getByTestId('label')).toBeInTheDocument();
     });
 
     test('that the button displays relevant text', () => {
@@ -25,7 +25,7 @@ describe('ChatSubmitForm component', () => {
         });
     });
 
-    test('on submit that the input field can not be empty', () => {
+    test('on submit that the input field can not be an empty string', () => {
         render(<ChatSubmitForm />);
         userEvent.type(screen.getByRole('textbox'), 'test input!');
         expect(screen.getByRole('textbox')).not.toHaveValue('');

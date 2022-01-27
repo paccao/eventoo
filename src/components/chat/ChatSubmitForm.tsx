@@ -1,10 +1,29 @@
-function ChatSubmitForm() {
-    return (
-        <form>
-            <label htmlFor="input-field">Input</label>
-            <input name="input-field" id="input-field" placeholder="meddelande.."></input>
+import React, { useRef } from 'react';
+import { MutableRefObject } from 'react';
 
-            <button>SKICKA</button>
+function ChatSubmitForm() {
+    const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+    function handleSubmit(e: React.SyntheticEvent) {
+        e.preventDefault();
+        const inputElem = inputRef.current;
+        const inputValue = inputElem.value;
+
+        inputElem.value = '';
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="input-field" data-testid="label">
+                Input
+            </label>
+            <input
+                ref={inputRef}
+                name="input-field"
+                id="input-field"
+                placeholder="meddelande.."
+            ></input>
+
+            <button type="submit">SKICKA</button>
         </form>
     );
 }
