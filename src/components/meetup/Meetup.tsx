@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Meeting } from '../../context/AppState';
+import MeetupBtnsContainer from './MeetupBtnsContainer';
 
 import TagChip from '../globals/TagChip';
 
@@ -26,8 +27,8 @@ function Meetup({ currentMeetup }: Props) {
                     ))}
                 </section>
                 <section className="interact-section">
-                    <button>Placeholder</button>
-                    <button>Placeholder</button>
+
+                <MeetupBtnsContainer id={currentMeetup.id} />
                 </section>
             </section>
         </MeetingContainer>
