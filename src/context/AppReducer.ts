@@ -44,19 +44,11 @@ export function AppReducer(state: State, action: ActionType) {
                 },
             };
         case 'ADD_COMMENT':
-            // if (!action.payload.urlId) return state;
-            console.log('Hello from reducer! ', action.payload);
-
             const currentMeeting = state.meetings.filter(
                 (meeting) => meeting.id === action.payload.urlId,
             );
             const updatedComments = [...currentMeeting[0].comments, action.payload.comment];
             currentMeeting[0].comments = updatedComments;
-            // const updatedMeeting = { ...currentMeeting[0], comments: updatedComments };
-
-            // const notUpdatedMeetings = state.meetings.map(
-            //     (meeting) => (meeting.id === action.payload.urlId && currentMeeting[0]) || meeting,
-            // );
             return {
                 ...state,
             };
