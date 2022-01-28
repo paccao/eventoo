@@ -132,7 +132,7 @@ describe('MeetUpList component', () => {
 		const toggle = screen.getByRole('checkbox');
 		userEvent.click(toggle);
 
-		const listItem = screen.queryByRole('heading', { name: /lördag på landet/i });
+		const listItem = screen.queryByRole('heading', { name: 'lördag på landet' });
 
 		expect(listItem).toBeInTheDocument();
 	});
@@ -156,7 +156,7 @@ describe('MeetUpList component', () => {
 		userEvent.click(toggle);
 		userEvent.click(toggle);
 
-		const listItem = screen.queryByRole('heading', { name: /lördag på lan/i });
+		const listItem = screen.queryByRole('heading', { name: 'lördag på landet' });
 
 		expect(listItem).toBeInTheDocument();
 	});
@@ -175,10 +175,13 @@ describe('MeetUpList component', () => {
 				</UiState>
 			</BrowserRouter>
 		);
+		
+		const toggle = screen.getByRole('checkbox');
+		userEvent.click(toggle);
 
-		const listItems = screen.getAllByRole('listitem');
+		const listItems = screen.getAllByRole('heading', { name: 'game night' });
 
-		expect(listItems[0]).toHaveTextContent(/game night/i);
+		expect(listItems[0]).toHaveTextContent('game night');
 	});
 });
 
