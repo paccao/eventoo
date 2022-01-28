@@ -8,6 +8,11 @@ function ChatSubmitForm() {
         const inputElem = inputRef.current;
         const inputValue = inputElem.value;
 
+        if (inputValue === '' || inputValue === null || inputValue === undefined) {
+            inputElem.value = '';
+            return;
+        }
+
         inputElem.value = '';
     }
 
