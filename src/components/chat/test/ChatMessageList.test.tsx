@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import AppState, { Comment } from '../../../context/AppState';
 import ChatMessageList from '../ChatMessageList';
-import { meetups as mockMeetups, meetupsNoComments } from '../../../mockData';
+import { meetups as mockMeetups, meetupsNoComments } from './mockData';
 import ChatMessageItem from '../ChatMessageItem';
 
 function MockChatMessageList() {

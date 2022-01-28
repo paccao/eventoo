@@ -1,19 +1,27 @@
-import React, { useRef } from 'react';
-import { MutableRefObject } from 'react';
+import { nanoid } from 'nanoid';
+import React, { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { AppContext, Comment } from '../../context/AppState';
+import { currentDate } from '../../helpers/currentDate';
 
 function ChatSubmitForm() {
-    const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+    const { state, dispatch } = useContext(AppContext);
+    const { id: urlId } = useParams();
+    const [commentValue, setCommentValue] = useState<string>('');
+
     function handleSubmit(e: React.SyntheticEvent) {
         e.preventDefault();
-        const inputElem = inputRef.current;
-        const inputValue = inputElem.value;
+        if (!commentValue) return;
 
-        if (inputValue === '' || inputValue === null || inputValue === undefined) {
-            inputElem.value = '';
-            return;
-        }
+        const comment: Comment = {
+            id: nanoid(),
+            time: currentDate(),
+            content: commentValue,
+            role: state.user.isAdmin ? 'admin' : 'guest',
+        };
 
-        inputElem.value = '';
+        dispatch({ type: 'ADD_COMMENT', payload: { urlId, comment } });
+        setCommentValue('');
     }
 
     return (
@@ -22,7 +30,8 @@ function ChatSubmitForm() {
                 Input
             </label>
             <input
-                ref={inputRef}
+                onChange={(e) => setCommentValue(e.target.value)}
+                value={commentValue}
                 name="input-field"
                 id="input-field"
                 placeholder="meddelande.."
