@@ -16,7 +16,6 @@ export default function MeetupBtnsContainer({ id, date }: { id: string, date: st
 		appDispatch({ type: 'ATTEND_MEETUP', payload: id })
 	}
 
-	
 	return (
 		<div>
  			{uiState.isAdmin && (

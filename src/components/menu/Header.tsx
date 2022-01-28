@@ -17,10 +17,11 @@ function Header() {
                 <h4 className="isAdmin">{state?.isAdmin ? 'Admin' : null}</h4>
             </div>
 
-            <div>{!state.showCreateMeetingModal && <ChangeRoleBtn />}</div>
 
             <div className="create-meetup-btn-container">
-                {state.isAdmin && <CreateMeetupBtn />}
+            {state.isAdmin && <CreateMeetupBtn />}
+            <div>{!state.showCreateMeetingModal && <ChangeRoleBtn />}</div>
+
             </div>
             {state.showCreateMeetingModal && <CreateMeetupModal />}
         </HeaderContainer>
@@ -54,6 +55,11 @@ const HeaderContainer = styled.header`
     }
 
     .create-meetup-btn-container {
-        min-width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+         div {
+             margin: 0rem 1rem;
+         }
     }
 `;

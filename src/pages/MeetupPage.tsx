@@ -7,6 +7,7 @@ import { useContext } from 'react';
 
 function MeetupPage() {
     const { id } = useParams();
+    
 
     const { state } = useContext(AppContext);
 

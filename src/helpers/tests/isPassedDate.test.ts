@@ -1,12 +1,13 @@
 import { isPassedDate } from '../isPassedDate';
+import { currentDatePlusOneYear } from '../currentDate'
 
 describe('isPassedDate function', () => {
-    it('should return true when the date passed as argument is passed current date (`2022-01-24 15:19`)', () => {
-        const testDate = '2022-02-24 15:19';
+    it('should return true when the date passed as argument is passed current date (`one year in the future`)', () => {
+        const testDate = currentDatePlusOneYear(true)
 
         const actual = isPassedDate(testDate);
 
-        expect(actual).toBe(true);
+        expect(actual).toBe(false);
     });
 
     it('should return false when the date passed as argument is before current date (`2021-01-24 15:19`)', () => {
@@ -14,6 +15,6 @@ describe('isPassedDate function', () => {
 
         const actual = isPassedDate(testDate);
 
-        expect(actual).toBe(false);
+        expect(actual).toBe(true);
     });
 });

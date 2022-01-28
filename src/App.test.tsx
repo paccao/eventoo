@@ -6,61 +6,67 @@ import UiState from './context/UiState';
 import AppState from './context/AppState';
 
 function MockRouter() {
-    return (
-        <BrowserRouter>
-            <AppState>
-                <UiState>
-                    <App />
-                </UiState>
-            </AppState>
-        </BrowserRouter>
-    );
+	return (
+		<BrowserRouter>
+			<AppState>
+				<UiState>
+					<App />
+				</UiState>
+			</AppState>
+		</BrowserRouter>
+	);
 }
 
 describe('App component', () => {
-    it('renders without crashing', () => {
-        render(<MockRouter />);
-    });
-    describe('When crating new meetup', () => {
-        it('Renders the newly added meetup in the list of comming meetups', () => {
-            render(<MockRouter />);
+    
+	beforeEach(() => {
+		localStorage.clear();
+	});
 
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
-            userEvent.click(changeRoleBtn);
+	it('renders without crashing', () => {
+		render(<MockRouter />);
+	});
 
-            const createMeetupBtn = screen.getByTestId('create-meetup-btn');
-            userEvent.click(createMeetupBtn);
+	describe('When crating new meetup', () => {
+		it('Renders the newly added meetup in the list of comming meetups', () => {
+			render(<MockRouter />);
 
-            const titleInput = screen.getByPlaceholderText(/titel:/i);
-            const tagInput = screen.getByPlaceholderText(/ämne:/i);
-            const imageInput = screen.getByPlaceholderText(/bild:/i);
-            const locationInput = screen.getByPlaceholderText(/plats:/i);
+			const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+			userEvent.click(changeRoleBtn);
 
-            userEvent.type(titleInput, 'Adam');
-            userEvent.type(tagInput, 'Javascript');
-            userEvent.type(locationInput, 'Lödöse');
-            userEvent.type(imageInput, 'testbild');
+			const createMeetupBtn = screen.getByTestId('create-meetup-btn');
+			userEvent.click(createMeetupBtn);
 
-            const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
-            expect(submitBtn).toBeInTheDocument();
-            userEvent.click(submitBtn);
+			const titleInput = screen.getByPlaceholderText(/titel:/i);
+			const tagInput = screen.getByPlaceholderText(/ämne:/i);
+			const imageInput = screen.getByPlaceholderText(/bild:/i);
+			const locationInput = screen.getByPlaceholderText(/plats:/i);
 
-            const futureEventList = screen.getByText(/alla meetups/i);
+			userEvent.type(titleInput, 'Adam');
+			userEvent.type(tagInput, 'Javascript');
+			userEvent.type(locationInput, 'Lödöse');
+			userEvent.type(imageInput, 'testbild');
 
-            expect(submitBtn).not.toBeInTheDocument();
-            expect(futureEventList).toBeInTheDocument();
+			const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
+			expect(submitBtn).toBeInTheDocument();
+			userEvent.click(submitBtn);
 
-            const newMeetup = screen.getByText(/Lödöse/i);
+			const futureEventList = screen.getByText(/alla meetups/i);
 
-            expect(newMeetup).toBeInTheDocument();
-        });
-    });
-});
+			expect(submitBtn).not.toBeInTheDocument();
+			expect(futureEventList).toBeInTheDocument();
 
-test('App component has darkmode', () => {
-    render(<MockRouter />);
+			const newMeetup = screen.getByText(/Lödöse/i);
 
-    const appContainer = screen.getByTestId('app-container');
+			expect(newMeetup).toBeInTheDocument();
+		});
+	});
 
-    expect(appContainer).toHaveStyle('background-color: #151515');
+	test('App component has darkmode', () => {
+		render(<MockRouter />);
+
+		const appContainer = screen.getByTestId('app-container');
+
+		expect(appContainer).toHaveStyle('background-color: #151515');
+	});
 });

@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { UiContext } from '../../context/UiState';
+import { Switch } from '@mui/material';
 
 import styled from 'styled-components';
 
@@ -22,4 +23,5 @@ const BtnContainer = styled.button`
     color: ${(props) => props.theme.textColorBlack};
     border: none;
     font-weight: bold;
+    cursor: pointer;
 `;
