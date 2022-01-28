@@ -1,9 +1,11 @@
+import { user } from '../mockData';
 import { State, Meeting, User } from './AppState';
 
 export type ActionType =
     | { type: 'SET_USER'; payload: User }
     | { type: 'ADD_MEETUP'; payload: Meeting }
-    | { type: 'SET_STATE'; payload: any };
+    | { type: 'SET_STATE'; payload: any }
+    | { type: 'ATTEND_MEETUP'; payload: string | undefined };
 
 export function AppReducer(state: State, action: ActionType) {
     switch (action.type) {
@@ -22,6 +24,20 @@ export function AppReducer(state: State, action: ActionType) {
             return {
                 ...state,
                 user: action.payload,
+            };
+
+        case 'ATTEND_MEETUP':
+
+            const isAttending = state.user.bookedMeetups.some((meetup: string ) => meetup === action.payload ) 
+
+            return {
+                ...state,
+                user: {
+                    ...user,
+                    bookedMeetups: !isAttending 
+                    ? [...state.user.bookedMeetups, action.payload] 
+                    : state.user.bookedMeetups.filter((meetup: string ) => meetup !== action.payload ),
+                }
             };
 
         default:

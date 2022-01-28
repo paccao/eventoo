@@ -23,7 +23,7 @@ export default function SwitchComponent() {
                             checked={state.isPassedMeetups}
                             onChange={onChangeHandler}
                             name="switch"
-                            color='default'
+/*                             color='default' */
         
                 
     

@@ -16,6 +16,8 @@ import SwitchComponent from '../../globals/SwitchComponent';
 import InfoBlockDivider from '../../globals/InfoBlockDivider';
 
 describe('MeetUpList component', () => {
+
+
 	it('should render', () => {
 		render(
 			<BrowserRouter>
@@ -154,12 +156,12 @@ describe('MeetUpList component', () => {
 		userEvent.click(toggle);
 		userEvent.click(toggle);
 
-		const listItem = screen.queryByRole('heading', { name: /lördag på lan.../i });
+		const listItem = screen.queryByRole('heading', { name: /lördag på lan/i });
 
 		expect(listItem).toBeInTheDocument();
 	});
 
-	it('should sort all cards in ascending order', () => {
+	it('should sort all cards in ascending order by date', () => {
 		render(
 			<BrowserRouter>
 				<UiState>

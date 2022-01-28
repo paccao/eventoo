@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+
+import AppState from '../../context/AppState';
 import MeetupListPage from '../MeetupListPage';
 import MeetupPage from '../MeetupPage';
 
@@ -10,6 +12,10 @@ describe('MeetupListPage component', () => {
 
 describe('MeetupPage component', () => {
     it('renders without crashing', () => {
-        render(<MeetupPage />);
+        render(
+            <AppState>
+                <MeetupPage />
+            </AppState>,
+        );
     });
 });

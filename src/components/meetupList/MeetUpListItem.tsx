@@ -5,7 +5,6 @@ import TagChip from '../globals/TagChip';
 import AttendingIndicator from '../globals/AttendingIndicator';
 import { shortenLongStrings } from '../../helpers/shortenLongString';
 
-import { isPassedDate } from '../../helpers/isPassedDate';
 
 interface MeetUpListItemProps {
 	id: string;
