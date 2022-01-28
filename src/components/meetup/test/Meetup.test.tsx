@@ -1,10 +1,32 @@
+import { useReducer } from 'react';
+
 import { render, screen } from '@testing-library/react';
 import AppState from '../../../context/AppState';
 import { mockMeetups } from '../MockData';
 
 import Meetup from '../Meetup';
+import userEvent from '@testing-library/user-event';
+import { UiReducer } from '../../../context/UiReducer';
+import { UiContext } from '../../../context/UiState';
 
 describe('Meetup component', () => {
+    function MockContext({ isLoggedIn }: { isLoggedIn: boolean }) {
+        const uiInitialState = {
+            isPassedMeetups: false,
+            isAdmin: isLoggedIn && true,
+            showCreateMeetingModal: false,
+            showEditDeleteModal: false,
+        };
+
+        const [state, dispatch] = useReducer(UiReducer, uiInitialState);
+
+        return (
+            <UiContext.Provider value={{ state, dispatch }}>
+                <Meetup currentMeetup={mockMeetups[0]} />
+            </UiContext.Provider>
+        );
+    }
+
     beforeEach(() => {});
 
     it('Renders without crashing', () => {
@@ -69,5 +91,24 @@ describe('Meetup component', () => {
         const img = screen.getByRole('img');
 
         expect(img).toBeInTheDocument();
+    });
+
+    describe('Edit Meetup', () => {
+        it('opens edit meetup modal when "edit" is clicked', () => {
+            render(<MockContext isLoggedIn={true} />);
+
+            const editBtn = screen.getByRole('button', { name: /editera/i });
+
+            userEvent.click(editBtn);
+            screen.getByText(/ändra meetup/i);
+        });
+        it('Input fields is prefilled with current meeting details', () => {
+            render(<MockContext isLoggedIn={true} />);
+
+            const editBtn = screen.getByRole('button', { name: /editera/i });
+
+            userEvent.click(editBtn);
+            screen.getByDisplayValue(/lördag på landet/i);
+        });
     });
 });

@@ -139,7 +139,6 @@ describe('Header component', () => {
             changeRole();
             openCreateMeetingModal();
 
-            const titleInput = screen.getByPlaceholderText(/titel:/i);
             const tagInput = screen.getByPlaceholderText(/ämne:/i);
             const imageInput = screen.getByPlaceholderText(/bild:/i);
             const locationInput = screen.getByPlaceholderText(/plats:/i);

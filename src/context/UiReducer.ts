@@ -27,7 +27,7 @@ export function UiReducer(state: UiStateModel, action: ActionType) {
         case 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL':
             return {
                 ...state,
-                showEditDeleteModal: !state.showCreateMeetingModal,
+                showEditDeleteModal: !state.showEditDeleteModal,
             };
 
         default:
