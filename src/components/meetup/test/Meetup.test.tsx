@@ -55,7 +55,7 @@ describe('Meetup component', () => {
             </AppState>,
         );
 
-        const time = screen.getByText(/2022-01-28 15:01/);
+        const time = screen.getByText(/2023-01-28 15:01/);
 
         expect(time).toBeInTheDocument();
     });
@@ -100,7 +100,10 @@ describe('Meetup component', () => {
             const editBtn = screen.getByRole('button', { name: /editera/i });
 
             userEvent.click(editBtn);
-            screen.getByText(/ändra meetup/i);
+
+            const modal = screen.getByText(/ändra meetup/i);
+
+            expect(modal).toBeInTheDocument();
         });
         it('Input fields is prefilled with current meeting details', () => {
             render(<MockContext isLoggedIn={true} />);

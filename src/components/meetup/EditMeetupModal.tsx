@@ -5,14 +5,15 @@ import { AppContext } from '../../context/AppState';
 import { MdOutlineLaptopMac } from 'react-icons/md';
 
 import { Meeting } from '../../context/AppState';
-import { nanoid } from 'nanoid';
 
 interface Props {
     currentMeetup: Meeting;
 }
 
 function EditMeetupModal({ currentMeetup }: Props) {
-    console.log(currentMeetup?.location);
+    console.log(currentMeetup);
+
+    const dateTimeArr = currentMeetup?.time.split(' ');
 
     const today = new Date().toLocaleDateString('sv-se');
 
@@ -23,8 +24,8 @@ function EditMeetupModal({ currentMeetup }: Props) {
     const [tag, setTag] = useState<string>(currentMeetup?.tag[0]);
     const [image, setImage] = useState<string>(currentMeetup?.image);
     const [location, setLocation] = useState<string>(currentMeetup?.location);
-    const [date, setDate] = useState<string>(currentMeetup?.time);
-    const [time, setTime] = useState<string>('18:00');
+    const [date, setDate] = useState<string>(dateTimeArr[0]);
+    const [time, setTime] = useState<string>(dateTimeArr[1]);
     const [isOnline, setIsOnline] = useState<boolean>(false);
 
     //Togles value of location input value when isOnline button is pressed
@@ -42,7 +43,7 @@ function EditMeetupModal({ currentMeetup }: Props) {
         const dateAndTime = date + ' ' + time;
 
         const meeting: Meeting = {
-            id: nanoid(),
+            id: currentMeetup.id,
             title,
             tag: [tag],
             time: dateAndTime,
@@ -50,13 +51,11 @@ function EditMeetupModal({ currentMeetup }: Props) {
             location,
             image,
             timeStamp: Date.parse(dateAndTime),
-            comments: [],
+            comments: currentMeetup.comments,
         };
 
-        appDispatch({ type: 'ADD_MEETUP', payload: meeting });
-        dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });
-
-        setLocation('');
+        appDispatch({ type: 'UPDATE_MEETUP', payload: meeting });
+        dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
     }
 
     return (
@@ -151,6 +150,7 @@ function EditMeetupModal({ currentMeetup }: Props) {
 export default EditMeetupModal;
 
 const EditMeetupModalContainer = styled.section`
+    padding-top: 100px;
     position: fixed;
     inset: 0 0 0 0;
     background-color: ${(props) => props.theme.__bgColorLargePageWidth};

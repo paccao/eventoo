@@ -146,8 +146,9 @@ function CreateMeetupModal() {
 export default CreateMeetupModal;
 
 const CreateMeetupModalContainer = styled.section`
+    padding-top: 100px;
     position: fixed;
-    inset: 120px 0 0 0;
+    inset: 0 0 0 0;
     background-color: ${(props) => props.theme.__bgColorLargePageWidth};
     opacity: 0.95;
     z-index: 1;
