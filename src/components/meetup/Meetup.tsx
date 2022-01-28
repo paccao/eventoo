@@ -9,12 +9,14 @@ interface Props {
 }
 
 function Meetup({ currentMeetup }: Props) {
+    
+
     return (
         <MeetingContainer>
             <section
                 role="img"
                 className="landing"
-                style={{ backgroundImage: `url(${currentMeetup?.image})` }}
+                style={{ backgroundImage: `url(${currentMeetup && currentMeetup?.image})` }}
             >
                 <h1>{currentMeetup?.title}</h1>
             </section>

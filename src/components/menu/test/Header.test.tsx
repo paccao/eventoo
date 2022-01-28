@@ -144,7 +144,6 @@ describe('Header component', () => {
             const imageInput = screen.getByPlaceholderText(/bild:/i);
             const locationInput = screen.getByPlaceholderText(/plats:/i);
 
-            userEvent.type(titleInput, '');
             userEvent.type(tagInput, 'javascript');
             userEvent.type(locationInput, 'Hemma');
             userEvent.type(imageInput, 'https://test.com');
