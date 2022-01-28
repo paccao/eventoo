@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Meeting } from '../../context/AppState';
 import MeetupBtnsContainer from './MeetupBtnsContainer';
+import { nanoid } from 'nanoid';
 
 import TagChip from '../globals/TagChip';
 
@@ -25,7 +26,7 @@ function Meetup({ currentMeetup }: Props) {
                    <code>{ currentMeetup && currentMeetup?.time}</code> 
                     <h2>{currentMeetup?.location}</h2>
                     {currentMeetup?.tag.map((tag) => (
-                        <TagChip key={currentMeetup.id} text={tag} />
+                        <TagChip key={nanoid()} text={tag} />
                     ))}
                 </section>
                 <section className="interact-section">
