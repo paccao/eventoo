@@ -105,5 +105,5 @@ export const user = {
     name: 'kalle',
     id: '1',
     isAdmin: false,
-    bookedMeetups: ['1', '3', '4'],
+    bookedMeetups: [],
 };
