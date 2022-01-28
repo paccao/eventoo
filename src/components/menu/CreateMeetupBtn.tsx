@@ -24,4 +24,5 @@ const CreateMeetupBtnContainer = styled.button`
     font-size: 2rem;
     background-color: ${(props) => props.theme.__bgColorLargePageWidth};
     border: none;
+    cursor: pointer;
 `;
