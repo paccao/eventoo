@@ -25,9 +25,11 @@ function Meetup({ currentMeetup }: Props) {
                 <section className="location-time">
                    <code>{ currentMeetup && currentMeetup?.time}</code> 
                     <h2>{currentMeetup?.location}</h2>
+                    <MeetupTagsContainer>
                     {currentMeetup?.tag.map((tag) => (
                         <TagChip key={nanoid()} text={tag} />
                     ))}
+                    </MeetupTagsContainer>
                 </section>
                 <section className="interact-section">
 
@@ -66,3 +68,10 @@ const MeetingContainer = styled.section`
         justify-content: space-between;
     }
 `;
+
+
+const MeetupTagsContainer = styled.div`
+display: flex;
+
+
+`
