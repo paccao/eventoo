@@ -3,28 +3,34 @@ import styled from 'styled-components';
 import { UiContext } from '../../context/UiState';
 import { AppContext } from '../../context/AppState';
 import { MdOutlineLaptopMac } from 'react-icons/md';
-import { currentDatePlusOneYear } from '../../helpers/currentDate';
 
 import { Meeting } from '../../context/AppState';
-import { nanoid } from 'nanoid';
 
-function CreateMeetupModal() {
+interface Props {
+    currentMeetup: Meeting;
+}
+
+function EditMeetupModal({ currentMeetup }: Props) {
+    console.log(currentMeetup);
+
+    const dateTimeArr = currentMeetup?.time.split(' ');
+
     const today = new Date().toLocaleDateString('sv-se');
 
     const { dispatch } = useContext(UiContext);
     const { dispatch: appDispatch } = useContext(AppContext);
 
-    const [title, setTitle] = useState<string>('');
-    const [tag, setTag] = useState<string>('');
-    const [image, setImage] = useState<string>('');
-    const [date, setDate] = useState<string>(currentDatePlusOneYear(false));
-    const [time, setTime] = useState<string>('18:00');
-    const [location, setLocation] = useState<string>('');
+    const [title, setTitle] = useState<string>(currentMeetup?.title);
+    const [tag, setTag] = useState<string>(currentMeetup?.tag[0]);
+    const [image, setImage] = useState<string>(currentMeetup?.image);
+    const [location, setLocation] = useState<string>(currentMeetup?.location);
+    const [date, setDate] = useState<string>(dateTimeArr[0]);
+    const [time, setTime] = useState<string>(dateTimeArr[1]);
     const [isOnline, setIsOnline] = useState<boolean>(false);
 
     //Togles value of location input value when isOnline button is pressed
     useEffect(() => {
-        isOnline ? setLocation('online') : setLocation('');
+        isOnline && setLocation('online');
     }, [isOnline]);
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -37,7 +43,7 @@ function CreateMeetupModal() {
         const dateAndTime = date + ' ' + time;
 
         const meeting: Meeting = {
-            id: nanoid(),
+            id: currentMeetup.id,
             title,
             tag: [tag],
             time: dateAndTime,
@@ -45,23 +51,21 @@ function CreateMeetupModal() {
             location,
             image,
             timeStamp: Date.parse(dateAndTime),
-            comments: [],
+            comments: currentMeetup.comments,
         };
 
-        appDispatch({ type: 'ADD_MEETUP', payload: meeting });
-        dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' });
-
-        setLocation('');
+        appDispatch({ type: 'UPDATE_MEETUP', payload: meeting });
+        dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
     }
 
     return (
-        <CreateMeetupModalContainer>
+        <EditMeetupModalContainer>
             <form onSubmit={handleSubmit} className="meeting-form">
                 <div className="close-container">
-                    <h2>lägg till meetup..</h2>{' '}
+                    <h2>Ändra meetup..</h2>{' '}
                     <div
                         className="x"
-                        onClick={() => dispatch({ type: 'TOGGLE_CREATE_MEETING_MODAL' })}
+                        onClick={() => dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' })}
                     >
                         {' '}
                         X
@@ -136,16 +140,16 @@ function CreateMeetupModal() {
                 </div>
 
                 <button className="submit-button" type="submit">
-                    SKAPA
+                    UPPDATERA
                 </button>
             </form>
-        </CreateMeetupModalContainer>
+        </EditMeetupModalContainer>
     );
 }
 
-export default CreateMeetupModal;
+export default EditMeetupModal;
 
-const CreateMeetupModalContainer = styled.section`
+const EditMeetupModalContainer = styled.section`
     padding-top: 100px;
     position: fixed;
     inset: 0 0 0 0;

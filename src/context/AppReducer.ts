@@ -4,6 +4,7 @@ import { State, Meeting, User, Comment } from './AppState';
 export type ActionType =
     | { type: 'SET_USER'; payload: User }
     | { type: 'ADD_MEETUP'; payload: Meeting }
+    | { type: 'UPDATE_MEETUP'; payload: Meeting }
     | { type: 'SET_STATE'; payload: any }
     | { type: 'ATTEND_MEETUP'; payload: string | undefined }
     | { type: 'ADD_COMMENT'; payload: { urlId: string | undefined; comment: Comment } };
@@ -19,6 +20,15 @@ export function AppReducer(state: State, action: ActionType) {
             return {
                 ...state,
                 meetings: [...state.meetings, action.payload],
+            };
+        case 'UPDATE_MEETUP':
+            const updatedMeetings = state.meetings.map((meeting) =>
+                meeting.id === action.payload.id ? action.payload : meeting,
+            );
+
+            return {
+                ...state,
+                meetings: [...updatedMeetings],
             };
 
         case 'SET_USER':

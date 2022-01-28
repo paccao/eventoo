@@ -1,5 +1,3 @@
-
-
 export const meetups = [
     {
         id: '1',

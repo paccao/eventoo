@@ -27,18 +27,14 @@ export function currentDatePlusOneYear(hasTime: boolean): string {
     const time = currentTimeStamp.getHours() + ':' + currentTimeStamp.getMinutes();
 
     if (hasTime) {
-        return date + ' ' + time;
+        return formattedDate + ' ' + time;
     } else {
         return formattedDate;
     }
 }
 
-
 export function currentDatePlusOneHalfHour(): string {
-    
-        var dt = new Date();
-        dt.setMinutes( dt.getMinutes() + 30 );
-        return dt.toString()
-    
-    }
-    
+    var dt = new Date();
+    dt.setMinutes(dt.getMinutes() + 30);
+    return dt.toString();
+}
