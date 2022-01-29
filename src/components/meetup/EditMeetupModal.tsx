@@ -61,11 +61,11 @@ function EditMeetupModal({ currentMeetup }: Props) {
     }
 
     function handleDelete() {
-        if (window.confirm(`Radera meetup "${currentMeetup.title}" ?`)) {
-            appDispatch({ type: 'DELETE_MEETUP', payload: currentMeetup });
-            dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
-            navigate('/');
-        }
+        // if (window.confirm(`Radera meetup "${currentMeetup.title}" ?`)) {
+        appDispatch({ type: 'DELETE_MEETUP', payload: currentMeetup });
+        dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
+        navigate('/');
+        // }
     }
 
     return (
@@ -226,6 +226,7 @@ const EditMeetupModalContainer = styled.section`
             background-color: ${(props) => props.theme.accentColorAdmin};
             font-size: 1.4rem;
             font-weight: bold;
+            cursor: pointer;
         }
 
         .button-delete {
@@ -247,6 +248,7 @@ const EditMeetupModalContainer = styled.section`
             font-size: 1rem;
             border: none;
             padding: 0.55rem;
+            cursor: pointer;
         }
 
         .online {

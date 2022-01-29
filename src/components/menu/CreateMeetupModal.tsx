@@ -203,6 +203,7 @@ const CreateMeetupModalContainer = styled.section`
             background-color: ${(props) => props.theme.accentColorAdmin};
             font-size: 1.5rem;
             font-weight: bold;
+            cursor: pointer;
         }
     }
 
@@ -219,6 +220,7 @@ const CreateMeetupModalContainer = styled.section`
             font-size: 1rem;
             border: none;
             padding: 0.55rem;
+            cursor: pointer;
         }
 
         .online {
