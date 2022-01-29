@@ -9,9 +9,18 @@ describe('MeetupListPage component', () => {
     it('should say 404', () => {
         render(<Page404 />);
 
-        const text = screen.getAllByRole('heading', { name: '404' })
+        const text = screen.getAllByRole('heading')
 
-        expect(text).toHaveTextContent('404')
+        expect(text[0]).toHaveTextContent('404')
+
+    });
+
+    it('should say Page Not Found', () => {
+        render(<Page404 />);
+
+        const text = screen.getAllByRole('heading')
+
+        expect(text[1]).toHaveTextContent('Page Not Found')
 
     });
 });
