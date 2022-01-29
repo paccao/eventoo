@@ -16,9 +16,9 @@ function App() {
 
                 <main>
                     <Routes>
-                        <Route path='*' element={<Page404 />} />
                         <Route path="/" element={<MeetupListPage />} />
                         <Route path="/meetup/:id" element={<MeetupPage />} />
+                        <Route path='*' element={<Page404 />} />
                     </Routes>
                 </main>
             </AppContainer>

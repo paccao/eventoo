@@ -1,6 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import MeetupListPage from '../MeetupListPage';
-
 import Page404 from '../Page404'
 
 
