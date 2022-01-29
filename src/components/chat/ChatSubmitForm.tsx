@@ -1,11 +1,13 @@
 import { nanoid } from 'nanoid';
 import React, { useContext, useState } from 'react';
 import { AppContext, Comment } from '../../context/AppState';
+import { UiContext } from '../../context/UiState';
 import { currentDate } from '../../helpers/currentDate';
 import styled from 'styled-components';
 
 function ChatSubmitForm({ urlId }: { urlId: string | undefined }) {
     const { state, dispatch } = useContext(AppContext);
+    const { state: uiState } = useContext(UiContext);
     const [commentValue, setCommentValue] = useState<string>('');
 
     function handleSubmit(e: React.SyntheticEvent) {
@@ -16,16 +18,12 @@ function ChatSubmitForm({ urlId }: { urlId: string | undefined }) {
             id: nanoid(),
             time: currentDate(),
             content: commentValue,
-            role: state.user.isAdmin ? 'admin' : 'guest',
+            role: uiState.isAdmin ? 'admin' : 'guest',
         };
-        
+
         dispatch({ type: 'ADD_COMMENT', payload: { urlId, comment } });
         setCommentValue('');
     }
-
-    console.log(state);
-    
-
     return (
         <Form onSubmit={handleSubmit}>
             <label htmlFor="input-field" data-testid="label">
