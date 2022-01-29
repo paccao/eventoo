@@ -61,10 +61,11 @@ function EditMeetupModal({ currentMeetup }: Props) {
     }
 
     function handleDelete() {
-        console.log('click');
-        appDispatch({ type: 'DELETE_MEETUP', payload: currentMeetup });
-        dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
-        navigate('/');
+        if (window.confirm(`Radera meetup "${currentMeetup.title}" ?`)) {
+            appDispatch({ type: 'DELETE_MEETUP', payload: currentMeetup });
+            dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
+            navigate('/');
+        }
     }
 
     return (
