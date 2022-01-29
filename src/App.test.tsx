@@ -6,67 +6,141 @@ import UiState from './context/UiState';
 import AppState from './context/AppState';
 
 function MockRouter() {
-	return (
-		<BrowserRouter>
-			<AppState>
-				<UiState>
-					<App />
-				</UiState>
-			</AppState>
-		</BrowserRouter>
-	);
+    return (
+        <BrowserRouter>
+            <AppState>
+                <UiState>
+                    <App />
+                </UiState>
+            </AppState>
+        </BrowserRouter>
+    );
 }
 
 describe('App component', () => {
-    
-	beforeEach(() => {
-		localStorage.clear();
-	});
+    beforeEach(() => {
+        localStorage.clear();
+    });
 
-	it('renders without crashing', () => {
-		render(<MockRouter />);
-	});
+    it('renders without crashing', () => {
+        render(<MockRouter />);
+    });
 
-	describe('When crating new meetup', () => {
-		it('Renders the newly added meetup in the list of comming meetups', () => {
-			render(<MockRouter />);
+    describe('When crating new meetup', () => {
+        it('Renders the newly added meetup in the list of comming meetups', () => {
+            render(<MockRouter />);
 
-			const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
-			userEvent.click(changeRoleBtn);
+            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            userEvent.click(changeRoleBtn);
 
-			const createMeetupBtn = screen.getByTestId('create-meetup-btn');
-			userEvent.click(createMeetupBtn);
+            const createMeetupBtn = screen.getByTestId('create-meetup-btn');
+            userEvent.click(createMeetupBtn);
 
-			const titleInput = screen.getByPlaceholderText(/titel:/i);
-			const tagInput = screen.getByPlaceholderText(/ämne:/i);
-			const imageInput = screen.getByPlaceholderText(/bild:/i);
-			const locationInput = screen.getByPlaceholderText(/plats:/i);
+            const titleInput = screen.getByPlaceholderText(/titel:/i);
+            const tagInput = screen.getByPlaceholderText(/ämne:/i);
+            const imageInput = screen.getByPlaceholderText(/bild:/i);
+            const locationInput = screen.getByPlaceholderText(/plats:/i);
 
-			userEvent.type(titleInput, 'Adam');
-			userEvent.type(tagInput, 'Javascript');
-			userEvent.type(locationInput, 'Lödöse');
-			userEvent.type(imageInput, 'testbild');
+            userEvent.type(titleInput, 'Adam');
+            userEvent.type(tagInput, 'Javascript');
+            userEvent.type(locationInput, 'Lödöse');
+            userEvent.type(imageInput, 'testbild');
 
-			const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
-			expect(submitBtn).toBeInTheDocument();
-			userEvent.click(submitBtn);
+            const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
+            expect(submitBtn).toBeInTheDocument();
+            userEvent.click(submitBtn);
 
-			const futureEventList = screen.getByText(/alla meetups/i);
+            const futureEventList = screen.getByText(/alla meetups/i);
 
-			expect(submitBtn).not.toBeInTheDocument();
-			expect(futureEventList).toBeInTheDocument();
+            expect(submitBtn).not.toBeInTheDocument();
+            expect(futureEventList).toBeInTheDocument();
 
-			const newMeetup = screen.getByText(/Lödöse/i);
+            const newMeetup = screen.getByText(/Lödöse/i);
 
-			expect(newMeetup).toBeInTheDocument();
-		});
-	});
+            expect(newMeetup).toBeInTheDocument();
+        });
+    });
 
-	test('App component has darkmode', () => {
-		render(<MockRouter />);
+    test('App component has darkmode', () => {
+        render(<MockRouter />);
 
-		const appContainer = screen.getByTestId('app-container');
+        const appContainer = screen.getByTestId('app-container');
 
-		expect(appContainer).toHaveStyle('background-color: #151515');
-	});
+        expect(appContainer).toHaveStyle('background-color: #151515');
+    });
+
+    describe('When editing meetups', () => {
+        it('New title shows up on meetup page when changed', () => {
+            render(<MockRouter />);
+            const newTitle = 'Game day';
+
+            const meetup = screen.getByText(/game night/i);
+
+            userEvent.click(meetup);
+
+            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            userEvent.click(changeRoleBtn);
+
+            const editMeetupBtn = screen.getByText('redigera');
+            userEvent.click(editMeetupBtn);
+
+            const title = screen.getByDisplayValue(/game night/i);
+
+            userEvent.type(title, '{selectall}{backspace}' + newTitle);
+
+            const submitBtn = screen.getByRole('button', { name: /uppdatera/i });
+            userEvent.click(submitBtn);
+
+            const updatedTitle = screen.getByText(newTitle);
+
+            expect(updatedTitle).toBeInTheDocument();
+        });
+    });
+    describe('When deleting meetups', () => {
+        it('User is redirected to home page', () => {
+            render(<MockRouter />);
+
+            const meetup = screen.getByText(/game night/i);
+
+            userEvent.click(meetup);
+
+            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            userEvent.click(changeRoleBtn);
+
+            const editMeetupBtn = screen.getByText('redigera');
+            userEvent.click(editMeetupBtn);
+
+            const deleteBtn = screen.getByRole('button', { name: /radera/i });
+            userEvent.click(deleteBtn);
+
+            const homePageText = screen.getByText(/alla meetups/i);
+
+            expect(homePageText).toBeInTheDocument();
+        });
+        it('The deleted meetup is not in the list of alla meetups', () => {
+            render(<MockRouter />);
+
+            const meetup = screen.getByText(/game night/i);
+
+            userEvent.click(meetup);
+
+            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            userEvent.click(changeRoleBtn);
+
+            const editMeetupBtn = screen.getByText('redigera');
+            userEvent.click(editMeetupBtn);
+
+            const deleteBtn = screen.getByRole('button', { name: /radera/i });
+            userEvent.click(deleteBtn);
+
+            const homePageText = screen.getByText(/alla meetups/i);
+
+            expect(homePageText).toBeInTheDocument();
+
+            const deletedmeeting = screen.queryByText(/game night/i);
+            const notDeletedMeeting = screen.getByText(/lördag på lan/i);
+            expect(notDeletedMeeting).toBeInTheDocument();
+            expect(deletedmeeting).not.toBeInTheDocument();
+        });
+    });
 });

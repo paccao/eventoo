@@ -8,6 +8,7 @@ import Meetup from '../Meetup';
 import userEvent from '@testing-library/user-event';
 import { UiReducer } from '../../../context/UiReducer';
 import { UiContext } from '../../../context/UiState';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Meetup component', () => {
     function MockContext({ isLoggedIn }: { isLoggedIn: boolean }) {
@@ -22,7 +23,9 @@ describe('Meetup component', () => {
 
         return (
             <UiContext.Provider value={{ state, dispatch }}>
-                <Meetup currentMeetup={mockMeetups[0]} />
+                <BrowserRouter>
+                    <Meetup currentMeetup={mockMeetups[0]} />
+                </BrowserRouter>
             </UiContext.Provider>
         );
     }
@@ -97,7 +100,7 @@ describe('Meetup component', () => {
         it('opens edit meetup modal when "edit" is clicked', () => {
             render(<MockContext isLoggedIn={true} />);
 
-            const editBtn = screen.getByRole('button', { name: /editera/i });
+            const editBtn = screen.getByRole('button', { name: /redigera/i });
 
             userEvent.click(editBtn);
 
@@ -108,7 +111,7 @@ describe('Meetup component', () => {
         it('Input fields is prefilled with current meeting details', () => {
             render(<MockContext isLoggedIn={true} />);
 
-            const editBtn = screen.getByRole('button', { name: /editera/i });
+            const editBtn = screen.getByRole('button', { name: /redigera/i });
 
             userEvent.click(editBtn);
             screen.getByDisplayValue(/lördag på landet/i);

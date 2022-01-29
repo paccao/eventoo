@@ -5,6 +5,7 @@ export type ActionType =
     | { type: 'SET_USER'; payload: User }
     | { type: 'ADD_MEETUP'; payload: Meeting }
     | { type: 'UPDATE_MEETUP'; payload: Meeting }
+    | { type: 'DELETE_MEETUP'; payload: Meeting }
     | { type: 'SET_STATE'; payload: any }
     | { type: 'ATTEND_MEETUP'; payload: string | undefined }
     | { type: 'ADD_COMMENT'; payload: { urlId: string | undefined; comment: Comment } };
@@ -29,6 +30,12 @@ export function AppReducer(state: State, action: ActionType) {
             return {
                 ...state,
                 meetings: [...updatedMeetings],
+            };
+
+        case 'DELETE_MEETUP':
+            return {
+                ...state,
+                meetings: [...state.meetings.filter((meeting) => meeting.id !== action.payload.id)],
             };
 
         case 'SET_USER':
