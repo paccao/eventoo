@@ -193,6 +193,7 @@ function testMeetup(upcomingMeetup: boolean): Meeting[] {
 		{
 			id: nanoid(),
 			title: 'lördag på landet',
+			description: 'Test desc',
 			tag: ['outdoors'],
 			time: upcomingMeetup ? currentDatePlusOneYearString : currentDateString,
 			isOnline: false,
