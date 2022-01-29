@@ -21,7 +21,7 @@ export default function MeetupBtnsContainer({ id, date }: { id: string; date: st
             {uiState.isAdmin && (
                 <CardButton
                     isSelected={isAttending(appState.user.bookedMeetups, id)}
-                    text="editera"
+                    text="redigera"
                     isActive={isTooLateToAttend(date)}
                     clickHandler={editMeetupHandler}
                 />

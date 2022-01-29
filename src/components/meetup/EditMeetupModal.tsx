@@ -6,12 +6,14 @@ import { MdOutlineLaptopMac } from 'react-icons/md';
 
 import { Meeting } from '../../context/AppState';
 
+import { useNavigate } from 'react-router-dom';
+
 interface Props {
     currentMeetup: Meeting;
 }
 
 function EditMeetupModal({ currentMeetup }: Props) {
-    console.log(currentMeetup);
+    const navigate = useNavigate();
 
     const dateTimeArr = currentMeetup?.time.split(' ');
 
@@ -56,6 +58,13 @@ function EditMeetupModal({ currentMeetup }: Props) {
 
         appDispatch({ type: 'UPDATE_MEETUP', payload: meeting });
         dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
+    }
+
+    function handleDelete() {
+        console.log('click');
+        appDispatch({ type: 'DELETE_MEETUP', payload: currentMeetup });
+        dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
+        navigate('/');
     }
 
     return (
@@ -138,10 +147,14 @@ function EditMeetupModal({ currentMeetup }: Props) {
                         <MdOutlineLaptopMac />
                     </button>
                 </div>
-
-                <button className="submit-button" type="submit">
-                    UPPDATERA
-                </button>
+                <div className="btn-container">
+                    <button className="button" type="submit">
+                        UPPDATERA
+                    </button>
+                    <button onClick={handleDelete} type="button" className="button button-delete">
+                        RADERA
+                    </button>
+                </div>
             </form>
         </EditMeetupModalContainer>
     );
@@ -200,13 +213,23 @@ const EditMeetupModalContainer = styled.section`
             color: ${(props) => props.theme.textColor};
         }
 
-        .submit-button {
+        .btn-container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .button {
             border-radius: ${(props) => props.theme.borderRadius};
             border: none;
             padding: 7px;
             background-color: ${(props) => props.theme.accentColorAdmin};
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
+        }
+
+        .button-delete {
+            background-color: red;
+            color: ${(props) => props.theme.textColor};
         }
     }
 

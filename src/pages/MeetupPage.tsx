@@ -7,7 +7,6 @@ import { useContext } from 'react';
 
 function MeetupPage() {
     const { id } = useParams();
-    
 
     const { state } = useContext(AppContext);
 
@@ -16,7 +15,7 @@ function MeetupPage() {
     return (
         <PageWrapper>
             <Meetup currentMeetup={currentMeetup} />
-            <ChatBox />
+            <ChatBox urlId={id} currentMeetup={currentMeetup} />
         </PageWrapper>
     );
 }

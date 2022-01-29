@@ -5,6 +5,7 @@ export type ActionType =
     | { type: 'SET_USER'; payload: User }
     | { type: 'ADD_MEETUP'; payload: Meeting }
     | { type: 'UPDATE_MEETUP'; payload: Meeting }
+    | { type: 'DELETE_MEETUP'; payload: Meeting }
     | { type: 'SET_STATE'; payload: any }
     | { type: 'ATTEND_MEETUP'; payload: string | undefined }
     | { type: 'ADD_COMMENT'; payload: { urlId: string | undefined; comment: Comment } };
@@ -31,6 +32,12 @@ export function AppReducer(state: State, action: ActionType) {
                 meetings: [...updatedMeetings],
             };
 
+        case 'DELETE_MEETUP':
+            return {
+                ...state,
+                meetings: [...state.meetings.filter((meeting) => meeting.id !== action.payload.id)],
+            };
+
         case 'SET_USER':
             return {
                 ...state,
@@ -54,15 +61,16 @@ export function AppReducer(state: State, action: ActionType) {
                 },
             };
         case 'ADD_COMMENT':
-            const currentMeeting = state.meetings.filter(
-                (meeting) => meeting.id === action.payload.urlId,
-            );
-
-            
-            const updatedComments = [...currentMeeting[0].comments, action.payload.comment];
-            currentMeeting[0].comments = updatedComments;
             return {
                 ...state,
+                meetings: [
+                    ...state.meetings.map((meeting) => {
+                        if (meeting.id === action.payload.urlId) {
+                            meeting.comments = [...meeting.comments, action.payload.comment];
+                        }
+                        return meeting;
+                    }),
+                ],
             };
 
         default:

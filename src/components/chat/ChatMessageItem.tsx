@@ -14,7 +14,7 @@ function ChatMessageItem({ id: _, time, content, role }: Comment) {
     return (
         <ListItem isAdmin={checkIfAdmin()}>
             <time dateTime={time}>{time}</time>
-            <p>{content}</p>
+            <p data-testid="commentContent">{content}</p>
             <cite className={role}>{'/ ' + formatRole(role)}</cite>
         </ListItem>
     );
