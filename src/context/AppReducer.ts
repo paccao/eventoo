@@ -57,6 +57,8 @@ export function AppReducer(state: State, action: ActionType) {
             const currentMeeting = state.meetings.filter(
                 (meeting) => meeting.id === action.payload.urlId,
             );
+
+            
             const updatedComments = [...currentMeeting[0].comments, action.payload.comment];
             currentMeeting[0].comments = updatedComments;
             return {
