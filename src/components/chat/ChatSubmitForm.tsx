@@ -73,5 +73,6 @@ const Form = styled.form`
         border-radius: ${(props) => props.theme.borderRadius};
         color: ${(props) => props.theme.textColorDark};
         font-weight: 800;
+        cursor: pointer;
     }
 `;
