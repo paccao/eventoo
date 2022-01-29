@@ -20,10 +20,13 @@ function ChatSubmitForm({ urlId }: { urlId: string | undefined }) {
             content: commentValue,
             role: uiState.isAdmin ? 'admin' : 'guest',
         };
-
+        
         dispatch({ type: 'ADD_COMMENT', payload: { urlId, comment } });
         setCommentValue('');
     }
+
+    console.log(state);
+    
 
     return (
         <Form onSubmit={handleSubmit}>
