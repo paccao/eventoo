@@ -25,7 +25,7 @@ function MockEmptyChatMessageList() {
 
 describe('ChatMessageList component', () => {
     it('renders without crashing', () => {
-        render(<ChatMessageList />);
+        render(<ChatMessageList urlId={'testID'} currentMeetup={mockMeetups[0]} />);
     });
 
     it('should render chat messages when there are any', () => {

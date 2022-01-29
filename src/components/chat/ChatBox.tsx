@@ -2,13 +2,14 @@ import ChatMessageList from './ChatMessageList';
 import ChatSubmitForm from './ChatSubmitForm';
 import InfoBlockDivider from '../globals/InfoBlockDivider';
 import styled from 'styled-components';
+import { Meeting } from '../../context/AppState';
 
-function ChatBox() {
+function ChatBox({ urlId, currentMeetup }: { urlId: string | undefined; currentMeetup: Meeting }) {
     return (
         <Wrapper>
             <InfoBlockDivider text="Diskussion" />
-            <ChatMessageList />
-            <ChatSubmitForm />
+            <ChatMessageList urlId={urlId} currentMeetup={currentMeetup} />
+            <ChatSubmitForm urlId={urlId} />
         </Wrapper>
     );
 }

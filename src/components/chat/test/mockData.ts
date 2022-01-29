@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 
 export const meetups = [
     {
-        id: nanoid(),
+        id: '1',
         title: 'lördag på landet',
         tag: ['outdoors'],
         time: '2022-01-28 15:01',

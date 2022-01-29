@@ -1,13 +1,11 @@
 import { nanoid } from 'nanoid';
 import React, { useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { AppContext, Comment } from '../../context/AppState';
 import { currentDate } from '../../helpers/currentDate';
 import styled from 'styled-components';
 
-function ChatSubmitForm() {
+function ChatSubmitForm({ urlId }: { urlId: string | undefined }) {
     const { state, dispatch } = useContext(AppContext);
-    const { id: urlId } = useParams();
     const [commentValue, setCommentValue] = useState<string>('');
 
     function handleSubmit(e: React.SyntheticEvent) {
