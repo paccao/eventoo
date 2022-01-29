@@ -2,14 +2,19 @@ import ChatMessageList from './ChatMessageList';
 import ChatSubmitForm from './ChatSubmitForm';
 import InfoBlockDivider from '../globals/InfoBlockDivider';
 import styled from 'styled-components';
-import { Meeting } from '../../context/AppState';
+import { AppContext, Meeting } from '../../context/AppState';
+import { useContext } from 'react';
+import { isAttending } from '../../helpers/isAttending';
 
 function ChatBox({ urlId, currentMeetup }: { urlId: string | undefined; currentMeetup: Meeting }) {
+    const { state } = useContext(AppContext);
     return (
         <Wrapper>
             <InfoBlockDivider text="Diskussion" />
             <ChatMessageList urlId={urlId} currentMeetup={currentMeetup} />
-            <ChatSubmitForm urlId={urlId} />
+            {isAttending(state.user.bookedMeetups, currentMeetup?.id) && (
+                <ChatSubmitForm urlId={urlId} />
+            )}
         </Wrapper>
     );
 }
