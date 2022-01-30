@@ -40,15 +40,17 @@ describe('ChatBox component', () => {
             </AppState>,
         );
 
-        const testInput = 'This is a test comment!';
-        userEvent.type(screen.getByRole('textbox'), testInput);
-        userEvent.click(screen.getByRole('button', { name: /SKICKA/ }));
+    
+        
+        const inputField = screen.getByRole('textbox')
+        userEvent.type(inputField, 'fun');
 
-        // const listItem = screen.getByRole('listitem');
-        // console.log(listItem);
-        // expect(listItem).toBeInTheDocument();
-        const commentContentElem = screen.getAllByTestId('commentContent');
-        console.log(commentContentElem);
-        expect(commentContentElem).toBeInTheDocument();
+        const button = screen.getByRole('button')
+        userEvent.click(button);
+
+        const listItems = screen.getAllByRole('listitem')
+
+ 
+        expect(listItems[0]).toBeInTheDocument();
     });
 });

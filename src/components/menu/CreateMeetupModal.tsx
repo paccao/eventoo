@@ -39,6 +39,7 @@ function CreateMeetupModal() {
         const meeting: Meeting = {
             id: nanoid(),
             title,
+            description: 'Test description',
             tag: [tag],
             time: dateAndTime,
             isOnline,

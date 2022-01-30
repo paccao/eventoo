@@ -4,6 +4,7 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'Lördag på landet',
+        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['outdoors', 'bilar'],
         time: '2023-01-28 15:01',
         isOnline: false,
@@ -35,6 +36,7 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'Sockerkaka hos gpa',
+        description: 'Ta med dig sockerkaka och ett glatt humör. Kaffet måste dock drickas med sockerbit och kopparna måste vara små. Va beredd på gamla anekdoter från tidig 60-tal',
         tag: ['fika', 'bakelse'],
         time: '2023-01-29 15:01',
         isOnline: false,
@@ -53,6 +55,7 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'Game night',
+        description: 'Nu kör vi magic! Gröna och röda lekar onskas. Denna tillställning ska ghå långsamt och räknar med ett pas på ett dygn. Vinnaren tar hem äran.',
         tag: ['fika'],
         time: '2023-01-27 15:01',
         isOnline: true,
@@ -71,6 +74,7 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'Räkjostillverkning med greger',
+        description: 'OBS, sista upplagan av detta inte så populära evenemang. Här träffas vi och bjuder varandra på räkcocktail som när den var som bäst.. (på 80-talet)',
         tag: ['food', 'gourme'],
         time: '2023-01-20 15:01',
         isOnline: true,
@@ -90,6 +94,7 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'Arcade Night!',
+        description: 'Ta med hinken med mynt, här ska det spelas spel. Den som vinner Sega Rally får 10 000 kronor i enkronor. Glöm inte handspriten.',
         tag: ['spel', 'liten grupp', 'arcade'],
         time: '2023-01-20 15:01',
         isOnline: true,
@@ -108,6 +113,7 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'Meercat spaning',
+        description: 'Kom och möts i Lasses minibuss.  Lån av kikare erbjuds  där vi skall spana på naturens egna spanare. Lite grupp på minst 10p.',
         tag: ['fika', 'slow', 'djur'],
         time: '2023-01-20 15:01',
         isOnline: true,
