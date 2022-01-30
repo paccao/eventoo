@@ -11,7 +11,7 @@ export default function TagChip({ text }: { text: string }) {
 
 const TagChipContainer = styled.li`
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     ${(props) => props.theme.borderRadius};
     padding: 0.3rem;
@@ -20,7 +20,7 @@ const TagChipContainer = styled.li`
     width: auto;
 
     .tag-p {
-        padding: 0.3rem;
+        padding: 0.3rem 0.5rem;
         border-radius: ${(props) => props.theme.borderRadius};
         color: ${(props) => props.theme.textColorDark};
         font-weight: 300;

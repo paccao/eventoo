@@ -31,11 +31,11 @@ const StyledButton = styled.button<{ isActive: boolean, isSelected?: boolean} >`
   background-color: transparent;
   border: 1px solid white;
   border-radius: ${props => props.theme.borderRadius};
-  border-color: ${props => props.isSelected ? props.theme.accentColor : '#fff'} ;
-  color: ${props => props.theme.textColor};
-
+  background-color: ${props => props.isSelected ? props.theme.accentColor : '#fff'} ;
+  color: ${props => props.theme.textColorDark};
+  border: none;
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 200;
   padding: 0.3rem 1rem;
   margin: 0.5rem;
   opacity: ${props => props.isActive ? '30%' : '100%' };
