@@ -15,7 +15,7 @@ function MeetupPage() {
     return (
         <PageWrapper>
             <Meetup currentMeetup={currentMeetup} />
-            <ChatBox urlId={id} currentMeetup={currentMeetup} />
+            <ChatBox urlId={id} />
         </PageWrapper>
     );
 }

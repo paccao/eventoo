@@ -6,7 +6,7 @@ import { currentDate } from '../../helpers/currentDate';
 import styled from 'styled-components';
 
 function ChatSubmitForm({ urlId }: { urlId: string | undefined }) {
-    const { state, dispatch } = useContext(AppContext);
+    const { dispatch } = useContext(AppContext);
     const { state: uiState } = useContext(UiContext);
     const [commentValue, setCommentValue] = useState<string>('');
 
