@@ -22,7 +22,11 @@ export default CreateMeetupBtn;
 const CreateMeetupBtnContainer = styled.button`
     color: ${(props) => props.theme.accentColorAdmin};
     font-size: 2rem;
-    background-color: ${(props) => props.theme.__bgColorLargePageWidth};
+    background-color: transparent;
     border: none;
     cursor: pointer;
+    position: absolute;
+    left: 10rem;
+    top: 0rem;
+
 `;
