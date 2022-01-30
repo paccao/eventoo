@@ -24,6 +24,7 @@ function EditMeetupModal({ currentMeetup }: Props) {
 
     const [title, setTitle] = useState<string>(currentMeetup?.title);
     const [tag, setTag] = useState<string>(currentMeetup?.tag[0]);
+    const [description, setDescription] = useState<string>('');
     const [image, setImage] = useState<string>(currentMeetup?.image);
     const [location, setLocation] = useState<string>(currentMeetup?.location);
     const [date, setDate] = useState<string>(dateTimeArr[0]);
@@ -97,6 +98,14 @@ function EditMeetupModal({ currentMeetup }: Props) {
                     id="ämne"
                     name="ämne"
                     placeholder="ämne:"
+                    required
+                />
+                <textarea
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                    id="content"
+                    name="content"
+                    placeholder="Beskrivning:"
                     required
                 />
                 <input
@@ -201,7 +210,8 @@ const EditMeetupModalContainer = styled.section`
             }
         }
 
-        input {
+        input,
+        textarea {
             margin-bottom: 1.5rem;
             border-radius: ${(props) => props.theme.borderRadius};
             border: none;
@@ -210,7 +220,8 @@ const EditMeetupModalContainer = styled.section`
             color: ${(props) => props.theme.textColor};
         }
 
-        input::placeholder {
+        input::placeholder,
+        textarea::placeholder {
             color: ${(props) => props.theme.textColor};
         }
 
