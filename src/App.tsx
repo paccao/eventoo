@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import MeetupListPage from './pages/MeetupListPage';
 import MeetupPage from './pages/MeetupPage';
+import Page404 from './pages/Page404';
 
 function App() {
     return (
@@ -16,9 +17,8 @@ function App() {
                 <main>
                     <Routes>
                         <Route path="/" element={<MeetupListPage />} />
-                    </Routes>
-                    <Routes>
                         <Route path="/meetup/:id" element={<MeetupPage />} />
+                        <Route path='*' element={<Page404 />} />
                     </Routes>
                 </main>
             </AppContainer>
