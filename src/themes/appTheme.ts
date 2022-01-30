@@ -1,10 +1,10 @@
 export const darkTheme = {
-    bgColor: '#121212',
+    bgColor: '#151515',
     __bgColorLargePageWidth: '#151515',
     textColor: '#ffffff',
     textColorDark: '#121212',
 
-    accentColor: '#F0F415',
+    accentColor: '#FBDE44FF',
     accentColorAdmin: '#fff',
     accentColorOpaque: '#353535',
 

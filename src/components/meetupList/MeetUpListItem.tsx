@@ -1,9 +1,14 @@
 import styled from 'styled-components';
-
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TagChip from '../globals/TagChip';
 import AttendingIndicator from '../globals/AttendingIndicator';
 import { shortenLongStrings } from '../../helpers/shortenLongString';
+import { isImage } from '../../helpers/isImage';
+
+const placeHolderUrl =
+	'https://images.unsplash.com/photo-1607827448387-a67db1383b59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
+
 
 
 interface MeetUpListItemProps {
@@ -25,6 +30,18 @@ export default function MeetUpListItem({
 	id,
 	isAttending,
 }: MeetUpListItemProps) {
+
+	const [isPlaceholderImage, setIsPlaceholderImage] = useState(false);
+
+	useEffect(() => {
+		async function checkIfImage() {
+			const res = await isImage(image && image);
+			setIsPlaceholderImage(res);
+		}
+		checkIfImage();
+	});
+
+
 	return (
 		<MeetUpListItemContainer>
 			<ListInfoContainer data-testid='list-info-container'>
@@ -53,7 +70,7 @@ export default function MeetUpListItem({
 			<ListImageContainer
 				className='image-container'
 				role={'img'}
-				style={{ backgroundImage: `url(${image})` }}
+				style={{ backgroundImage: `url(${!isPlaceholderImage ? placeHolderUrl : image})` }}
 			></ListImageContainer>
 		</MeetUpListItemContainer>
 	);
