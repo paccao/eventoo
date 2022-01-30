@@ -24,7 +24,7 @@ function EditMeetupModal({ currentMeetup }: Props) {
 
     const [title, setTitle] = useState<string>(currentMeetup?.title);
     const [tag, setTag] = useState<string>(currentMeetup?.tag[0]);
-    const [description, setDescription] = useState<string>('');
+    const [description, setDescription] = useState<string>(currentMeetup.description);
     const [image, setImage] = useState<string>(currentMeetup?.image);
     const [location, setLocation] = useState<string>(currentMeetup?.location);
     const [date, setDate] = useState<string>(dateTimeArr[0]);
@@ -46,7 +46,7 @@ function EditMeetupModal({ currentMeetup }: Props) {
         const dateAndTime = date + ' ' + time;
 
         const meeting: Meeting = {
-            description: 'Test description',
+            description,
             id: currentMeetup.id,
             title,
             tag: [tag],
