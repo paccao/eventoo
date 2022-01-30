@@ -38,7 +38,7 @@ export const meetups = [
         title: 'Sockerkaka hos gpa',
         description: 'Ta med dig sockerkaka och ett glatt humör. Kaffet måste dock drickas med sockerbit och kopparna måste vara små. Va beredd på gamla anekdoter från tidig 60-tal',
         tag: ['fika', 'bakelse'],
-        time: '2023-01-29 15:01',
+        time: '2022-01-29 15:01',
         isOnline: false,
         location: 'Göteborg',
         timeStamp: 1643097488,

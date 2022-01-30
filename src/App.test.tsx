@@ -149,4 +149,48 @@ describe('App component', () => {
             expect(deletedmeeting).not.toBeInTheDocument();
         });
     });
+
+    describe('when user clicks on a meetup card', () => {
+
+        it('should link user to a meetup page corresponding to the selected meetup', () => {
+            render(<MockRouter />);
+
+            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            userEvent.click(changeRoleBtn);
+
+            const createMeetupBtn = screen.getByTestId('create-meetup-btn');
+            userEvent.click(createMeetupBtn);
+
+            const titleInput = screen.getByPlaceholderText(/titel:/i);
+            const tagInput = screen.getByPlaceholderText(/ämne:/i);
+            const imageInput = screen.getByPlaceholderText(/bild:/i);
+            const locationInput = screen.getByPlaceholderText(/plats:/i);
+            const description = screen.getByPlaceholderText(/beskrivning:/i);
+
+            userEvent.type(titleInput, 'FutureEvent');
+            userEvent.type(tagInput, 'bluegrass');
+            userEvent.type(locationInput, 'gränna');
+            userEvent.type(imageInput, 'img');
+            userEvent.type(description, 'description to find');
+
+            const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
+            expect(submitBtn).toBeInTheDocument();
+            userEvent.click(submitBtn);
+
+            const meetupToClickOn = screen.getByText(/FutureEvent/i);
+
+            userEvent.click(meetupToClickOn)
+
+            const descriptionToFind = screen.getByText('description to find');
+
+            expect(descriptionToFind).toHaveTextContent('description to find')
+
+
+        })
+
+
+    })
+
+    
+
 });
