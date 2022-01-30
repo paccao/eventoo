@@ -61,13 +61,16 @@ export function AppReducer(state: State, action: ActionType) {
                 },
             };
         case 'ADD_COMMENT':
-            const currentMeeting = state.meetings.filter(
-                (meeting) => meeting.id === action.payload.urlId,
-            );
-            const updatedComments = [...currentMeeting[0].comments, action.payload.comment];
-            currentMeeting[0].comments = updatedComments;
             return {
                 ...state,
+                meetings: [
+                    ...state.meetings.map((meeting) => {
+                        if (meeting.id === action.payload.urlId) {
+                            meeting.comments = [...meeting.comments, action.payload.comment];
+                        }
+                        return meeting;
+                    }),
+                ],
             };
 
         default:

@@ -1,17 +1,17 @@
-import { useContext } from 'react';
-import { AppContext, Comment } from '../../context/AppState';
-import { useParams } from 'react-router-dom';
+import { Comment, Meeting } from '../../context/AppState';
 import ChatMessageItem from './ChatMessageItem';
 import styled from 'styled-components';
 
-function ChatMessageList() {
-    const { state } = useContext(AppContext);
-    const { id } = useParams();
-    const currentMeeting = [...state?.meetings]?.filter((meeting) => meeting.id === id)[0];
-
+function ChatMessageList({
+    urlId: _,
+    currentMeetup,
+}: {
+    urlId: string | undefined;
+    currentMeetup: Meeting;
+}) {
     return (
         <List data-testid="chatMessageList">
-            {currentMeeting?.comments?.map((comment: Comment) => (
+            {currentMeetup?.comments?.map((comment: Comment) => (
                 <ChatMessageItem key={'commentItem-' + comment.id} {...comment} />
             ))}
         </List>
