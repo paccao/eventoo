@@ -191,6 +191,46 @@ describe('App component', () => {
 
     })
 
+    describe('when user clicks on app logo (eventoo) ', () => {
+
+        it('should link back to start page (meetup page)', () => {
+            render(<MockRouter />);
+
+            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            userEvent.click(changeRoleBtn);
+
+            const createMeetupBtn = screen.getByTestId('create-meetup-btn');
+            userEvent.click(createMeetupBtn);
+
+            const titleInput = screen.getByPlaceholderText(/titel:/i);
+            const tagInput = screen.getByPlaceholderText(/ämne:/i);
+            const imageInput = screen.getByPlaceholderText(/bild:/i);
+            const locationInput = screen.getByPlaceholderText(/plats:/i);
+            const description = screen.getByPlaceholderText(/beskrivning:/i);
+
+            userEvent.type(titleInput, 'event');
+            userEvent.type(tagInput, 'bluegrass');
+            userEvent.type(locationInput, 'gränna');
+            userEvent.type(imageInput, 'img');
+            userEvent.type(description, 'description to find');
+
+            const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
+            userEvent.click(submitBtn);
+
+            const meetupToClickOn = screen.getByText(/event/i);
+            userEvent.click(meetupToClickOn)
+
+            const titleToClickOn = screen.getByRole('heading', { name: 'eventoo.' });
+            userEvent.click(titleToClickOn)
+
+            const controlTextOnHomePage = screen.getByText(/alla meetups/i);
+
+            expect(controlTextOnHomePage).toHaveTextContent(/alla meetups/i)
+        })
+
+
+    })
+
     
 
 });
