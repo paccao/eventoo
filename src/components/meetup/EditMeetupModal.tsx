@@ -30,6 +30,7 @@ function EditMeetupModal({ currentMeetup }: Props) {
     const [date, setDate] = useState<string>(dateTimeArr[0]);
     const [time, setTime] = useState<string>(dateTimeArr[1]);
     const [isOnline, setIsOnline] = useState<boolean>(false);
+    const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
 
     //Togles value of location input value when isOnline button is pressed
     useEffect(() => {
@@ -63,11 +64,13 @@ function EditMeetupModal({ currentMeetup }: Props) {
     }
 
     function handleDelete() {
-        // if (window.confirm(`Radera meetup "${currentMeetup.title}" ?`)) {
+        setShowConfirmDelete(true);
+    }
+
+    function handleConfirmDelete() {
         appDispatch({ type: 'DELETE_MEETUP', payload: currentMeetup });
         dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
         navigate('/');
-        // }
     }
 
     return (
@@ -158,14 +161,37 @@ function EditMeetupModal({ currentMeetup }: Props) {
                         <MdOutlineLaptopMac />
                     </button>
                 </div>
-                <div className="btn-container">
-                    <button className="button" type="submit">
-                        UPPDATERA
-                    </button>
-                    <button onClick={handleDelete} type="button" className="button button-delete">
-                        RADERA
-                    </button>
-                </div>
+                {!showConfirmDelete && (
+                    <div className="btn-container">
+                        <button className="button" type="submit">
+                            UPPDATERA
+                        </button>
+                        <button
+                            onClick={handleDelete}
+                            type="button"
+                            className="button button-delete"
+                        >
+                            RADERA
+                        </button>
+                    </div>
+                )}
+                {showConfirmDelete && (
+                    <section className="confirm-delete-container">
+                        <p>{`Ta bort meetup "${currentMeetup.title}" ?`}</p>
+                        <div className="confirm-delete-btn-container">
+                            <button onClick={handleConfirmDelete} className="button" type="button">
+                                Ja, ta bort
+                            </button>
+                            <button
+                                onClick={() => setShowConfirmDelete(false)}
+                                type="button"
+                                className="button button-delete"
+                            >
+                                Avbryt
+                            </button>
+                        </div>
+                    </section>
+                )}
             </form>
         </EditMeetupModalContainer>
     );
@@ -242,8 +268,22 @@ const EditMeetupModalContainer = styled.section`
         }
 
         .button-delete {
-            background-color: red;
-            color: ${(props) => props.theme.textColor};
+            background-color: ${(props) => props.theme.accentColor};
+        }
+
+        .confirm-delete-container {
+            border: 2px solid white;
+            border-radius: ${(props) => props.theme.borderRadius};
+            padding: 0.5rem;
+            p {
+                color: ${(props) => props.theme.textColor};
+                margin-bottom: 0.5rem;
+                font-weight: 700;
+            }
+        }
+        .confirm-delete-btn-container {
+            display: flex;
+            justify-content: space-between;
         }
     }
 
