@@ -30,6 +30,7 @@ describe('ChatBox component', () => {
             isAdmin: isLoggedIn && true,
             showCreateMeetingModal: false,
             showEditDeleteModal: false,
+            searchString: ''
         };
 
         const [ state, dispatch ] = useReducer(UiReducer, uiInitialState);

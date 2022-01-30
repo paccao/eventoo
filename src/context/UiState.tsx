@@ -6,6 +6,7 @@ export interface UiStateModel {
     isAdmin: Boolean;
     showCreateMeetingModal: boolean;
     showEditDeleteModal: boolean,
+    searchString: string
 }
 
 interface ContextProps {
@@ -18,6 +19,7 @@ const initialState: UiStateModel = {
     isAdmin: false,
     showCreateMeetingModal: false,
     showEditDeleteModal: false,
+    searchString: ''
 };
 
 export const UiContext = createContext<ContextProps>({

@@ -17,17 +17,30 @@ interface MeetUpListProps {
 
 export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
 	const { state } = useContext(UiContext);
-	const [activeList, setActiveList] = useState<Meeting[]>([]);
+	const [ activeList, setActiveList ] = useState<Meeting[]>([]);
 
+	
 	useEffect(() => {
-		const ascendingList = [...list].sort((a, b) => Date.parse(a.time) - Date.parse(b.time));
+
+		const ascendingList = [...list]
+
+		.sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+		.filter(meetup => {
+			if (meetup.tag.find(tagIntrest => tagIntrest.includes(state.searchString))) {
+				return meetup;
+			}
+		});
+
 
 		if (state.isPassedMeetups) {
 			setActiveList([...ascendingList].filter(meetup => isPassedDate(meetup.time)));
 		} else {
 			setActiveList([...ascendingList].filter(meetup => !isPassedDate(meetup.time)));
 		}
+		
 	}, [list, state]);
+
+
 
 	return (
 		<ListContainer>

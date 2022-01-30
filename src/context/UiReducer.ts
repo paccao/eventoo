@@ -4,7 +4,8 @@ export type ActionType =
     | { type: 'TOGGLE_ROLE' }
     | { type: 'SET_IS_PASSED_MEETUPS' }
     | { type: 'TOGGLE_CREATE_MEETING_MODAL' }
-    | { type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' };
+    | { type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' }
+    | { type: 'SET_SEARCH_STRING', payload: string };
 
 export function UiReducer(state: UiStateModel, action: ActionType) {
     switch (action.type) {
@@ -28,6 +29,11 @@ export function UiReducer(state: UiStateModel, action: ActionType) {
             return {
                 ...state,
                 showEditDeleteModal: !state.showEditDeleteModal,
+            };
+        case 'SET_SEARCH_STRING':
+            return {
+                ...state,
+                searchString: action.payload,
             };
 
         default:
