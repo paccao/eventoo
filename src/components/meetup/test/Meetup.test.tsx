@@ -84,6 +84,20 @@ describe('Meetup component', () => {
 
         expect(tag).toBeInTheDocument();
     });
+
+    it('Renders with the correct "description" for the event', () => {
+        render(
+            <AppState>
+                <Meetup currentMeetup={mockMeetups[2]} />
+            </AppState>,
+        );
+
+        const description = screen.getByText(/träffen/i);
+        
+
+        expect(description).toBeInTheDocument();
+    });
+
     it('Renders with the correct image for the event', () => {
         render(
             <AppState>

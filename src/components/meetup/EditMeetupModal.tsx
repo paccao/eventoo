@@ -46,6 +46,7 @@ function EditMeetupModal({ currentMeetup }: Props) {
         const dateAndTime = date + ' ' + time;
 
         const meeting: Meeting = {
+            description: 'Test description',
             id: currentMeetup.id,
             title,
             tag: [tag],

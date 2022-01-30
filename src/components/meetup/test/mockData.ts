@@ -2,6 +2,7 @@ export const meetups = [
     {
         id: '1',
         title: 'lördag på landet',
+        description: 'Träffen för alla bilnördar! Kom som du är. Det bjuds på kaffe, korv och turbo. Gratis däck för alla som vill elda',
         tag: ['outdoors'],
         time: '2022-01-28 15:01',
         isOnline: false,
@@ -21,7 +22,7 @@ export const meetups = [
     {
         id: '2',
         title: 'sockerkaka hos gpa',
-        tag: ['fika'],
+        description: 'Träffen för alla bilnördar! Kom som du är. Det kommer bjudas på kaffe, korv och turbo. Gratis däck för alla som vill elda',
         time: '2022-01-29 15:01',
         isOnline: false,
         location: 'Göteborg',
@@ -39,6 +40,7 @@ export const meetups = [
     {
         id: '3',
         title: 'game night',
+        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['fika'],
         time: '2022-01-27 15:01',
         isOnline: true,
@@ -57,6 +59,7 @@ export const meetups = [
     {
         id: '4',
         title: 'Räkjostillverkning med greger',
+        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['food', 'gourme'],
         time: '2022-01-20 15:01',
         isOnline: true,
@@ -78,6 +81,7 @@ export const meetupsNoComments = [
     {
         id: '1',
         title: 'lördag på landet',
+        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['outdoors'],
         time: 'Lördag 20 Jan 18.00',
         isOnline: false,

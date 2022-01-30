@@ -2,6 +2,7 @@ export const mockMeetups = [
     {
         id: '1',
         title: 'lördag på landet',
+        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['outdoors'],
         time: '2023-01-28 15:01',
         isOnline: false,
@@ -21,6 +22,7 @@ export const mockMeetups = [
     {
         id: '2',
         title: 'sockerkaka hos gpa',
+        description: 'Träffen för alla bilnördar! Kom som du är. Det kommer bjudas på kaffe, korv och turbo. Gratis däck för alla som vill elda',
         tag: ['fika'],
         time: '2023-01-29 15:01',
         isOnline: false,
@@ -39,6 +41,7 @@ export const mockMeetups = [
     {
         id: '3',
         title: 'game night',
+        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['gaming'],
         time: '2023-01-27 15:01',
         isOnline: true,

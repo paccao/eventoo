@@ -16,6 +16,7 @@ export interface State {
 export interface Meeting {
 	id: string;
 	title: string;
+	description: string;
 	tag: string[];
 	time: string;
 	isOnline: boolean;
