@@ -31,7 +31,7 @@ export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
 
 	return (
 		<ListContainer>
-			{list.length < 1 && <PlaceholderMessage>No meetups found</PlaceholderMessage>}
+			{list.length < 1 && <PlaceholderMessage>Inga meetups här</PlaceholderMessage>}
 			{divider}
 			{activeList?.map((meeting: Meeting) => (
 				<MeetUpListItem
@@ -55,5 +55,5 @@ const PlaceholderMessage = styled.h2`
 	color: ${props => props.theme.textColor};
 	opacity: ${props => props.theme.textLowEmpEmph};
 	width: 100%;
-	height: 10rem;
+	height: 3rem;
 `;

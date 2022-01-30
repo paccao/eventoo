@@ -69,7 +69,7 @@ describe('MeetUpList component', () => {
 			</BrowserRouter>
 		);
 
-		const message = screen.getByRole('heading', { name: /no meetups found/i });
+		const message = screen.getByRole('heading', { name: /inga meetups här/i });
 
 		expect(message).toBeInTheDocument();
 	});
