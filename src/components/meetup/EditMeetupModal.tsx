@@ -24,11 +24,13 @@ function EditMeetupModal({ currentMeetup }: Props) {
 
     const [title, setTitle] = useState<string>(currentMeetup?.title);
     const [tag, setTag] = useState<string>(currentMeetup?.tag[0]);
+    const [description, setDescription] = useState<string>(currentMeetup.description);
     const [image, setImage] = useState<string>(currentMeetup?.image);
     const [location, setLocation] = useState<string>(currentMeetup?.location);
     const [date, setDate] = useState<string>(dateTimeArr[0]);
     const [time, setTime] = useState<string>(dateTimeArr[1]);
     const [isOnline, setIsOnline] = useState<boolean>(false);
+    const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
 
     //Togles value of location input value when isOnline button is pressed
     useEffect(() => {
@@ -45,7 +47,7 @@ function EditMeetupModal({ currentMeetup }: Props) {
         const dateAndTime = date + ' ' + time;
 
         const meeting: Meeting = {
-            description: 'Test description',
+            description,
             id: currentMeetup.id,
             title,
             tag: [tag],
@@ -62,7 +64,10 @@ function EditMeetupModal({ currentMeetup }: Props) {
     }
 
     function handleDelete() {
-        console.log('click');
+        setShowConfirmDelete(true);
+    }
+
+    function handleConfirmDelete() {
         appDispatch({ type: 'DELETE_MEETUP', payload: currentMeetup });
         dispatch({ type: 'TOGGLE_SHOW_EDIT_DELETE_MEETING_MODAL' });
         navigate('/');
@@ -97,6 +102,14 @@ function EditMeetupModal({ currentMeetup }: Props) {
                     id="ämne"
                     name="ämne"
                     placeholder="ämne:"
+                    required
+                />
+                <textarea
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                    id="content"
+                    name="content"
+                    placeholder="Beskrivning:"
                     required
                 />
                 <input
@@ -148,14 +161,37 @@ function EditMeetupModal({ currentMeetup }: Props) {
                         <MdOutlineLaptopMac />
                     </button>
                 </div>
-                <div className="btn-container">
-                    <button className="button" type="submit">
-                        UPPDATERA
-                    </button>
-                    <button onClick={handleDelete} type="button" className="button button-delete">
-                        RADERA
-                    </button>
-                </div>
+                {!showConfirmDelete && (
+                    <div className="btn-container">
+                        <button className="button" type="submit">
+                            UPPDATERA
+                        </button>
+                        <button
+                            onClick={handleDelete}
+                            type="button"
+                            className="button button-delete"
+                        >
+                            RADERA
+                        </button>
+                    </div>
+                )}
+                {showConfirmDelete && (
+                    <section className="confirm-delete-container">
+                        <p>{`Ta bort meetup "${currentMeetup.title}" ?`}</p>
+                        <div className="confirm-delete-btn-container">
+                            <button onClick={handleConfirmDelete} className="button" type="button">
+                                Ja, ta bort
+                            </button>
+                            <button
+                                onClick={() => setShowConfirmDelete(false)}
+                                type="button"
+                                className="button button-delete"
+                            >
+                                Avbryt
+                            </button>
+                        </div>
+                    </section>
+                )}
             </form>
         </EditMeetupModalContainer>
     );
@@ -201,7 +237,8 @@ const EditMeetupModalContainer = styled.section`
             }
         }
 
-        input {
+        input,
+        textarea {
             margin-bottom: 1.5rem;
             border-radius: ${(props) => props.theme.borderRadius};
             border: none;
@@ -210,7 +247,8 @@ const EditMeetupModalContainer = styled.section`
             color: ${(props) => props.theme.textColor};
         }
 
-        input::placeholder {
+        input::placeholder,
+        textarea::placeholder {
             color: ${(props) => props.theme.textColor};
         }
 
@@ -226,11 +264,26 @@ const EditMeetupModalContainer = styled.section`
             background-color: ${(props) => props.theme.accentColorAdmin};
             font-size: 1.4rem;
             font-weight: bold;
+            cursor: pointer;
         }
 
         .button-delete {
-            background-color: red;
-            color: ${(props) => props.theme.textColor};
+            background-color: ${(props) => props.theme.accentColor};
+        }
+
+        .confirm-delete-container {
+            border: 2px solid white;
+            border-radius: ${(props) => props.theme.borderRadius};
+            padding: 0.5rem;
+            p {
+                color: ${(props) => props.theme.textColor};
+                margin-bottom: 0.5rem;
+                font-weight: 700;
+            }
+        }
+        .confirm-delete-btn-container {
+            display: flex;
+            justify-content: space-between;
         }
     }
 
@@ -247,6 +300,7 @@ const EditMeetupModalContainer = styled.section`
             font-size: 1rem;
             border: none;
             padding: 0.55rem;
+            cursor: pointer;
         }
 
         .online {

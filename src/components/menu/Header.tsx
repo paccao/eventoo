@@ -7,21 +7,23 @@ import ChangeRoleBtn from './ChangeRoleBtn';
 import CreateMeetupBtn from './CreateMeetupBtn';
 import CreateMeetupModal from './CreateMeetupModal';
 
+import { Link } from 'react-router-dom';
+
 function Header() {
     const { state } = useContext(UiContext);
 
     return (
         <HeaderContainer>
             <div className="logo-container">
-                <h2 className="logo">eventoo.</h2>
+                <Link to="/">
+                    <h2 className="logo">eventoo.</h2>{' '}
+                </Link>
                 <h4 className="isAdmin">{state?.isAdmin ? 'Admin' : null}</h4>
             </div>
 
-
             <div className="create-meetup-btn-container">
-            {state.isAdmin && <CreateMeetupBtn />}
-            <div>{!state.showCreateMeetingModal && <ChangeRoleBtn />}</div>
-
+                {state.isAdmin && <CreateMeetupBtn />}
+                <div>{!state.showCreateMeetingModal && <ChangeRoleBtn />}</div>
             </div>
             {state.showCreateMeetingModal && <CreateMeetupModal />}
         </HeaderContainer>
@@ -58,8 +60,8 @@ const HeaderContainer = styled.header`
         display: flex;
         justify-content: center;
         align-items: center;
-         div {
-             margin: 0rem 1rem;
-         }
+        div {
+            margin: 0rem 1rem;
+        }
     }
 `;

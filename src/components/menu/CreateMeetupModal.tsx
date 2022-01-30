@@ -16,6 +16,7 @@ function CreateMeetupModal() {
 
     const [title, setTitle] = useState<string>('');
     const [tag, setTag] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
     const [image, setImage] = useState<string>('');
     const [date, setDate] = useState<string>(currentDatePlusOneYear(false));
     const [time, setTime] = useState<string>('18:00');
@@ -39,7 +40,7 @@ function CreateMeetupModal() {
         const meeting: Meeting = {
             id: nanoid(),
             title,
-            description: 'Test description',
+            description,
             tag: [tag],
             time: dateAndTime,
             isOnline,
@@ -84,6 +85,14 @@ function CreateMeetupModal() {
                     id="ämne"
                     name="ämne"
                     placeholder="ämne:"
+                    required
+                />
+                <textarea
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                    id="content"
+                    name="content"
+                    placeholder="Beskrivning:"
                     required
                 />
                 <input
@@ -184,7 +193,8 @@ const CreateMeetupModalContainer = styled.section`
             }
         }
 
-        input {
+        input,
+        textarea {
             margin-bottom: 1.5rem;
             border-radius: ${(props) => props.theme.borderRadius};
             border: none;
@@ -193,7 +203,8 @@ const CreateMeetupModalContainer = styled.section`
             color: ${(props) => props.theme.textColor};
         }
 
-        input::placeholder {
+        input::placeholder,
+        textarea::placeholder {
             color: ${(props) => props.theme.textColor};
         }
 
@@ -204,6 +215,7 @@ const CreateMeetupModalContainer = styled.section`
             background-color: ${(props) => props.theme.accentColorAdmin};
             font-size: 1.5rem;
             font-weight: bold;
+            cursor: pointer;
         }
     }
 
@@ -220,6 +232,7 @@ const CreateMeetupModalContainer = styled.section`
             font-size: 1rem;
             border: none;
             padding: 0.55rem;
+            cursor: pointer;
         }
 
         .online {

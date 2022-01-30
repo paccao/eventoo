@@ -113,6 +113,9 @@ describe('App component', () => {
             const deleteBtn = screen.getByRole('button', { name: /radera/i });
             userEvent.click(deleteBtn);
 
+            const confirm = screen.getByRole('button', { name: /ja, ta bort/i });
+            userEvent.click(confirm);
+
             const homePageText = screen.getByText(/alla meetups/i);
 
             expect(homePageText).toBeInTheDocument();
@@ -132,6 +135,9 @@ describe('App component', () => {
 
             const deleteBtn = screen.getByRole('button', { name: /radera/i });
             userEvent.click(deleteBtn);
+
+            const confirm = screen.getByRole('button', { name: /ja, ta bort/i });
+            userEvent.click(confirm);
 
             const homePageText = screen.getByText(/alla meetups/i);
 
