@@ -99,12 +99,15 @@ export const meetups = [
 export const meetupsNoComments = [
     {
         id: '1',
-        title: 'lördag på landet',
-        tag: ['outdoors'],
-        time: 'Lördag 20 Jan 18.00',
-        isOnline: false,
+        title: 'game night',
+        description:
+            'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
+        tag: ['fika'],
+        time: '2022-01-27 15:01',
+        isOnline: true,
         location: 'Göteborg',
-        image: 'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        timeStamp: 1643097488,
+        image: 'https://images.unsplash.com/photo-1500061228850-950b0dc792c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
         comments: [],
     },
 ];

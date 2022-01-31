@@ -1,27 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import AppState, { Comment } from '../../../context/AppState';
 import ChatMessageList from '../ChatMessageList';
 import { meetups as mockMeetups, meetupsNoComments } from './mockData';
-import ChatMessageItem from '../ChatMessageItem';
-
-function MockChatMessageList() {
-    return (
-        <ul data-testid="chatMessageList">
-            {mockMeetups[0]?.comments?.map((comment: Comment) => (
-                <ChatMessageItem key={'commentItem-' + comment.id} {...comment} />
-            ))}
-        </ul>
-    );
-}
-function MockEmptyChatMessageList() {
-    return (
-        <ul data-testid="chatMessageList">
-            {meetupsNoComments[0]?.comments?.map((comment: Comment) => (
-                <ChatMessageItem key={'commentItem-' + comment.id} {...comment} />
-            ))}
-        </ul>
-    );
-}
 
 describe('ChatMessageList component', () => {
     it('renders without crashing', () => {
@@ -29,24 +8,16 @@ describe('ChatMessageList component', () => {
     });
 
     it('should render chat messages when there are any', () => {
-        render(
-            <AppState>
-                <MockChatMessageList />
-            </AppState>,
-        );
+        render(<ChatMessageList urlId={'testID'} currentMeetup={mockMeetups[0]} />);
 
         const listItem = screen.queryAllByRole('listitem');
-        expect(listItem[0]).toBeInTheDocument();
+        expect(listItem.length).toBe(mockMeetups[0].comments.length);
     });
-
-    it("should not crash when there aren't any chat messages", () => {
-        render(
-            <AppState>
-                <MockEmptyChatMessageList />
-            </AppState>,
-        );
-
+    it('should show message that encourage user to write a comment', () => {
+        render(<ChatMessageList urlId={'testID'} currentMeetup={meetupsNoComments[0]} />);
         const listItem = screen.queryAllByRole('listitem');
-        expect(listItem[0]).toBeUndefined();
+        expect(listItem.length).toBe(meetupsNoComments[0].comments.length);
+        const message = screen.getByText(/No comments found. Be the first to write a comment!/i);
+        expect(message).toBeInTheDocument();
     });
 });
