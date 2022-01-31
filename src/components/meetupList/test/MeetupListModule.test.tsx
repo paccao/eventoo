@@ -48,7 +48,7 @@ describe('MeetUpListModule component', () => {
 	}
 
 	it('should render', () => {
-		render( <ComponentWrappedInContext isLoggedIn={false} />)
+		render(<ComponentWrappedInContext isLoggedIn={false} />)
 	});
 
 	it('should filter all cards by search criteria (tags) when user searches. (case insensitive)', () => {
@@ -67,6 +67,5 @@ describe('MeetUpListModule component', () => {
 		expect(listItems[1]).toHaveTextContent(/fika/i);
 		expect(listItems[2]).toHaveTextContent(/fika/i);
 		expect(listItems[3]).toHaveTextContent(/fika/i);
-
 	});
 });
