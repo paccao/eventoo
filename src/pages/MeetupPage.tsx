@@ -25,6 +25,15 @@ const PageWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export default MeetupPage;

@@ -50,9 +50,9 @@ const ListItem = styled.li<{ isAdmin: Boolean }>`
     }
 
     cite {
-        opacity: 1;
+        opacity: ${(props) => (props.isAdmin ? 1 : props.theme.textHighEmph)};
         color: ${(props) =>
-            props.isAdmin ? props.theme.accentColorAdmin : props.theme.accentColor};
+            props.isAdmin ? props.theme.accentColor : props.theme.accentColorAdmin};
         text-align: right;
         font-size: 0.85em;
     }

@@ -11,7 +11,7 @@ function ChatBox({ urlId }: { urlId: string | undefined }) {
     const { state } = useContext(AppContext);
     const { state: uiState } = useContext(UiContext);
 
-    const currentMeetup = state?.meetings?.filter((meetup) =>  meetup.id === urlId )[0]
+    const currentMeetup = state?.meetings?.filter((meetup) => meetup.id === urlId)[0];
 
     return (
         <Wrapper>
@@ -29,10 +29,6 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
-
-    > :not(:first-child) {
-        margin-left: 1rem;
-    }
 `;
 
 export default ChatBox;

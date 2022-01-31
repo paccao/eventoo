@@ -24,11 +24,12 @@ function ChatMessageList({
 const List = styled.ul`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 0.6rem;
+    max-height: 25vh;
+    overflow-y: scroll;
 
     background-color: ${(props) => props.theme.cardBgColor};
     border-radius: ${(props) => props.theme.borderRadius};
-    padding: 1em 1rem;
+    padding: 1rem;
 `;
 export default ChatMessageList;
