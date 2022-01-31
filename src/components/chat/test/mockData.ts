@@ -4,7 +4,8 @@ export const meetups = [
     {
         id: '1',
         title: 'lördag på landet',
-        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
+        description:
+            'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['outdoors'],
         time: '2022-01-28 15:01',
         isOnline: false,
@@ -36,7 +37,8 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'sockerkaka hos gpa',
-        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
+        description:
+            'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['fika'],
         time: '2022-01-29 15:01',
         isOnline: false,
@@ -55,7 +57,8 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'game night',
-        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
+        description:
+            'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['fika'],
         time: '2022-01-27 15:01',
         isOnline: true,
@@ -74,7 +77,8 @@ export const meetups = [
     {
         id: nanoid(),
         title: 'Räkjostillverkning med greger',
-        description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
+        description:
+            'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['food', 'gourme'],
         time: '2022-01-20 15:01',
         isOnline: true,
@@ -105,11 +109,9 @@ export const meetupsNoComments = [
     },
 ];
 
-
 export const user = {
     name: 'kalle',
     id: '1',
     isAdmin: false,
-    bookedMeetups: [],
+    bookedMeetups: ['1'],
 };
-

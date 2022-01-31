@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import UiState from './context/UiState';
 import AppState from './context/AppState';
 
-function MockRouter() {
+function IntegrationTestWrapper() {
     return (
         <BrowserRouter>
             <AppState>
@@ -23,14 +23,14 @@ describe('App component', () => {
     });
 
     it('renders without crashing', () => {
-        render(<MockRouter />);
+        render(<IntegrationTestWrapper />);
     });
 
     describe('When crating new meetup', () => {
         it('Renders the newly added meetup in the list of comming meetups', () => {
-            render(<MockRouter />);
+            render(<IntegrationTestWrapper />);
 
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            const changeRoleBtn = screen.getByRole('button', { name: /byt roll/i });
             userEvent.click(changeRoleBtn);
 
             const createMeetupBtn = screen.getByTestId('create-meetup-btn');
@@ -62,7 +62,7 @@ describe('App component', () => {
     });
 
     test('App component has darkmode', () => {
-        render(<MockRouter />);
+        render(<IntegrationTestWrapper />);
 
         const appContainer = screen.getByTestId('app-container');
 
@@ -71,14 +71,14 @@ describe('App component', () => {
 
     describe('When editing meetups', () => {
         it('New title shows up on meetup page when changed', () => {
-            render(<MockRouter />);
+            render(<IntegrationTestWrapper />);
             const newTitle = 'Game day';
 
             const meetup = screen.getByText(/game night/i);
 
             userEvent.click(meetup);
 
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            const changeRoleBtn = screen.getByRole('button', { name: /byt roll/i });
             userEvent.click(changeRoleBtn);
 
             const editMeetupBtn = screen.getByText('redigera');
@@ -98,13 +98,13 @@ describe('App component', () => {
     });
     describe('When deleting meetups', () => {
         it('User is redirected to home page', () => {
-            render(<MockRouter />);
+            render(<IntegrationTestWrapper />);
 
             const meetup = screen.getByText(/game night/i);
 
             userEvent.click(meetup);
 
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            const changeRoleBtn = screen.getByRole('button', { name: /byt roll/i });
             userEvent.click(changeRoleBtn);
 
             const editMeetupBtn = screen.getByText('redigera');
@@ -121,13 +121,13 @@ describe('App component', () => {
             expect(homePageText).toBeInTheDocument();
         });
         it('The deleted meetup is not in the list of alla meetups', () => {
-            render(<MockRouter />);
+            render(<IntegrationTestWrapper />);
 
             const meetup = screen.getByText(/game night/i);
 
             userEvent.click(meetup);
 
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            const changeRoleBtn = screen.getByRole('button', { name: /byt roll/i });
             userEvent.click(changeRoleBtn);
 
             const editMeetupBtn = screen.getByText('redigera');
@@ -151,11 +151,10 @@ describe('App component', () => {
     });
 
     describe('when user clicks on a meetup card', () => {
-
         it('should link user to a meetup page corresponding to the selected meetup', () => {
-            render(<MockRouter />);
+            render(<IntegrationTestWrapper />);
 
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            const changeRoleBtn = screen.getByRole('button', { name: /byt roll/i });
             userEvent.click(changeRoleBtn);
 
             const createMeetupBtn = screen.getByTestId('create-meetup-btn');
@@ -179,58 +178,11 @@ describe('App component', () => {
 
             const meetupToClickOn = screen.getByText(/FutureEvent/i);
 
-            userEvent.click(meetupToClickOn)
+            userEvent.click(meetupToClickOn);
 
             const descriptionToFind = screen.getByText('description to find');
 
-            expect(descriptionToFind).toHaveTextContent('description to find')
-
-
-        })
-
-
-    })
-
-    describe('when user clicks on app logo (eventoo) ', () => {
-
-        it('should link back to start page (meetup page)', () => {
-            render(<MockRouter />);
-
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
-            userEvent.click(changeRoleBtn);
-
-            const createMeetupBtn = screen.getByTestId('create-meetup-btn');
-            userEvent.click(createMeetupBtn);
-
-            const titleInput = screen.getByPlaceholderText(/titel:/i);
-            const tagInput = screen.getByPlaceholderText(/ämne:/i);
-            const imageInput = screen.getByPlaceholderText(/bild:/i);
-            const locationInput = screen.getByPlaceholderText(/plats:/i);
-            const description = screen.getByPlaceholderText(/beskrivning:/i);
-
-            userEvent.type(titleInput, 'event');
-            userEvent.type(tagInput, 'bluegrass');
-            userEvent.type(locationInput, 'gränna');
-            userEvent.type(imageInput, 'img');
-            userEvent.type(description, 'description to find');
-
-            const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
-            userEvent.click(submitBtn);
-
-            const meetupToClickOn = screen.getByText(/event/i);
-            userEvent.click(meetupToClickOn)
-
-            const titleToClickOn = screen.getByRole('heading', { name: 'eventoo.' });
-            userEvent.click(titleToClickOn)
-
-            const controlTextOnHomePage = screen.getByText(/alla meetups/i);
-
-            expect(controlTextOnHomePage).toHaveTextContent(/alla meetups/i)
-        })
-
-
-    })
-
-    
-
+            expect(descriptionToFind).toHaveTextContent('description to find');
+        });
+    });
 });

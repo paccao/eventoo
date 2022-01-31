@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { nanoid } from 'nanoid';
 
@@ -16,201 +15,198 @@ import SwitchComponent from '../../globals/SwitchComponent';
 import InfoBlockDivider from '../../globals/InfoBlockDivider';
 
 describe('MeetUpList component', () => {
+    it('should render', () => {
+        render(
+            <BrowserRouter>
+                <AppState>
+                    <MeetUpList
+                        user={user}
+                        list={meetups}
+                        divider={
+                            <InfoBlockDivider text="Bokade meetups" toggle={<SwitchComponent />} />
+                        }
+                    />
+                </AppState>
+            </BrowserRouter>,
+        );
+    });
 
+    it('should render list components', () => {
+        render(
+            <BrowserRouter>
+                <AppState>
+                    <MeetUpList
+                        user={user}
+                        list={testMeetup(true)}
+                        divider={
+                            <InfoBlockDivider text="Bokade meetups" toggle={<SwitchComponent />} />
+                        }
+                    />
+                </AppState>
+            </BrowserRouter>,
+        );
 
-	it('should render', () => {
-		render(
-			<BrowserRouter>
-				<AppState>
-					<MeetUpList
-						user={user}
-						list={meetups}
-						divider={
-							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</AppState>
-			</BrowserRouter>
-		);
-	});
+        const listItem = screen.getAllByRole('listitem');
 
-	it('should render list components', () => {
-		render(
-			<BrowserRouter>
-				<AppState>
-					<MeetUpList
-						user={user}
-						list={testMeetup(true)}
-						divider={
-							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</AppState>
-			</BrowserRouter>
-		);
+        expect(listItem[0]).toBeInTheDocument();
+    });
 
-		const listItem = screen.getAllByRole('listitem');
+    it('should render "No meetups found" message if there are no meetups', () => {
+        render(
+            <BrowserRouter>
+                <AppState>
+                    <MeetUpList
+                        user={user}
+                        list={[]}
+                        divider={
+                            <InfoBlockDivider text="Bokade meetups" toggle={<SwitchComponent />} />
+                        }
+                    />
+                </AppState>
+            </BrowserRouter>,
+        );
 
-		expect(listItem[0]).toBeInTheDocument();
-	});
+        const message = screen.getByRole('heading', { name: /inga meetups här/i });
 
-	it('should render "No meetups found" message if there are no meetups', () => {
-		render(
-			<BrowserRouter>
-				<AppState>
-					<MeetUpList
-						user={user}
-						list={[]}
-						divider={
-							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</AppState>
-			</BrowserRouter>
-		);
+        expect(message).toBeInTheDocument();
+    });
 
-		const message = screen.getByRole('heading', { name: /inga meetups här/i });
+    it('should render list divider "Alla meetups"', () => {
+        render(
+            <BrowserRouter>
+                <UiState>
+                    <MeetUpList
+                        user={user}
+                        list={meetups}
+                        divider={
+                            <InfoBlockDivider text="Alla meetups" toggle={<SwitchComponent />} />
+                        }
+                    />
+                </UiState>
+            </BrowserRouter>,
+        );
 
-		expect(message).toBeInTheDocument();
-	});
+        const heading = screen.getByText(/alla meetups/i);
 
-	it('should render list divider "Alla meetups"', () => {
-		render(
-			<BrowserRouter>
-				<UiState>
-					<MeetUpList
-						user={user}
-						list={meetups}
-						divider={
-							<InfoBlockDivider text='Alla meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</UiState>
-			</BrowserRouter>
-		);
+        expect(heading).toBeInTheDocument();
+    });
 
-		const heading = screen.getByText(/alla meetups/i);
+    it('should render list divider "Bokade meetups"', () => {
+        render(
+            <BrowserRouter>
+                <AppState>
+                    <MeetUpList
+                        user={user}
+                        list={meetups}
+                        divider={
+                            <InfoBlockDivider text="Bokade meetups" toggle={<SwitchComponent />} />
+                        }
+                    />
+                </AppState>
+            </BrowserRouter>,
+        );
 
-		expect(heading).toBeInTheDocument();
-	});
+        const heading = screen.getByText(/bokade meetups/i);
 
-	it('should render list divider "Bokade meetups"', () => {
-		render(
-			<BrowserRouter>
-				<AppState>
-					<MeetUpList
-						user={user}
-						list={meetups}
-						divider={
-							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</AppState>
-			</BrowserRouter>
-		);
+        expect(heading).toHaveTextContent(/Bokade meetups/i);
+    });
 
-		const heading = screen.getByText(/bokade meetups/i);
+    it('should only render passed meetups when "Visa gamla meetups" toggle is clicked once"', () => {
+        render(
+            <BrowserRouter>
+                <UiState>
+                    <MeetUpList
+                        user={user}
+                        list={testMeetup(false)}
+                        divider={
+                            <InfoBlockDivider text="Bokade meetups" toggle={<SwitchComponent />} />
+                        }
+                    />
+                </UiState>
+            </BrowserRouter>,
+        );
 
-		expect(heading).toHaveTextContent(/Bokade meetups/i);
-	});
+        const toggle = screen.getByRole('checkbox');
+        userEvent.click(toggle);
 
-	it('should only render passed meetups when "Visa gamla meetups" toggle is clicked once"', () => {
-		render(
-			<BrowserRouter>
-				<UiState>
-					<MeetUpList
-						user={user}
-						list={testMeetup(false)}
-						divider={
-							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</UiState>
-			</BrowserRouter>
-		);
+        const listItem = screen.queryByRole('heading', { name: 'lördag på landet' });
 
-		const toggle = screen.getByRole('checkbox');
-		userEvent.click(toggle);
+        expect(listItem).toBeInTheDocument();
+    });
 
-		const listItem = screen.queryByRole('heading', { name: 'lördag på landet' });
+    it('should only render upcoming meetups when "Visa gamla" toggle is clicked twice"', () => {
+        render(
+            <BrowserRouter>
+                <UiState>
+                    <MeetUpList
+                        user={user}
+                        list={testMeetup(true)}
+                        divider={
+                            <InfoBlockDivider text="Bokade meetups" toggle={<SwitchComponent />} />
+                        }
+                    />
+                </UiState>
+            </BrowserRouter>,
+        );
 
-		expect(listItem).toBeInTheDocument();
-	});
+        const toggle = screen.getByRole('checkbox');
+        userEvent.click(toggle);
+        userEvent.click(toggle);
 
-	it('should only render upcoming meetups when "Visa gamla" toggle is clicked twice"', () => {
-		render(
-			<BrowserRouter>
-				<UiState>
-					<MeetUpList
-						user={user}
-						list={testMeetup(true)}
-						divider={
-							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</UiState>
-			</BrowserRouter>
-		);
+        const listItem = screen.queryByRole('heading', { name: 'lördag på landet' });
 
-		const toggle = screen.getByRole('checkbox');
-		userEvent.click(toggle);
-		userEvent.click(toggle);
+        expect(listItem).toBeInTheDocument();
+    });
 
-		const listItem = screen.queryByRole('heading', { name: 'lördag på landet' });
+    it('should sort all cards in ascending order by date', () => {
+        render(
+            <BrowserRouter>
+                <UiState>
+                    <MeetUpList
+                        user={user}
+                        list={meetups}
+                        divider={
+                            <InfoBlockDivider text="Bokade meetups" toggle={<SwitchComponent />} />
+                        }
+                    />
+                </UiState>
+            </BrowserRouter>,
+        );
 
-		expect(listItem).toBeInTheDocument();
-	});
+        const toggle = screen.getByRole('checkbox');
+        userEvent.click(toggle);
 
-	it('should sort all cards in ascending order by date', () => {
-		render(
-			<BrowserRouter>
-				<UiState>
-					<MeetUpList
-						user={user}
-						list={meetups}
-						divider={
-							<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />
-						}
-					/>
-				</UiState>
-			</BrowserRouter>
-		);
-		
-		const toggle = screen.getByRole('checkbox');
-		userEvent.click(toggle);
+        const listItems = screen.getAllByRole('heading', { name: 'game night' });
 
-		const listItems = screen.getAllByRole('heading', { name: 'game night' });
-
-		expect(listItems[0]).toHaveTextContent('game night');
-	});
+        expect(listItems[0]).toHaveTextContent('game night');
+    });
 });
 
 function testMeetup(upcomingMeetup: boolean): Meeting[] {
-	const currentDatePlusOneYearString = currentDatePlusOneYear(true);
-	const currentDateString = currentDate();
+    const currentDatePlusOneYearString = currentDatePlusOneYear(true);
+    const currentDateString = currentDate();
 
-	return [
-		{
-			id: nanoid(),
-			title: 'lördag på landet',
-			description: 'Test desc',
-			tag: ['outdoors'],
-			time: upcomingMeetup ? currentDatePlusOneYearString : currentDateString,
-			isOnline: false,
-			location: 'Göteborg',
-			timeStamp: upcomingMeetup
-				? Date.parse(currentDatePlusOneYearString)
-				: Date.parse(currentDateString),
-			image:
-				'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-			comments: [
-				{
-					id: '1',
-					time: '2020-05-25',
-					content: 'First comment!',
-					role: 'guest',
-				},
-			],
-		},
-	];
+    return [
+        {
+            id: nanoid(),
+            title: 'lördag på landet',
+            description: 'Test desc',
+            tag: ['outdoors'],
+            time: upcomingMeetup ? currentDatePlusOneYearString : currentDateString,
+            isOnline: false,
+            location: 'Göteborg',
+            timeStamp: upcomingMeetup
+                ? Date.parse(currentDatePlusOneYearString)
+                : Date.parse(currentDateString),
+            image: 'https://images.unsplash.com/photo-1618264366449-c8a2a1b799ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+            comments: [
+                {
+                    id: '1',
+                    time: '2020-05-25',
+                    content: 'First comment!',
+                    role: 'guest',
+                },
+            ],
+        },
+    ];
 }

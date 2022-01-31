@@ -8,9 +8,6 @@ describe('ChatMessageItem component', () => {
         content: 'Coolt event!',
         role: 'Guest',
     };
-    const MockItem = () => {
-        return <ChatMessageItem {...comment} />;
-    };
 
     it('renders without crashing', () => {
         render(<ChatMessageItem {...comment} />);
@@ -19,7 +16,7 @@ describe('ChatMessageItem component', () => {
     it('should render the role of the author', () => {
         render(<ChatMessageItem {...comment} />);
 
-        const roleElement = screen.getByText(/Guest/ || /Admin/);
+        const roleElement = screen.getByText(/Guest/i || /Admin/i);
         expect(roleElement).toBeInTheDocument();
     });
 
@@ -29,11 +26,10 @@ describe('ChatMessageItem component', () => {
         const content = screen.getByText(comment.content);
         expect(content).toBeInTheDocument();
     });
+    it('should display the time of the comment', () => {
+        render(<ChatMessageItem {...comment} />);
 
-    it('should display the time of when the comment was left on the the meeting page in the correct time format', () => {
-        render(<time dateTime={comment.time}>{comment.time}</time>);
-
-        const time = screen.getAllByText(comment.time);
-        expect(time[0]).toBeInTheDocument();
+        const time = screen.getByText(comment.time);
+        expect(time).toBeInTheDocument();
     });
 });

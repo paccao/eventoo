@@ -5,14 +5,12 @@ import ChatBox from '../ChatBox';
 import userEvent from '@testing-library/user-event';
 import { meetups, user } from './mockData';
 
-import { AppContext } from '../../../context/AppState'
-import { AppReducer } from '../../../context/AppReducer'
-import { UiReducer } from '../../../context/UiReducer'
-import { UiContext } from '../../../context/UiState'
-
+import { AppContext } from '../../../context/AppState';
+import { AppReducer } from '../../../context/AppReducer';
+import { UiReducer } from '../../../context/UiReducer';
+import { UiContext } from '../../../context/UiState';
 
 describe('ChatBox component', () => {
-
     function MockAppState({ children }: React.PropsWithChildren<{}>) {
         const appInitialState = {
             meetings: meetups,
@@ -30,10 +28,10 @@ describe('ChatBox component', () => {
             isAdmin: isLoggedIn && true,
             showCreateMeetingModal: false,
             showEditDeleteModal: false,
-            searchString: ''
+            searchString: '',
         };
 
-        const [ state, dispatch ] = useReducer(UiReducer, uiInitialState);
+        const [state, dispatch] = useReducer(UiReducer, uiInitialState);
 
         return (
             <UiContext.Provider value={{ state, dispatch }}>
@@ -61,29 +59,75 @@ describe('ChatBox component', () => {
     });
 
     it('should render the chat input field', () => {
-        render(<ChatBoxWrappedInContext isLoggedIn={true}/>);
+        render(<ChatBoxWrappedInContext isLoggedIn={true} />);
         const inputBoxNode = screen.getByRole('textbox');
         expect(inputBoxNode).toBeInTheDocument();
     });
 
     it('should render the chat enter button', () => {
-        render(<ChatBoxWrappedInContext isLoggedIn={true}/>);
+        render(<ChatBoxWrappedInContext isLoggedIn={true} />);
         const inputBoxNode = screen.getByRole('button');
         expect(inputBoxNode).toBeInTheDocument();
     });
 
-    test("a new comment should be added to the meeting's list of comments on submit", () => {
-        render(<ChatBoxWrappedInContext isLoggedIn={true}/>);
-        
-        const inputField = screen.getByRole('textbox')
-        userEvent.type(inputField, 'fun');
+    describe('When adding new comment', () => {
+        test("a new comment should be added to the meeting's list of comments on submit", () => {
+            render(<ChatBoxWrappedInContext isLoggedIn={true} />);
 
-        const button = screen.getByRole('button')
-        userEvent.click(button);
+            const inputField = screen.getByRole('textbox');
+            userEvent.type(inputField, 'fun');
 
-        const newComment = screen.getByText('fun')
+            const button = screen.getByRole('button');
+            userEvent.click(button);
 
-    
-        expect(newComment).toBeInTheDocument();
+            const newComment = screen.getByText('fun');
+
+            expect(newComment).toBeInTheDocument();
+        });
+
+        test("a new comment should not be added to the meeting's list if comment is an empty string", () => {
+            render(<ChatBoxWrappedInContext isLoggedIn={true} />);
+
+            const listitemsBefore = screen.getAllByRole('listitem');
+
+            screen.getByRole('textbox');
+
+            const button = screen.getByRole('button');
+            userEvent.click(button);
+
+            const listitemsAfter = screen.getAllByRole('listitem');
+
+            expect(listitemsAfter.length).toBe(listitemsBefore.length);
+        });
+        it('Renders comment with  role "guest" if role is guest', () => {
+            render(<ChatBoxWrappedInContext isLoggedIn={false} />);
+
+            const inputField = screen.getByRole('textbox');
+            userEvent.type(inputField, 'Test message');
+
+            const button = screen.getByRole('button');
+            userEvent.click(button);
+
+            const comments = screen.getAllByRole('listitem');
+
+            const newComment = comments[comments.length - 1];
+
+            expect(newComment).toHaveTextContent(/guest/i);
+        });
+        it('Renders comment with  role "admin" if role is admin', () => {
+            render(<ChatBoxWrappedInContext isLoggedIn={true} />);
+
+            const inputField = screen.getByRole('textbox');
+            userEvent.type(inputField, 'Test message');
+
+            const button = screen.getByRole('button');
+            userEvent.click(button);
+
+            const comments = screen.getAllByRole('listitem');
+
+            const newComment = comments[comments.length - 1];
+
+            expect(newComment).toHaveTextContent(/admin/i);
+        });
     });
 });

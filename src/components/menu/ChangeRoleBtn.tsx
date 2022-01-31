@@ -10,7 +10,7 @@ function ChangeRoleBtn() {
         dispatch({ type: 'TOGGLE_ROLE' });
     }
 
-    return <BtnContainer onClick={changeRole}>Change Role</BtnContainer>;
+    return <BtnContainer onClick={changeRole}>Byt roll</BtnContainer>;
 }
 
 export default ChangeRoleBtn;

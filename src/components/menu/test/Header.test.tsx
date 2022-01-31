@@ -21,9 +21,9 @@ describe('Header component', () => {
     });
 
     describe('When Changing role', () => {
-        it('Btn with text change role is visible', () => {
+        it('Btn with text "Byt roll" is visible', () => {
             render(<WrappedHeader />);
-            screen.getByRole('button', { name: /change role/i });
+            screen.getByRole('button', { name: /byt roll/i });
         });
 
         it('Text with Admin shows in header when button is pressed once', () => {
@@ -38,7 +38,7 @@ describe('Header component', () => {
         it('Text with Admin does not show in header when buton is pressed two times', () => {
             render(<WrappedHeader />);
 
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            const changeRoleBtn = screen.getByRole('button', { name: /byt roll/i });
             userEvent.click(changeRoleBtn);
             userEvent.click(changeRoleBtn);
 
@@ -59,7 +59,7 @@ describe('Header component', () => {
 
         it('Create new meeting btn is vissible when role is admin', () => {
             render(<WrappedHeader />);
-            const changeRoleBtn = screen.getByRole('button', { name: /change role/i });
+            const changeRoleBtn = screen.getByRole('button', { name: /byt roll/i });
             userEvent.click(changeRoleBtn);
 
             const element = screen.getByTestId('create-meetup-btn');
@@ -134,7 +134,7 @@ describe('Header component', () => {
 });
 
 function changeRole(): void {
-    const element = screen.getByRole('button', { name: /change role/i });
+    const element = screen.getByRole('button', { name: /byt roll/i });
     userEvent.click(element);
 }
 

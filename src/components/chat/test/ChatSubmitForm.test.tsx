@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import ChatSubmitForm from '../ChatSubmitForm';
 
 describe('ChatSubmitForm component', () => {
@@ -20,14 +19,9 @@ describe('ChatSubmitForm component', () => {
 
     test('that the button displays relevant text', () => {
         render(<ChatSubmitForm urlId={'testID'} />);
-        screen.getByRole('button', {
+        const submitBtn = screen.getByRole('button', {
             name: /SKICKA/,
         });
-    });
-
-    test('on submit that the input field can not be an empty string', () => {
-        render(<ChatSubmitForm urlId={'testID'} />);
-        userEvent.type(screen.getByRole('textbox'), 'test input!');
-        expect(screen.getByRole('textbox')).not.toHaveValue('');
+        expect(submitBtn).toBeInTheDocument();
     });
 });
