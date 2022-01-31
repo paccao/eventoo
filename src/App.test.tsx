@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import UiState from './context/UiState';
 import AppState from './context/AppState';
+import { currentDatePlusOneYear } from './helpers/currentDate'
 
 function IntegrationTestWrapper() {
     return (
@@ -40,11 +41,14 @@ describe('App component', () => {
             const tagInput = screen.getByPlaceholderText(/ämne:/i);
             const imageInput = screen.getByPlaceholderText(/bild:/i);
             const locationInput = screen.getByPlaceholderText(/plats:/i);
+            const dateInput = screen.getByPlaceholderText(/date:/i);
 
             userEvent.type(titleInput, 'Adam');
             userEvent.type(tagInput, 'Javascript');
             userEvent.type(locationInput, 'Lödöse');
             userEvent.type(imageInput, 'testbild');
+
+            userEvent.type(dateInput, '{selectall}{backspace}' + currentDatePlusOneYear(false))
 
             const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
             expect(submitBtn).toBeInTheDocument();
@@ -56,6 +60,8 @@ describe('App component', () => {
             expect(futureEventList).toBeInTheDocument();
 
             const newMeetup = screen.getByText(/Lödöse/i);
+
+            
 
             expect(newMeetup).toBeInTheDocument();
         });
@@ -165,12 +171,15 @@ describe('App component', () => {
             const imageInput = screen.getByPlaceholderText(/bild:/i);
             const locationInput = screen.getByPlaceholderText(/plats:/i);
             const description = screen.getByPlaceholderText(/beskrivning:/i);
+            const dateInput = screen.getByPlaceholderText(/date:/i);
 
             userEvent.type(titleInput, 'FutureEvent');
             userEvent.type(tagInput, 'bluegrass');
             userEvent.type(locationInput, 'gränna');
             userEvent.type(imageInput, 'img');
             userEvent.type(description, 'description to find');
+
+            userEvent.type(dateInput, '{selectall}{backspace}' + currentDatePlusOneYear(false))
 
             const submitBtn = screen.getByRole('button', { name: /SKAPA/i });
             expect(submitBtn).toBeInTheDocument();

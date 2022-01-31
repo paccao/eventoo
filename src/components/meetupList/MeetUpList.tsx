@@ -13,37 +13,32 @@ interface MeetUpListProps {
 	list: Meeting[];
 	divider: ReactChild;
 	user: User;
+	testId?: string;
 }
 
-export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
+export default function MeetUpList({ list, divider, user, testId }: MeetUpListProps) {
 	const { state } = useContext(UiContext);
-	const [ activeList, setActiveList ] = useState<Meeting[]>([]);
-
+	const [activeList, setActiveList] = useState<Meeting[]>([]);
 
 	useEffect(() => {
-
 		const ascendingList = [...list]
 
-		.sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
-		.filter(meetup => {
-			if (meetup.tag.find(tag => tag.includes(state.searchString))) {
-				return meetup;
-			}
-		});
-
+			.sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+			.filter(meetup => {
+				if (meetup.tag.find(tag => tag.includes(state.searchString.toLowerCase()))) {
+					return meetup;
+				}
+			});
 
 		if (state.isPassedMeetups) {
 			setActiveList([...ascendingList].filter(meetup => isPassedDate(meetup.time)));
 		} else {
 			setActiveList([...ascendingList].filter(meetup => !isPassedDate(meetup.time)));
 		}
-		
 	}, [list, state]);
 
-
-
 	return (
-		<ListContainer>
+		<ListContainer data-testid={testId}>
 			{list.length < 1 && <PlaceholderMessage>Inga meetups här</PlaceholderMessage>}
 			{divider}
 			{activeList?.map((meeting: Meeting) => (

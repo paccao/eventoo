@@ -180,6 +180,7 @@ describe('MeetUpList component', () => {
 
         expect(listItems[0]).toHaveTextContent('game night');
     });
+
 });
 
 function testMeetup(upcomingMeetup: boolean): Meeting[] {

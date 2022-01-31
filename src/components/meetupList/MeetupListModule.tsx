@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppState';
 import styled from 'styled-components';
+import Search from '../globals/Search';
 
 import MeetUpList from './MeetUpList';
 import InfoBlockDivider from '../globals/InfoBlockDivider';
@@ -16,7 +17,9 @@ export default function MeetUpListModule() {
 
 	return (
 		<MeetupListModuleContainer>
-			<MeetUpList
+			<Search />
+			<MeetUpList 
+				testId={'booked-meetups-list'}
 				list={filteredByBooked}
 				divider={<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />}
 				user={state.user}
