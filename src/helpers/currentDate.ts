@@ -12,7 +12,7 @@ export function currentDate(): string {
     const dateAndTime = date + ' ' + time;
     const formattedDate = new Date(dateAndTime).toLocaleString('sv-se').substring(0, 16);
 
-    console.log(formattedDate);
+
 
     return formattedDate;
 }

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 //Context
 import { useContext } from 'react';
 import { UiContext } from '../../context/UiState';
-import Search from '../globals/Search';
 
 import ChangeRoleBtn from './ChangeRoleBtn';
 import CreateMeetupBtn from './CreateMeetupBtn';
@@ -15,12 +14,6 @@ function Header() {
 
 	return (
 		<HeaderContainer>
-			<div className='left-tools-container'>
-                <Search />
-				{state.isAdmin && <CreateMeetupBtn />}
-
-			</div>
-
 			<div className='logo-container'>
 				<Link to='/'>
 					<h2 className='logo'>eventoo.</h2>{' '}
@@ -29,6 +22,7 @@ function Header() {
 			</div>
 
 			<div className='create-meetup-btn-container'>
+                {state.isAdmin && <CreateMeetupBtn />}
 				<div>{!state.showCreateMeetingModal && <ChangeRoleBtn />}</div>
 			</div>
 			{state.showCreateMeetingModal && <CreateMeetupModal />}
@@ -46,20 +40,19 @@ const HeaderContainer = styled.header`
 	justify-content: space-between;
 	align-items: center;
 
-    .left-tools-container {
-        position: relative;
-    }
+	.left-tools-container {
+		position: relative;
+	}
 
 	.logo-container {
 		display: flex;
 		flex-direction: column;
 
-
 		h4 {
 			align-self: flex-end;
 			font-size: 0.7rem;
-            position: absolute;
-            top: 3rem;
+			position: absolute;
+			top: 3rem;
 		}
 	}
 

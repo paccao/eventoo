@@ -26,7 +26,7 @@ export default function MeetUpList({ list, divider, user }: MeetUpListProps) {
 
 		.sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
 		.filter(meetup => {
-			if (meetup.tag.find(tag => tag.includes(state.searchString))) {
+			if (meetup.tag.find(tag => tag.includes(state.searchString.toLowerCase()))) {
 				return meetup;
 			}
 		});

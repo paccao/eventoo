@@ -25,8 +25,6 @@ const CreateMeetupBtnContainer = styled.button`
     background-color: transparent;
     border: none;
     cursor: pointer;
-    position: absolute;
-    left: 10rem;
-    top: 0rem;
-
+    margin: 0rem 1rem;
+    margin-top: 0.5rem;
 `;
