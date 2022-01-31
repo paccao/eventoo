@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 
 export const meetups = [
     {
-        id: nanoid(),
+        id: '1',
         title: 'lördag på landet',
         description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['outdoors'],
@@ -22,7 +22,7 @@ export const meetups = [
     },
 
     {
-        id: nanoid(),
+        id: '2',
         title: 'sockerkaka hos gpa',
         description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['fika'],
@@ -41,7 +41,7 @@ export const meetups = [
         ],
     },
     {
-        id: nanoid(),
+        id: '3',
         title: 'game night',
         description: 'Träffen för alla bilnördar! Kom som du är, det bjuds på kaffe korv och turbo. Gratis däck för alla som vill elda',
         tag: ['fika'],

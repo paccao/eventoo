@@ -17,8 +17,9 @@ export default function MeetUpListModule() {
 
 	return (
 		<MeetupListModuleContainer>
-			               <Search />
-			<MeetUpList
+			<Search />
+			<MeetUpList 
+				testId={'booked-meetups-list'}
 				list={filteredByBooked}
 				divider={<InfoBlockDivider text='Bokade meetups' toggle={<SwitchComponent />} />}
 				user={state.user}

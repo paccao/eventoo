@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { meetups, user } from './mockData';
 import { useReducer } from 'react';
 
@@ -62,10 +62,26 @@ describe('MeetUpListModule component', () => {
 
 		const listItems = screen.getAllByRole('listitem');
 
-		expect(listItems).toHaveLength(4);
+		expect(listItems).toHaveLength(6);
 		expect(listItems[0]).toHaveTextContent(/fika/i);
 		expect(listItems[1]).toHaveTextContent(/fika/i);
 		expect(listItems[2]).toHaveTextContent(/fika/i);
 		expect(listItems[3]).toHaveTextContent(/fika/i);
+		expect(listItems[4]).toHaveTextContent(/fika/i);
+		expect(listItems[5]).toHaveTextContent(/fika/i);
+	});
+
+	it('should render all booked meetups at the top of the page', () => {
+		render(<ComponentWrappedInContext isLoggedIn={false} />);
+
+		const activeList = screen.getByTestId('booked-meetups-list');
+
+		const toggle = screen.getByRole('checkbox');
+		userEvent.click(toggle);
+
+		const listItems = within(activeList).getAllByText(/deltar/i)
+		
+		expect(listItems).toHaveLength(2)
+
 	});
 });
