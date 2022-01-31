@@ -4,9 +4,9 @@
 This project was a hand in assignment where our task was to make a modern web app with Typescript and TDD, test driven development. This was done using the npm package [Testing-Library](https://testing-library.com/) and [Jest-DOM](https://www.npmjs.com/package/@testing-library/jest-dom).
 
 ## Team members
-- Kristofer @krispad-dev
-- Adam @Adam-Bjurhede
-- Joel P @paccao
+- Kristofer @github/krispad-dev
+- Adam @github/Adam-Bjurhede
+- Joel P @github/paccao
 
 ## User stories
 We began our project by defining a set of user stories to describe what the user will expect of the application. These helped us define test cases for the test driven development to represent the user stories but also to focus on what needed to be added to the MVP. Here is a list of all user stories we worked on in this project (in Swedish).
