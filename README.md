@@ -1,5 +1,32 @@
 # Eventoo, the perfect way to plan, attend and discuss up and coming meetups with other people.
 
+## Background
+This project was a hand in assignment where our task was to make a modern web app with Typescript and TDD, test driven development. This was done using the npm package [Testing-Library](https://testing-library.com/) and [Jest-DOM](https://www.npmjs.com/package/@testing-library/jest-dom).
+
+## Team members
+@krispad-dev
+@Adam-Bjurhede
+@paccao
+
+## User stories
+We began our project by defining a set of user stories of what the user would expect of our application. To begin working a team member picked a user story and defined a small list of test cases to work with the TDD principles.
+
+- Som gäst vill jag se en lista med Meetups så att jag får en överblick över vilka som finns tillgängliga.
+- Som gäst vill jag kunna växla mellan att visa tidigare och kommande meetups så att jag får mer överskådliga vyer.
+- Som gäst vill jag att meetups sorteras så satt de som kommer närmast i tid hamnar högst upp i sina respektive listor så att jag enkelt ser vilken meetup som inträffar först.
+- Som gäst vill jag kunna se titeln och ämne för ett evenemang så att man snabbt får en bild av vad meetupen kommer handla om.
+- Som gäst vill jag veta tid och plats för meetupen så att jag kan ta reda på om jag har möjlighet att ta mig dit.
+- Som användare vill jag kunna söka på taggar för att filtrera meetups som intresserar mig.
+- Som användare vill jag kunna välja en meetup i listan så att jag kommer till en sida med mer information om den meetupen.
+- Som gäst vill jag kunna anmäla att jag ska gå på en meetup så att jag får en indikation på vilka jag är anmäld till.
+- Som gäst vill jag kunna avanmäla mig från en meetup så att jag har möjlighet att ändra mig.
+- Som gäst vill jag kunna diskutera meetups jag är markerad som anmäld till med andra så att jag kan ställa frågor och lämna feedback.
+- Som gäst vill jag att meetups som jag är anmäld till visas i en egen lista högst upp på meetup sidan så att jag snabbt ser vilka jag är anmäld till.
+- Som användare vill jag kunna välja arrangörsrollen så att jag får tillgång till arrangörsprivilegier.
+- Som arrangör vill jag kunna skapa en meetup så att jag kan nå ut till besökare med information om eventet.
+- Som arrangör vill jag inte att besökare ska kunna avanmäla/anmäla sig inom 1h före start av meetup för att kunna planera för hur många som kommer.
+- Som arrangör vill jag kunna radera en meetup innan det har börjat så att jag kan ställa in om det behövs.
+
 ## Installation
 1. This project was built with node.js version 16.13.0. Make sure you have the same version or anything above which generally works aswell by running the command `node -v` in a terminal on your system.
 2. To download the required dependecies, make sure you have the package manager npm at version 8.1.3 or above by running the command `npm --version`
