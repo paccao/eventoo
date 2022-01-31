@@ -1,4 +1,3 @@
-import AppState from '../../../context/AppState';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { meetups, user } from './mockData';
@@ -52,7 +51,7 @@ describe('MeetUpListModule component', () => {
 		render( <ComponentWrappedInContext isLoggedIn={false} />)
 	});
 
-	it('should filter all cards by search criteria (tags) when user searches (case insensitive)', () => {
+	it('should filter all cards by search criteria (tags) when user searches. (case insensitive)', () => {
 		render(<ComponentWrappedInContext isLoggedIn={false} />);
 
 		const toggle = screen.getByRole('checkbox');
@@ -64,6 +63,10 @@ describe('MeetUpListModule component', () => {
 		const listItems = screen.getAllByRole('listitem');
 
 		expect(listItems).toHaveLength(4);
-	
+		expect(listItems[0]).toHaveTextContent(/fika/i);
+		expect(listItems[1]).toHaveTextContent(/fika/i);
+		expect(listItems[2]).toHaveTextContent(/fika/i);
+		expect(listItems[3]).toHaveTextContent(/fika/i);
+
 	});
 });
