@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { UiContext } from '../../context/UiState';
 import { AppContext } from '../../context/AppState';
 import { MdOutlineLaptopMac } from 'react-icons/md';
-import { currentDatePlusOneYear } from '../../helpers/currentDate';
 
 import { Meeting } from '../../context/AppState';
 import { nanoid } from 'nanoid';
@@ -18,7 +17,7 @@ function CreateMeetupModal() {
     const [tag, setTag] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [image, setImage] = useState<string>('');
-    const [date, setDate] = useState<string>(currentDatePlusOneYear(false));
+    const [date, setDate] = useState<string>('2022-06-04');
     const [time, setTime] = useState<string>('18:00');
     const [location, setLocation] = useState<string>('');
     const [isOnline, setIsOnline] = useState<boolean>(false);
@@ -237,7 +236,7 @@ const CreateMeetupModalContainer = styled.section`
 
         .online {
             background-color: ${(props) => props.theme.accentColorAdmin};
-            color: ${(props) => props.theme.cardBgColor};
+            color: black;
         }
     }
 

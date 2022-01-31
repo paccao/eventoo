@@ -305,7 +305,7 @@ const EditMeetupModalContainer = styled.section`
 
         .online {
             background-color: ${(props) => props.theme.accentColorAdmin};
-            color: ${(props) => props.theme.cardBgColor};
+            color: black;
         }
     }
 
