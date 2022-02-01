@@ -11,7 +11,7 @@ import { UiContext } from '../../../context/UiState';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('Meetup component', () => {
-    function MockContext({ isLoggedIn }: { isLoggedIn: boolean }) {
+    function ComponentWrappedInaContext({ isLoggedIn }: { isLoggedIn: boolean }) {
         const uiInitialState = {
             isPassedMeetups: false,
             isAdmin: isLoggedIn && true,
@@ -31,7 +31,6 @@ describe('Meetup component', () => {
         );
     }
 
-    beforeEach(() => {});
 
     it('Renders without crashing', () => {
         render(
@@ -113,7 +112,7 @@ describe('Meetup component', () => {
 
     describe('Edit Meetup', () => {
         it('opens edit meetup modal when "edit" is clicked', () => {
-            render(<MockContext isLoggedIn={true} />);
+            render(<ComponentWrappedInaContext isLoggedIn={true} />);
 
             const editBtn = screen.getByRole('button', { name: /redigera/i });
 
@@ -124,7 +123,7 @@ describe('Meetup component', () => {
             expect(modal).toBeInTheDocument();
         });
         it('Input fields is prefilled with current meeting details', () => {
-            render(<MockContext isLoggedIn={true} />);
+            render(<ComponentWrappedInaContext isLoggedIn={true} />);
 
             const editBtn = screen.getByRole('button', { name: /redigera/i });
 
