@@ -34,7 +34,7 @@ We began our project by defining a set of user stories to describe what the user
 4. When that is finished, run `cd eventoo` or open the folder in your file explorer.
 5. Inside of that path run: `npm install`, which will download the required dependecies for the project. This may take a couple of minutes.
 
-Now you are ready to run the application. **Note that you need to enable cookies for this app to work properly.**
+Now you are ready to run the application.
 
 ## Available Scripts
 
