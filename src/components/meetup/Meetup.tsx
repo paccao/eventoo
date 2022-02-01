@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 
 import TagChip from '../globals/TagChip';
 import EditMeetupModal from './EditMeetupModal';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { UiContext } from '../../context/UiState';
 
 import { isImage } from '../../helpers/isImage';
@@ -19,15 +19,6 @@ interface Props {
 
 function Meetup({ currentMeetup }: Props) {
     const { state } = useContext(UiContext);
-    const [isPlaceholderImage, setIsPlaceholderImage] = useState(false);
-
-    useEffect(() => {
-        async function checkIfImage() {
-            const res = await isImage(currentMeetup && currentMeetup?.image);
-            setIsPlaceholderImage(res);
-        }
-        checkIfImage();
-    });
 
     return (
         <MeetingContainer>
@@ -36,7 +27,7 @@ function Meetup({ currentMeetup }: Props) {
                 className="landing"
                 style={{
                     backgroundImage: `url(${
-                        !isPlaceholderImage ? placeHolderUrl : currentMeetup && currentMeetup?.image
+                        !isImage(currentMeetup?.image) ? placeHolderUrl : currentMeetup && currentMeetup?.image
                     })`,
                 }}
             >

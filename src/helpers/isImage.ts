@@ -1,7 +1,11 @@
-export async function isImage(url: string) {
+export function isImage(url: string) {
 
-        const res = await fetch(url);
-        const buff = await res.blob();
-       
-        return buff.type.startsWith('image/')
+        if(!url) return false
+
+        if (url.startsWith('https://') || url.startsWith('http://')) {
+                return true
+        } else {
+                return false
+        }
 }
+

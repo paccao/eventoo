@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TagChip from '../globals/TagChip';
 import AttendingIndicator from '../globals/AttendingIndicator';
@@ -31,17 +30,6 @@ export default function MeetUpListItem({
 	isAttending,
 }: MeetUpListItemProps) {
 
-	const [isPlaceholderImage, setIsPlaceholderImage] = useState(false);
-
-	useEffect(() => {
-		async function checkIfImage() {
-			const res = await isImage(image && image);
-			setIsPlaceholderImage(res);
-		}
-		checkIfImage();
-	});
-
-
 	return (
 		<MeetUpListItemContainer>
 			<ListInfoContainer data-testid='list-info-container'>
@@ -70,7 +58,7 @@ export default function MeetUpListItem({
 			<ListImageContainer
 				className='image-container'
 				role={'img'}
-				style={{ backgroundImage: `url(${!isPlaceholderImage ? placeHolderUrl : image})` }}
+				style={{ backgroundImage: `url(${!isImage(image) ? placeHolderUrl : image})` }}
 			></ListImageContainer>
 		</MeetUpListItemContainer>
 	);
