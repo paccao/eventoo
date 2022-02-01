@@ -27,6 +27,8 @@ export default function MeetUpList({ list, divider, user, testId }: MeetUpListPr
 			.filter(meetup => {
 				if (meetup.tag.find(tag => tag.includes(state.searchString.toLowerCase()))) {
 					return meetup;
+				} else {
+					return null; 
 				}
 			});
 
