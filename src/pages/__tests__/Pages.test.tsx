@@ -4,9 +4,15 @@ import AppState from '../../context/AppState';
 import MeetupListPage from '../MeetupListPage';
 import MeetupPage from '../MeetupPage';
 
+import { BrowserRouter } from 'react-router-dom';
+
 describe('MeetupListPage component', () => {
     it('renders without crashing', () => {
-        render(<MeetupListPage />);
+        render(
+            <BrowserRouter>
+                <MeetupListPage />
+            </BrowserRouter>,
+        );
     });
 });
 

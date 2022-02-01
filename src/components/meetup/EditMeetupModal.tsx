@@ -212,6 +212,15 @@ const EditMeetupModalContainer = styled.section`
     align-items: center;
     justify-content: flex-start;
 
+    overflow-y: scroll;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .meeting-form {
         width: 100%;
         max-width: 300px;

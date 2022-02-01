@@ -1,7 +1,6 @@
 import React, { createContext, useReducer, Dispatch, useEffect } from 'react';
 import { AppReducer, ActionType } from './AppReducer';
 import { useStoreHook } from '../hooks/StoreHook';
-import { checkInitialData } from '../helpers/cookieChecks';
 
 import { meetups, user } from '../mockData';
 
@@ -10,7 +9,7 @@ const db = new Db();
 
 export interface State {
     meetings: Meeting[] | [];
-    user: any;
+    user: User;
 }
 
 export interface Meeting {
@@ -43,12 +42,12 @@ export interface User {
     id: string;
     isAdmin: boolean;
     name: string;
-    bookedMeetups: string[];
+    bookedMeetups: string[] | [];
 }
 
 const initialState: State = {
-    meetings: [],
-    user: {},
+    meetings: meetups,
+    user: user,
 };
 
 export const AppContext = createContext<ContextProps>({
@@ -77,24 +76,6 @@ function AppState({ children }: React.PropsWithChildren<{}>) {
     useEffect(() => {
         mutate(state);
     }, [state, mutate]);
-
-    //  set new user
-    useEffect(() => {
-        if (!checkInitialData()) {
-            dispatch({ type: 'SET_USER', payload: user });
-        }
-    }, []);
-
-    // Sets initial app mock-data if no previous data is set
-    useEffect(() => {
-        if (!checkInitialData()) {
-            meetups.forEach((meetup) => {
-                dispatch({ type: 'ADD_MEETUP', payload: meetup });
-            });
-
-            document.cookie = 'initData=true; SameSite=Strict; Secure; Max-Age=2592000';
-        }
-    }, []);
 
     return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 }
